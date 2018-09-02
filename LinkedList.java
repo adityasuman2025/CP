@@ -155,11 +155,17 @@ public class LinkedList
 		Node node = new Node(89);
 		LinkedList list = new LinkedList(node);
 		list.print();
-		list.size();
+		//list.size();
+
 		list.add(78);
-		list.get(1);
-		list.size();
-		list.remove();
-		list.size();
+		list.add(788);
+		list.add(98);
+		list.add(8);
+		list.add(7);
+		list.add(1);
+
+		//list.get(1);
+		//list.size();
+		list.print();
 	}
 }

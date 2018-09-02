@@ -1,3 +1,5 @@
+count = 0;
+
 def quicksort(arr, start, end):
 	if start<end:
 		pIndex = partition(arr, start, end)
@@ -8,13 +10,17 @@ def partition(arr, start, end):
 	pivot = arr[end]
 	pIndex = start
 
+	comp = end-start
+	global count
+	count += comp-1
+
 	for i in range(start, end):
 		if arr[i]<=pivot:
 			temp = arr[pIndex]
 			arr[pIndex] = arr[i]
 			arr[i] = temp
 
-			pIndex +=1
+			pIndex +=1		
 
 	temp_end = pivot
 	arr[end] = arr[pIndex]
@@ -22,7 +28,11 @@ def partition(arr, start, end):
 
 	return pIndex
 
-arr = [8,5,9,7,6,2,4,1,3]
+sample = int(input())
+arr = []
+for i in range(sample):
+	arr.append(int(input()))
 
 quicksort(arr, 0, len(arr)-1)
-print(arr)
+#print(arr)
+print(count)
