@@ -55,6 +55,8 @@ def twoStacks(x, a, b):
 
 
 if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
     g = int(input())
 
     for g_itr in range(g):
@@ -72,4 +74,6 @@ if __name__ == '__main__':
 
         result = twoStacks(x, a, b)
 
-        print(result)
+        fptr.write(str(result) + '\n')
+
+    fptr.close()
