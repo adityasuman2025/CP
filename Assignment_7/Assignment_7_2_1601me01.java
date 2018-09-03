@@ -127,7 +127,7 @@ public class Assignment_7_2_1601me01
 {
 	public static void main(String[] args) 
 	{
-		Visit visit1 = new Visit("Aditya", new Date());
+		Visit visit1 = new Visit("Aditya Suman", new Date());
 		visit1.customer.setMemberType("Premium");
 
 		System.out.println("Customer name: " + visit1.getName());
