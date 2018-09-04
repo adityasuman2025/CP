@@ -1,6 +1,6 @@
 import math
 
-c='a'
+c='♡'
 width = 40
 
 print ((c*2).center(width//2)*2)
