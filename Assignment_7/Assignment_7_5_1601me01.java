@@ -49,12 +49,11 @@ class SavAcc extends Account
 		super(name, accNum, "Saving", balance);
 	}
 
-	double Irate;
+	double Irate = 0.04;
 
-	void calcInterest(double rate)
+	void calcInterest(int month)
 	{
-		this.Irate = rate;
-		double interestAmmount = this.balance*Irate;
+		double interestAmmount = (this.balance*Irate*month)/12;
 
 		System.out.println("Interest Amount: " + Double.toString(interestAmmount));
 
@@ -101,7 +100,7 @@ public class Assignment_7_5_1601me01
 		sav1.deposit(1000);
 		sav1.withdraw(2000);
 
-		sav1.calcInterest(.2);
+		sav1.calcInterest(1);
 		sav1.checkBalance();
 
 		System.out.println();
