@@ -50,6 +50,7 @@ public class BST_all
 		}
 	}
 	
+//depth-first search
 	public static void inOrder(Node root)
 	{
 		if(root.left != null)
@@ -65,41 +66,37 @@ public class BST_all
 		}
 	}
 
-	public static int min(Node root)
+	public static void preOrder(Node root)
 	{
-		Node current = root;
-		while(current.left !=null)
+		System.out.println(root.data);
+
+		if(root.left!=null)
 		{
-			current = current.left;
+			preOrder(root.left);
 		}
 
-		return current.data;
+		if(root.right!=null)
+		{
+			preOrder(root.right);
+		}
 	}
 
-	public static int max(Node root)
+	public static void postOrder(Node root)
 	{
-		Node current = root;
-		while(current.right !=null)
+		if(root.left!=null)
 		{
-			current = current.right;
+			preOrder(root.left);
 		}
 
-		return current.data;
-	}
-
-	public static int height(Node root) //or max-height
-	{
-		if(root == null)
+		if(root.right!=null)
 		{
-			return -1;
+			preOrder(root.right);
 		}
 
-		int lHeight = height(root.left);
-		int rHeight = height(root.right);
-
-		return Math.max(lHeight, rHeight) +1;
+		System.out.println(root.data);
 	}
 
+//breadth-first search
 	public static void levelOrder(Node root)
 	{
 		Queue<Node> queue = new LinkedList<>();
@@ -122,6 +119,43 @@ public class BST_all
 			temp_node = queue.poll();
 		}
 	}
+
+//min max in BST
+	public static int min(Node root)
+	{
+		Node current = root;
+		while(current.left !=null)
+		{
+			current = current.left;
+		}
+
+		return current.data;
+	}
+
+	public static int max(Node root)
+	{
+		Node current = root;
+		while(current.right !=null)
+		{
+			current = current.right;
+		}
+
+		return current.data;
+	}
+
+//height of BST
+	public static int height(Node root) //or max-height
+	{
+		if(root == null)
+		{
+			return -1;
+		}
+
+		int lHeight = height(root.left);
+		int rHeight = height(root.right);
+
+		return Math.max(lHeight, rHeight) +1;
+	}	
 
 //checking if the binary tree is binary search tree or not
 	static List<Integer> list = new ArrayList<>();

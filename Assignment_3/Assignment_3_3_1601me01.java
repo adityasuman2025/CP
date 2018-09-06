@@ -9,9 +9,9 @@ public class Assignment_3_3_1601me01
 		
 		for(int i=0; i<text.length(); i++)
 		{
-			for(int j=i+1; j<=text.length(); j++)
+			for(int j=i; j<text.length(); j++)
 			{
-				System.out.println(text.substring(i,j));
+				System.out.println(text.substring(i,j+1));
 			}
 		}
 	}
