@@ -99,24 +99,29 @@ public class BST_all
 //breadth-first search
 	public static void levelOrder(Node root)
 	{
-		Queue<Node> queue = new LinkedList<>();
-
-		Node temp_node = root;
-		while(temp_node != null)
+		if(root == null)
 		{
-			System.out.print(temp_node.data + " ");
+			return;
+		}
 
-			if(temp_node.left !=null)
+		Queue<Node> q = new LinkedList<>();
+		q.add(root);
+
+		while(!q.isEmpty())
+		{
+			Node temp = q.poll();
+
+			System.out.println(temp.data);		
+
+			if(temp.left !=null)
 			{
-				queue.add(temp_node.left);
+				q.add(temp.left);
 			}
 
-			if(temp_node.right !=null)
+			if(temp.right !=null)
 			{
-				queue.add(temp_node.right);
+				q.add(temp.right);
 			}
-
-			temp_node = queue.poll();
 		}
 	}
 
@@ -211,11 +216,7 @@ public class BST_all
 		insert(node, 1);
 
 		levelOrder(node);	
-
-		System.out.println();
-		System.out.println(min(node));
-		System.out.println(max(node));
-
+		
 		System.out.println(height(node));
 
 		checkBST(node);
