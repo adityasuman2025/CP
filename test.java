@@ -1,130 +1,44 @@
-import java.util.Scanner;
+import java.util.*;
 import java.lang.*;
 import java.io.*;
-import java.util.*;
-import java.lang.Integer;
-import java.util.HashMap;
-// A Binary Search Tree node
-class Node
-{
-    int data;
-    Node left, right;
-    Node(int item)
-    {
-        data = item;
-        left = right = null;
-    }
-}
 class test
-{
-	/*void printInorder(Node node)
+ {
+    static void ways(int n)
     {
-        if (node == null)
-            return;
-        /* first recur on left child */
-        //printInorder(node.left);
-        /* then print the data of node */
-       // System.out.print(node.data + " ");
-        /* now recur on right child */
-        //printInorder(node.right);
-    //}*/
-    // driver function to test the above functions
-    public static void main(String args[])
-    {
-        // Input the number of test cases you want to run
-        Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-		test ob = new test();
-        while (t > 0)
+        int table[] = new int[n+1];
+        
+    //base condition
+        table[0] = 1;
+        
+    //performing our required operations
+        for(int i =1; i<=n; i++)
         {
-            HashMap<Integer, Node> m = new HashMap<Integer, Node> ();
-            int n = sc.nextInt();
-			
-            Node root = null;
-            while (n > 0)
-            {
-                int n1 = sc.nextInt();
-                int n2 = sc.nextInt();
-                char lr = sc.next().charAt(0);
-                //  cout << n1 << " " << n2 << " " << (char)lr << endl;
-                Node parent = m.get(n1);
-                if (parent == null)
-                {
-                    parent = new Node(n1);
-                    m.put(n1, parent);
-                    if (root == null)
-                        root = parent;
-                }
-                Node child = new Node(n2);
-                if (lr == 'L')
-                    parent.left = child;
-                else
-                    parent.right = child;
-                m.put(n2, child);
-                n--;
-            }
-			
-			GfG g = new GfG();
-            System.out.println(g.isBST(root));
-			//ob.printInorder(root);
-            t--;
-			
+            table[i] += table[i-1];
         }
-    }
-}
 
+        for(int i =3; i<=n; i++)
+        {
+            table[i] += 2*table[i-3];
+        }
 
-/*Please note that it's Function problem i.e.
-you need to write your solution in the form of Function(s) only.
-Driver Code to call/invoke your function is mentioned above.*/
+        for(int i =4; i<=n; i++)
+        {
+            table[i] += table[i-4];
+        }
 
-/*  A Binary Search Tree node
-class Node
-{
-    int data;
-    Node left, right;
-    Node(int item)
-    {
-        data = item;
-        left = right = null;
-    }
-} */
-class GfG
-{
-    static List<Integer> list = new ArrayList<>();
-    
-    public static void inOrder(Node root)
-    {
-          if(root.left !=null)
-          {
-              inOrder(root.left);
-          }
-       
-        list.add(root.data);
-       
-          if(root.right !=null)
-          {
-              inOrder(root.right);
-          }
+        System.out.println(table[n]);
     }
     
-    int isBST(Node root)  
+    static Scanner scanner = new Scanner(System.in);
+    public static void main (String[] args)
     {
-        if(root == null)
+        int T = Integer.parseInt(scanner.nextLine());
+        for(int a= 0; a<T; a++)
         {
-            return 1;
+            int O = Integer.parseInt(scanner.nextLine());
+            
+            ways(O);
         }
         
-        inOrder(root);
-        System.out.println(list);
-        
-        for(int i=0; i<list.size()-1; i++)
-        {
-            if(list.get(i)>list.get(i+1))
-            {
-                return 0;
-            }
-        }
-        return 1;
-    }
+     }
 }

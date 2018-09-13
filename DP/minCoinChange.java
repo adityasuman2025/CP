@@ -35,7 +35,7 @@ public class minCoinChange
 	
 	public static void main(String[] args) 
 	{
-		int arr[]  = {9,6,5,1};
-		coin(arr, 11);
+		int arr[]  = {8,3,16,6};
+		coin(arr, 10);
 	}	
 }
