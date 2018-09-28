@@ -2,7 +2,7 @@ import java.util.*;
 
 class Assignment_10_5_1601me01
 {	
-	Scanner scanner = new Scanner(System.in);
+	static Scanner scanner = new Scanner(System.in);
 	public static void main(String[] args) 
 	{
 		Stack<Character> st = new Stack<>();
@@ -43,8 +43,7 @@ class Assignment_10_5_1601me01
 				}
 			}
 		}
-
-		System.out.prinln(st);
+		
 		if(st.isEmpty())
 		{	
 			System.out.println("The expression is having balanced symbol");
