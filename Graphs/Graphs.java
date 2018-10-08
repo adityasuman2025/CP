@@ -19,7 +19,7 @@ class graph
 
 public class Graphs
 {
-	static int v = 5;
+	static int v = 6;
 	static graph g = new graph(v);
 
 //function to add edge in the directed graph
@@ -75,10 +75,9 @@ public class Graphs
 				}
 			}
 		}
-
 	}
 
-//function to do DFS from a vertex onwards
+//recursive DFS from a vertex onwards
 	static void DFSUtil(int v, boolean visited[])
 	{
 		visited[v] = true;
@@ -164,6 +163,7 @@ public class Graphs
 		}
 
 		stack.push(v);
+		//System.out.println(stack); 
 	}
 
 	static void topSort()
@@ -188,6 +188,45 @@ public class Graphs
 
 		System.out.println(); 
 		System.out.println(); 
+	}
+
+//function to get shortest path(minimum edges required) between two vertices
+//we are using here BFS, which is used for the case of when all edges has length =1
+//when edges have different lengths, we need to use dijkstra algorithm to get shortest path in that case
+	static int[] pathBFSUtil(int start)
+	{
+		boolean visited[] = new boolean[g.V];
+		int dist[] = new int[g.V];
+
+		Queue<Integer> q = new LinkedList<>();
+		q.add(start);
+		visited[start] = true;
+		dist[start] = 0;
+
+		while(!q.isEmpty())
+		{
+			start = q.poll();
+
+			Iterator<Integer> it = g.adjList[start].iterator();
+			while(it.hasNext())
+			{
+				int temp = it.next();
+
+				if(!visited[temp])
+				{
+					visited[temp] = true;
+					dist[temp] = dist[start] +1;
+					q.add(temp);
+				}
+			}
+		}
+
+		return dist;
+	}
+
+	static void getPath(int src, int desc) // src vertex, dest vertex
+	{
+		System.out.println("Minimum distance of edges(Shortest Path) between source " + src + " and destination " + desc + " is: " + pathBFSUtil(src)[desc]);
 	}
 
 //finding the mother vertex of the graph
@@ -229,11 +268,12 @@ public class Graphs
 		}
 
 		DFSUtil2(lastFinishedVertex, visited);
+		
 		for(int i=0; i<g.V; i++)
 		{
-			if(visited[i] = false)
+			if(visited[i] == false)
 			{
-				System.out.println("This graph has no mother vertex");
+				System.out.println("DNE");
 				return;
 			}
 		}
@@ -249,7 +289,7 @@ public class Graphs
 			return true;
 		}
 
-		if (visited[i]) 
+		if(visited[i]) 
         {
        		return false; 
         }   
@@ -266,7 +306,6 @@ public class Graphs
 				return true;
 			}
 		}
-
 		stack[i] = false;
 
 		return false;
@@ -285,32 +324,97 @@ public class Graphs
 				return true;
 			}			
 		}
+		return false;
+	}
+
+//to check if undirected graph is tree or not
+//there should not be cycle and should be connected
+	static boolean isCyclic(int i, boolean visited[], int parent)
+	{
+		visited[i] = true;
+
+		Iterator<Integer> it = g.adjList[i].listIterator();
+		while(it.hasNext())
+		{
+			int v = it.next();
+
+			if(!visited[v])
+			{
+				if(isCyclic(v, visited, i))
+				{
+					return true;
+				}
+			}
+			else
+			{
+				if(v != parent)
+				{
+					return true;
+				}
+			}			
+		}
 
 		return false;
+	}
+
+	static boolean isTree()
+	{
+		boolean visited[] = new boolean[g.V];
+
+	//checking for cycle
+		if(isCyclic(0, visited, -1))
+		{
+			System.out.println("is cyclic: yes");		
+			return false;
+		}
+		else
+		{
+			System.out.println("is cyclic: no");		
+		}
+
+	//checking for reachability
+		for(int i=0; i<g.V; i++)
+		{
+			if(!visited[i])
+			{
+				return false;
+			}
+		}
+
+	//if the graph is tree
+		return true;
 	}
 
 //main function
 	public static void main(String[] args)
 	{
-		addEdge(1, 0); 
-        addEdge(2, 1); 
-        addEdge(3, 4); 
-        addEdge(4, 0);
+		addEdge(0, 1); 
+        addEdge(0, 2); 
+        addEdge(1, 3); 
+        addEdge(2, 3);
+        addEdge(2, 4);
+        addEdge(3, 4);
+  		addEdge(4, 5);
+        addEdge(3, 5);
+  		
   		print();
 
         System.out.println("Following is a Topological sort of the given graph"); 
         topSort();
 
         System.out.println("Following is a Breadth First Search of the given graph"); 
-        BFS(3);
+        BFS(0);
 
         System.out.println("Following is a Depth First Search of the given graph"); 
         ItDFS();
        
-        System.out.println("Mother of the graph is:"); 
-        findMother();
+       	System.out.println();
+       	getPath(3, 3);
 
-        System.out.println("Graph contains cycle:" + detectCycle());
+        // System.out.print("Mother of the graph is: "); 
+        // findMother();
 
+        // System.out.println("Graph contains cycle: " + detectCycle());
+        // System.out.println("Is graph a tree: " + isTree());
 	}
 }
