@@ -34,5 +34,5 @@ for i in range(sample):
 	arr.append(int(input()))
 
 quicksort(arr, 0, len(arr)-1)
-#print(arr)
+print(arr)
 print(count)

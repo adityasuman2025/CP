@@ -13,6 +13,7 @@ class Node
 
 public class BST_all
 {
+//insert
 	public static void insert(Node root, int value)
 	{
 		if(root.data == 0)
