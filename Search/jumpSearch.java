@@ -2,46 +2,49 @@ import java.util.*;
 
 public class jumpSearch
 {
-	public static void main(String[] args) 
+	static int JS(int arr[], int x)
 	{
-		int ans = -1;
-
-		int arr[] = {1,2,3,4,5,6,7,8,9,10,11};
 		int n = arr.length;
+
 		int step = (int)Math.floor(Math.sqrt(n));
 		int prev = 0;
+		int next = step;
 
-		int x = 8;
-		
 	//searching for the block just greater than the the given number
-		while(x > arr[Math.min(step, n)-1])
+		while(x>arr[Math.min(next, n) -1])
 		{
-			prev = step;
-			step += (int)Math.floor(Math.sqrt(n));
+			prev = next;
+			next += step;
 
-			if(prev >=n)
+			if(prev>=n)
 			{
-				ans = -1;
+				return -1;
 			}
-		}	
+		}
 
-	//doing linear search in that block area
-		while(x > arr[prev])
+	//searching for x in that block
+		while(x>arr[prev])
 		{
 			prev++;
 
-			if(prev == Math.min(step, n))
+			if(prev>= Math.min(next,n))
 			{
-				ans = -1;
+				return -1;
 			}
 		}
 
 	// if that element is found
 		if(arr[prev] == x)
-		{
-			ans =  prev;
-		}
+			return prev;
+		else
+			return -1;
+	}
 
-		System.out.println(ans);
+	public static void main(String[] args) 
+	{
+		int arr[] = {1,2,3,4,5,6,7,8,9,10,11};
+		int x = 11;
+
+		System.out.println(JS(arr,x));
 	}
 }
