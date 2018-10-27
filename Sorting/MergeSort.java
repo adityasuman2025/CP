@@ -1,12 +1,12 @@
 public class MergeSort
 {
-	public static int[] merge_sort(int arr[])
+	public static void merge_sort(int arr[])
 	{
 		int arr_length = arr.length;
 
 		if(arr_length <2) //if array is too short then doing nothing
 		{
-			return arr;
+			return;
 		}	
 	
 		int mid = (arr_length)/2;
@@ -25,9 +25,7 @@ public class MergeSort
 
 		merge_sort(left);
 		merge_sort(right);
-		merge(left, right, arr);			
-
-		return arr;
+		merge(left, right, arr);
 	}
 
 	public static void merge(int left[], int right[], int arr[])
@@ -81,9 +79,9 @@ public class MergeSort
         System.out.println("");
 
     //sorting the array and displaying it
-        int arr2[] = merge_sort(arr);
+       	merge_sort(arr);
 
-        for(int k: arr2)
+        for(int k: arr)
         {
             System.out.print(k + ", ");
         }
