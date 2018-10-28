@@ -98,20 +98,26 @@ public class sort
 	}
 
 //function to sort array using merge sort
+	static int c_merge = 0;
+
 	static ArrayList<Integer> merge(ArrayList<Integer> arr2)
 	{
 		ArrayList<Integer> arr = new ArrayList<>(arr2);
-		int count = 0;
-
-		mergesort(arr, count);
-
-		System.out.println("No of comparisions done: " + count);
+		
+		mergesort(arr);
+		System.out.println("No of comparisions done: " + c_merge);
 		return arr;
 	}
 
-	static void mergesort(ArrayList<Integer> arr, int count)
+	static void mergesort(ArrayList<Integer> arr)
 	{
-		int mid = arr.size()/2;
+		int n = arr.size();
+		if(n<2)
+		{
+			return;
+		}
+
+		int mid = n/2;
 
 		ArrayList<Integer> left = new ArrayList<>();
 		for(int i=0; i<mid; i++)
@@ -128,7 +134,108 @@ public class sort
 		mergesort(left);
 		mergesort(right);
 
-		mergearr(arr, left, right);
+		merge_arr(left, right, arr);
+	}
+
+	static void merge_arr(ArrayList<Integer> left, ArrayList<Integer> right, ArrayList<Integer> arr)
+	{
+		int i=0, j=0, k=0;
+
+		while(i<left.size() && j<right.size())
+		{
+			if(left.get(i)<=right.get(j))
+			{
+				c_merge++;
+				arr.set(k, left.get(i));
+				i++;
+			}
+			else if(right.get(j) < left.get(i))
+			{
+				c_merge++;
+				arr.set(k, right.get(j));
+				j++;
+			}
+			k++;
+		}
+
+		while(i<left.size())
+		{
+			arr.set(k, left.get(i));
+			i++;
+			k++;
+			//c_merge++;
+		}
+
+		while(j<right.size())
+		{
+			arr.set(k, right.get(j));
+			j++;
+			k++;
+			//c_merge++;
+		}
+	}
+
+//function to sort array using heap sort
+	static int c_heap = 0;
+	static ArrayList<Integer> heap(ArrayList<Integer> arr2)
+	{
+		ArrayList<Integer> arr = new ArrayList<>(arr2);
+		int n = arr.size();
+
+	//building heap
+		for(int i = n/2-1; i>=0; i--)
+		{
+			heapify(arr, n, i);
+		}	
+
+	// One by one extract an element from heap 
+		for(int i=n-1; i>=0; i--) 
+		{
+		//Move current root to end 
+			int temp = arr.get(0);
+			arr.set(0, arr.get(i));
+			arr.set(i, temp);
+
+			c_heap++;
+
+		//call max heapify on the reduced heap 
+			heapify(arr, i, 0); 
+		}
+
+		System.out.println("No of comparisions done: " + c_heap);
+		return arr;
+	}
+
+	static void heapify(ArrayList<Integer> arr, int n, int i)
+	{
+		int largest = i;
+		int l = 2*i+1;
+		int r = 2*i+2;
+
+	//if left child is smallest than root
+		if(l<n && arr.get(l)>arr.get(largest))
+		{
+			largest = l;
+		}
+
+	//if right child is smallest than root
+		if(r<n && arr.get(r)>arr.get(largest))
+		{
+			largest = r;
+		}
+
+	//if smallest is not root then swapping it with the minimum
+		if(largest !=i)
+		{
+			int temp = arr.get(i);
+			arr.set(i, arr.get(largest));
+			arr.set(largest, temp);
+
+			c_heap++;
+		
+		//recursively heapifying the affected sub trees
+			heapify(arr, n, largest);
+		}
 	}
 
 //main function	
@@ -163,6 +270,11 @@ public class sort
 	//merge sort	
 		System.out.println("Sorting by Merge Sort");
 		System.out.println(merge(list));
+		System.out.println();
+
+	//heap sort	
+		System.out.println("Sorting by Heap Sort");
+		System.out.println(heap(list));
 		System.out.println();
 	}
 }
