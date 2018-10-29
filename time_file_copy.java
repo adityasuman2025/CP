@@ -1,7 +1,7 @@
 import java.io.*; 
 import java.util.*;
 
-class prog
+class time_file_copy
 {
 	public static void main(String args[]) throws Exception
 	{
