@@ -5,7 +5,8 @@ import java.io.InputStreamReader;
 //import for Scanner and other utility classes
 import java.util.*;
 
-public class Reverse_string {
+public class ReverseString
+{
     public static void main(String args[] ) throws Exception {
 
         //BufferedReader
@@ -26,17 +27,6 @@ public class Reverse_string {
             input1.append(inputs[i]);
 
             System.out.println(input1.reverse());
-        }
-        
-        //Scanner
-        // Scanner s = new Scanner(System.in);
-        // String name = s.nextLine();                 // Reading input from STDIN
-        // System.out.println("Hi, " + name + ".");    // Writing output to STDOUT
-
-        
-
-        // Write your code here
-
-
+        }        
     }
 }
