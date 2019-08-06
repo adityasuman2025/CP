@@ -27,14 +27,14 @@ public class InsertionSort
         	// 	}
         	// }
 
-        	while(hole>0 && value<arr[hole-1])
-        	{
-        		int temp = arr[hole-1];
-    			arr[hole-1] = value;
-    			arr[hole] = temp;
+            while(hole>0 && value<arr[hole-1])
+            {
+            	int temp = arr[hole-1];
+            	arr[hole-1] = value;
+            	arr[hole] = temp;
 
-    			hole--;
-        	}
+            	hole--;
+            }
         }
 
     //printing the sorted array
@@ -42,5 +42,6 @@ public class InsertionSort
         {
             System.out.print(k + ", ");
         }
+        System.out.println("");
 	}
 }
