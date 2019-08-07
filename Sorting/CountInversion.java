@@ -4,19 +4,18 @@ public class CountInversion
 {
 	public long count = 0;
 
-	public long countInversions(int[] arr)
+	public long countInversions()
     {
         return count;
     }
-    
 
-	public int[] merge_sort(int arr[])
+	public void merge_sort(int arr[])
 	{
 		int arr_length = arr.length;
 
 		if(arr_length <2) //if array is too short then doing nothing
 		{
-			return arr;
+			return;
 		}	
 	
 		int mid = (arr_length)/2;
@@ -35,9 +34,7 @@ public class CountInversion
 
 		merge_sort(left);
 		merge_sort(right);
-		merge(left, right, arr);			
-
-		return arr;
+		merge(left, right, arr);
 	}
 
 	public void merge(int left[], int right[], int arr[])
@@ -88,18 +85,11 @@ public class CountInversion
 
 	public static void main(String[] args) 
     {
-        Scanner in = new Scanner(System.in);
-        
-        int n = in.nextInt();
-        int arr[] = new int[n];
-        for(int arr_i=0; arr_i < n; arr_i++)
-        {
-            arr[arr_i] = in.nextInt();
-        }
+       	int arr[] = {9,78,52,15,23,0,32, 2, 100, 81, 23};
         
         CountInversion c = new CountInversion();
 
-        arr = c.merge_sort(arr);
-        System.out.println(c.countInversions(arr));
+        c.merge_sort(arr);
+        System.out.println(c.countInversions());
     }
 }

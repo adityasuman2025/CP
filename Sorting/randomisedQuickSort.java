@@ -1,16 +1,26 @@
 import java.util.*;
 
-class QuickSortNew
+class randomisedQuickSort
 {
 	static void quickSort(int arr[], int start, int end)
 	{
 		if(start>=end)
 			return;
 
-		int pIndex = partition(arr, start, end);
+		int pIndex = randomPartition(arr, start, end);
 
 		quickSort(arr, start, pIndex-1);
 		quickSort(arr, pIndex+1, end);
+	}
+
+	static int randomPartition(int arr[], int start, int end) //to avoid worst case of quick sort (n square)
+	{
+		int pivotIndex = (int)(Math.random()*(end - start + 1)) + start;
+		int temp = arr[end];
+		arr[end] = arr[pivotIndex];
+		arr[pivotIndex] = temp;
+
+		return partition(arr, start, end);
 	}
 
 	static int partition(int arr[], int start, int end)
