@@ -24,17 +24,17 @@ class countRotation
 			{
 				return mid;
 			}
-			else if(arr[mid] <= arr[high])
+			else if(arr[mid] <= arr[high]) //array is sorted from mid to high
 			{
 				high = mid-1;
 			}
-			else if(arr[mid] >= arr[low])
+			else if(arr[mid] >= arr[low]) //array is sorted from low to mid
 			{
 				low = mid + 1;
 			}			
 		}
 
-		return -1;
+		return 0;
 	}
 
 	public static void main(String[] args) 
