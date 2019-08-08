@@ -85,7 +85,7 @@ public class CountInversion
 
 	public static void main(String[] args) 
     {
-       	int arr[] = {9,78,52,15,23,0,32, 2, 100, 81, 23};
+       	int arr[] = {87, 78, 16, 94};
         
         CountInversion c = new CountInversion();
 
