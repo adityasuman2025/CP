@@ -1,4 +1,4 @@
-class Fibonacci
+class nTHFibonacciNo
 {
 //recursive in this case in not much benefitial as the recursion become too long
 	static int fibonacci(int n)
@@ -10,7 +10,6 @@ class Fibonacci
 		else
 		{
 			int k = fibonacci(n-1) + fibonacci(n-2);
-			System.out.print(k + " ");
 			return k;
 		}
 	}
@@ -34,9 +33,8 @@ class Fibonacci
 
 	public static void main(String[] args) 
 	{
-		int ans = itr_fib(6);
+		int ans = fibonacci(6-1);
 
-		//itr_fib(6);
 		System.out.print(ans);
 	}
 
