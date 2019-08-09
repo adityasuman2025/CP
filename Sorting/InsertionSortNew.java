@@ -37,7 +37,7 @@ class InsertionSortNew
 
 	public static void main(String[] args) 
 	{
-		int arr[] = {9,78,52,2,15,0,32, 2, 100, 11, 71};
+		int arr[] = {9,78,52,2,15,0,1, 2, 100, 11, 71};
 		System.out.println("Given array is: " + Arrays.toString(arr));	
 
 		int res[] = insertionSort(arr);
