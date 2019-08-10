@@ -231,6 +231,56 @@ public class LinkedListNew
 		head = prev;		
 	}
 
+//to bubble sort linked list
+	void bubbleSort()
+	{
+		NodeNew current = head;
+		
+		for(NodeNew i=current; i != null; i=i.next)
+		{
+			int flag = 0;
+			for(NodeNew j=current; j.next != null; j=j.next)
+			{
+				if(j.data>j.next.data)
+				{
+					swap(j,j.next);
+					flag = 1;
+				}
+			}
+
+			if(flag == 0)
+				break;
+		}
+	}
+
+	void swap(NodeNew a, NodeNew b) 
+	{ 
+		int temp = a.data; 
+		a.data = b.data; 
+		b.data = temp; 
+	} 
+
+//to know if linked list has cycle
+	boolean hasCycle()
+	{
+		if(head == null)
+			return false;
+		
+		NodeNew slow = head;
+		NodeNew fast = head.next;
+
+		while(fast != null && fast.next != null)
+		{
+			if(fast == slow)
+				return true;
+
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+
+		return false;
+	}
+
 //to print the linkedlist
 	public void print()
 	{
@@ -256,14 +306,17 @@ public class LinkedListNew
 	public static void main(String[] args) 
 	{
 		LinkedListNew ls = new LinkedListNew(1);
-		ls.append(2);
+		ls.append(10);
 		ls.prepend(3);
 		ls.append(4);
 		ls.prepend(42);
+		ls.prepend(7);
 		ls.print();
 
-		ls.reverse();
+		ls.bubbleSort();
 		ls.print();
+
+		System.out.println(ls.hasCycle());
 
 		// ls.rotateLeft(5);
 		// ls.print();
