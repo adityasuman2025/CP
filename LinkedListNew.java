@@ -212,6 +212,25 @@ public class LinkedListNew
 		kthNode.next = null;
 	}
 
+//to reverse a linked list
+	void reverse()
+	{
+		NodeNew prev = null;
+		NodeNew curr = head;
+		NodeNew next = null;
+
+		while(curr != null)
+		{
+			next = curr.next;
+			curr.next = prev;
+
+			prev = curr;
+			curr = next;
+		}
+
+		head = prev;		
+	}
+
 //to print the linkedlist
 	public void print()
 	{
@@ -243,10 +262,13 @@ public class LinkedListNew
 		ls.prepend(42);
 		ls.print();
 
+		ls.reverse();
+		ls.print();
+
 		// ls.rotateLeft(5);
 		// ls.print();
 
-		ls.rotateRight(5);
-		ls.print();
+		// ls.rotateRight(5);
+		// ls.print();
 	}
 }
