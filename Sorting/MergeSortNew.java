@@ -28,6 +28,38 @@ class MergeSortNew
 		merge(left, right, arr);
 	}
 
+	static void iterativeMergeSort(int arr[])
+	{
+		int n = arr.length;
+
+		for(int curr_size = 1; curr_size <n; curr_size = 2*curr_size)
+		{
+			for(int left = 0; left<n-1; left += 2*curr_size)
+			{
+				int mid = Math.min(left + curr_size - 1, n-1);
+
+				int right = Math.min(left + 2*curr_size - 1, n-1);
+
+				int n1 = mid-left+1; 
+        		int n2 = right-mid; 
+				int l[] = new int[n1];
+				int r[] = new int[n2];
+
+				for(int i=0; i<n1; i++)
+				{
+					l[i] = arr[left + i];
+				}
+
+				for(int i=0; i<n2; i++)
+				{
+					r[i] = arr[mid+1+i];
+				}
+
+				merge(l, r, arr);
+			}
+		}
+	}
+
 	static void merge(int left[], int right[], int arr[])
 	{
 		int l=0,r=0,a=0;
@@ -70,7 +102,7 @@ class MergeSortNew
 		int arr[] = {9,78,52,2,15,0,32, 2, 100, 11, 71};
 		System.out.println("Given array is: " + Arrays.toString(arr));	
 
-		mergeSort(arr);
+		iterativeMergeSort(arr);
 		System.out.println("Sorted array is: " + Arrays.toString(arr));
 	}
 }
