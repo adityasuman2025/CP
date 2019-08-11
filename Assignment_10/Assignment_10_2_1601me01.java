@@ -133,6 +133,7 @@ class Assignment_10_2_1601me01
 			}
 		}	
 
+	//if some operators are left in stack then popping them	
 		while(!stack.empty()) //t is lower than top
 		{
 			char top = stack.pop();
@@ -140,7 +141,7 @@ class Assignment_10_2_1601me01
 		}
 
 		System.out.println();
-		System.out.println("Postfix expression is: " +out);
+		System.out.println("Postfix expression is: " + out);
 		System.out.println();
 
 	//mathematical calculation from the expression

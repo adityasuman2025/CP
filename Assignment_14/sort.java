@@ -36,7 +36,7 @@ public class sort
 		return arr;
 	}
 
-//function to sort array using bubble sort
+//function to sort array using insertion sort
 	static ArrayList<Integer> insert(ArrayList<Integer> arr2)
 	{
 		ArrayList<Integer> arr = new ArrayList<>(arr2);
