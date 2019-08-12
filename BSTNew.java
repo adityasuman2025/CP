@@ -47,7 +47,7 @@ class BSTNew
 		}
 	}
 
-//search function()
+//search function
 	boolean contains(Node root, int value)
 	{
 		if(root == null)	
@@ -66,6 +66,27 @@ class BSTNew
 			return contains(root.right, value);
 		}
 	}
+
+	Node search(Node head, int value)
+    {
+        if(head == null)
+        {    
+            return null;
+        }
+            
+        if(head.data == value)
+        {
+            return head;
+        }
+        else if(head.data > value)
+        {
+            return search(head.left, value);
+        }
+        else
+        {
+            return search(head.right, value);
+        }      
+    }
 
 //inorderal transversal
 	void inOrder(Node root)
@@ -396,6 +417,20 @@ class BSTNew
         return res;
     }
 
+//lowest common ancestor in bST
+    Node LCA(Node node, int n1, int n2) 
+    {
+        if(node == null)
+            return null;
+            
+        if(n1<node.data && n2<node.data)
+            return LCA(node.left, n1, n2);
+        else if(n1>node.data && n2>node.data)
+            return LCA(node.right, n1, n2);
+            
+        return node;
+    }
+    
 //main function
 	public static void main(String[] args) 
 	{
@@ -437,6 +472,10 @@ class BSTNew
 
 		bst.printVertical(root);
 
-		System.out.println("Maximum level sum: " + bst.maxLevelSum(root));		
+		System.out.println("Maximum level sum: " + bst.maxLevelSum(root));	
+
+		Node val = bst.search(root, 11);	
+
+		System.out.println(val.data);
 	}	
 }
