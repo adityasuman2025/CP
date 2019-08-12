@@ -1,6 +1,7 @@
 import java.util.*;
 import java.lang.*;
 import java.io.*;
+
 class maxAreaInHistogram
 {
     static Scanner scanner = new Scanner(System.in);
