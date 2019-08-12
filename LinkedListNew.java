@@ -302,6 +302,41 @@ public class LinkedListNew
 		System.out.println();
 	}
 
+//to copy/clone a linked list
+	void cloneList()
+	{
+		NodeNew current = head;;
+
+		NodeNew coppiedCurr = null;
+		NodeNew coppiedHead = null;
+		NodeNew coppiedOld = null;
+
+		while(current != null)
+		{
+			coppiedCurr = new NodeNew(current.data);
+
+			if(coppiedHead == null) //to set head of the copied linked list
+				coppiedHead = coppiedCurr;
+
+			if(coppiedOld != null)//becoz at first old is null and null.next is not possible
+				coppiedOld.next = coppiedCurr;
+
+			coppiedOld = coppiedCurr;
+
+			current = current.next;			
+		}
+
+	//printing cloned list	
+		current = coppiedHead;
+
+		while(current != null)
+		{
+			System.out.print(current.data + " ");
+			current = current.next;
+		}		
+		System.out.println();
+	}
+
 //main function
 	public static void main(String[] args) 
 	{
@@ -318,7 +353,7 @@ public class LinkedListNew
 
 		System.out.println(ls.hasCycle());
 
-		// ls.rotateLeft(5);
+		ls.cloneList();
 		// ls.print();
 
 		// ls.rotateRight(5);
