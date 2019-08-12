@@ -303,6 +303,99 @@ class BSTNew
 		}
 	}
 
+//vertical sum
+	void printVertical(Node root)
+    {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        printV(root, 0, map);
+        
+        int c =0;
+        int min = 0;
+        int max = 0;
+        for(int key: map.keySet())
+        {
+            if(c ==0)
+            {
+                c++;
+                min = key;
+                max = key;
+            }
+            
+            if(key<min)
+                min = key;
+                
+            if(key>min)
+                max = key;
+        }
+        
+        System.out.print("Vertical sum of given tree is: ");
+        for(int i=min; i<=max; i++)
+        {
+            System.out.print(map.get(i) + " ");
+        }
+        System.out.println();
+    }
+    
+    static void printV(Node root, int index, HashMap<Integer, Integer> map)
+    {
+        if(root.left != null)
+        {
+            printV(root.left, index-1, map);
+        }
+        
+        if(map.containsKey(index))
+        {
+            int old = map.get(index);
+            int new_val = old + root.data;
+            map.put(index, new_val);
+        }
+        else
+        {
+            map.put(index, root.data);    
+        }
+       
+        if(root.right != null)
+        {
+            printV(root.right, index+1, map);
+        }
+    }
+
+//level order sum
+    public int maxLevelSum(Node root)
+    {
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        
+        int res = root.data;
+        while(!q.isEmpty())
+        {
+            int c = q.size();
+            
+            int sum = 0;
+            while(c>0)
+            {
+                Node temp = q.poll();
+                sum +=temp.data;
+                
+                if(temp.left != null)
+                {
+                    q.add(temp.left);
+                }
+                 
+                if(temp.right != null)
+                {
+                    q.add(temp.right);
+                }
+                
+                c--;
+            }
+            
+            res = Math.max(sum,res);
+        }
+        
+        return res;
+    }
+
 //main function
 	public static void main(String[] args) 
 	{
@@ -342,9 +435,8 @@ class BSTNew
 
 		bst.checkBST(root);
 
-		// System.out.print("LevelOrder transversal: ");
-		// bst.levelOrder(root);
-		// System.out.println();
+		bst.printVertical(root);
 
+		System.out.println("Maximum level sum: " + bst.maxLevelSum(root));		
 	}	
 }
