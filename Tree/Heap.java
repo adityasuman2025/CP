@@ -7,16 +7,16 @@ public class Heap
 
 	public void shiftUp()
 	{
-		int k = heap.size() -1;
+		int k = heap.size() -1; //child/item index
 
 		while(k>0)
 		{
-			int p = (k-1)/2;
+			int p = (k-1)/2; //parent index
 
 			int item = heap.get(k);
 			int parent = heap.get(p);
 
-			if(item<parent)
+			if(parent>item) // becoz in heap (min-heap) parent is smaller than its child
 			{
 			//swap that item with the parent
 				int temp = heap.get(k);
@@ -27,25 +27,38 @@ public class Heap
 			{
 				break;
 			}
+
+			k = p;
 		}
 	}
 
 	public void shiftDown()
 	{
-		int k = 0;
-		int left = 2*k +1;
+		int k = 0; //parent index
+		int left = 2*k +1; //left-child index
 
-		while(left< heap.size())
+		while(left < heap.size())
 		{
 			int max = left;
-			right = left +1;
+			right = left +1; //right-child index
 
-			if(right<heap.size() && right>max)
+			if(right<heap.size() && right>max) //if right child is greater than left child then making max index equal to right child index
 			{
 				max = right;
 			}
 
-			IF(heap.get(k))
+			if(heap.get(k)<item.get(max)) //if parent < child then heap is all gud // nothing is required
+			{
+				break;
+			}
+			else //parent>child
+			{
+				int temp = heap.get(k);
+				heap.set(k, heap.get(max));
+				heap.set(max,temp);
+			}
+
+			k = max;
 		}
 	}
 
