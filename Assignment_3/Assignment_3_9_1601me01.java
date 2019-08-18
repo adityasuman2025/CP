@@ -16,7 +16,7 @@ public class Assignment_3_9_1601me01
         while(k<m && l<n)
         {
         //printing the first row
-            for(i=0; i<n; i++)
+            for(i=l; i<n; i++)
             {
                 System.out.print(arr[k].charAt(i));
             }
@@ -32,7 +32,7 @@ public class Assignment_3_9_1601me01
         //Printing the last row from the remaining rows
             if ( k < m)
             {
-                for (i = n-1; i >= 0; --i)
+                for (i = n-1; i >=l; --i)
                 {
                     System.out.print(arr[m-1].charAt(i));
                 }
