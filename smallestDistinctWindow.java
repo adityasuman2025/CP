@@ -12,12 +12,10 @@ class smallestDistinctWindow
 	        String s = bf.readLine();
 	        String t=new String();
 	        
-	       Set<String> set=new HashSet<>();
+	        Set<String> set=new HashSet<>();
     	    for(int i=0;i<s.length();i++)
     	    set.add(Character.toString(s.charAt(i)));
-    	    t=String.join("",set);
-    	    
-    	    
+    	    t=String.join("",set);    	        	    
     	    
     	    String res="";
     	    int letterCount[]=new int[256];
