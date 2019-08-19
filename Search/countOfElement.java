@@ -42,16 +42,15 @@ class countOfElement
 		int n = arr.length;
 
 		int firstIndex = bs(arr, 0, n-1, to_find, true);
-
-		if(firstIndex != -1)
+        int lastIndex = bs(arr, 0, n-1, to_find, false);	
+    
+		if(firstIndex != -1 && lastIndex != -1)
 		{
-			int lastIndex = bs(arr, 0, n-1, to_find, false);	
-		
-			return lastIndex-firstIndex+1;
+		    return lastIndex-firstIndex+1;
 		}
 		else
 		{
-			return 0;
+		    return -1;
 		}
 	}
 
