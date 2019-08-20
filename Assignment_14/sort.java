@@ -1,7 +1,6 @@
 import java.io.File; 
 import java.util.*;
 
-
 public class sort
 {
 //function to sort array using bubble sort	
