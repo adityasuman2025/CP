@@ -112,26 +112,20 @@ public class LinkedListNew
 			size++;
 		}
 		size++;		
-
-		if(k>=size)
-			k = k%size;
-
+		
+		k = k%size;
 		if(k == 0)
 			return;
 
 	//going to the kth node	
-		int count = 1;
+		int count = 0;
 		while(current != null)
 		{
-			if(count<k)
-			{
-				current = current.next;
-				count++;
-			}
-			else
-			{
+			count++;
+			if(count>=k)			
 				break;
-			}			
+
+			current = current.next;		
 		}
 
 		if(current == null) //when k is greater or equal to size of linked list
@@ -171,32 +165,26 @@ public class LinkedListNew
 			size++;
 		}
 		size++;		
-
-		if(k>=size)
-			k = k%size;
-
+		
+		k = k%size;
 		if(k == 0)
 			return;
 		
 	//going to the kth node	
-		int count = 1;
+		int count = 0;
 		while(current != null)
 		{
-			if(count<size-k)
-			{
-				current = current.next;
-				count++;
-			}
-			else
-			{
-				break;
-			}			
+			count++;
+			if(count>=size-k)			
+				break;		
+			current = current.next;
 		}
 
 		if(current == null) //when k is greater or equal to size of linked list
 			return;
 
 		NodeNew kthNode = current;
+		NodeNew nextKth = kthNode.next;
 
 	//going to the last element of the linked list and linking last element to head
 		while(current.next !=null)
@@ -206,7 +194,7 @@ public class LinkedListNew
 		current.next = head;
 
 	// making the element next to the kth element as head 	
-		head = kthNode.next;
+		head = nextKth;
 
 	//making next of the kth element null
 		kthNode.next = null;
@@ -348,15 +336,15 @@ public class LinkedListNew
 		ls.prepend(7);
 		ls.print();
 
-		ls.bubbleSort();
+		//ls.bubbleSort();
 		ls.print();
 
-		System.out.println(ls.hasCycle());
+		//System.out.println(ls.hasCycle());
 
-		ls.cloneList();
-		// ls.print();
+		//ls.cloneList();
+		ls.print();
 
-		// ls.rotateRight(5);
-		// ls.print();
+		ls.rotateLeft(4);
+		ls.print();
 	}
 }
