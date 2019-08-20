@@ -28,7 +28,7 @@ public class BinarySearch
 	}
 
 //binary search using iteration
-	public static boolean bs_iteration(int array[], int to_find)
+	public static int bs_iteration(int array[], int to_find)
 	{
 		int left =0;
 		int right = array.length-1;
@@ -39,7 +39,7 @@ public class BinarySearch
 
 			if(array[mid] == to_find)
 			{
-				return true;
+				return mid;
 			}
 			else if(to_find < array[mid])
 			{
@@ -51,25 +51,15 @@ public class BinarySearch
 			}
 		}
 
-		return false;
+		return -1;
 	}
 
 	public static void main(String args[])
 	{
-		int arr[] = {1,3,4,8,9,12,15};
+		int arr[] = {10,40,20};
 
-		Arrays.sort(arr);
-		int i = 0;
-		// if(bs_recursion(arr, 0, arr.length-1, 15))
-		// {
-		// 	i =1;
-		// }
-
-		if(bs_iteration(arr, 115))
-		{
-			i =1;
-		}
-
-		System.out.println(i);
+		Arrays.sort(arr);		
+	
+		System.out.println(bs_iteration(arr, 20));
 	}
 }
