@@ -2,25 +2,21 @@ import java.util.*;
 import java.lang.*;
 import java.io.*;
 
-class maxAreaInHistogram
+class MaxAreaInHistogram
 {
     static Scanner scanner = new Scanner(System.in);
     public static void main (String[] args)
 	{
-	    int T = Integer.parseInt(scanner.nextLine());
-	    for(int a=0; a<T; a++)
-	    {
-	        int N = scanner.nextInt();
+	    int N = scanner.nextInt();
 	        
-	        long arr[] = new long[N];
-	        for(int i=0; i<N; i++)
-	        {
-	            arr[i] = scanner.nextLong();
-	        }
-	        
-	        long maxArea = maxAreaHistogram(arr);
-	        System.out.println(maxArea);
-	    }
+        long arr[] = new long[N];
+        for(int i=0; i<N; i++)
+        {
+            arr[i] = scanner.nextLong();
+        }
+        
+        long maxArea = maxAreaHistogram(arr);
+        System.out.println(maxArea);
 	}
 	
 	static long maxAreaHistogram(long arr[])
@@ -35,7 +31,7 @@ class maxAreaInHistogram
 	    int i = 0;
 	    while(i<n)
 	    {
-	        if(stack.empty() || arr[i] >= arr[stack.peek()]) //if stack is empty or 
+	        if(stack.isEmpty() || arr[i] >= arr[stack.peek()]) //if stack is empty or 
 	        {
 	            stack.push(i++);
 	            //i++;
@@ -44,7 +40,7 @@ class maxAreaInHistogram
 	        {
 	            int top = stack.pop();
 	            
-	            if(stack.empty())
+	            if(stack.isEmpty())
 	            {
 	                area = arr[top]*i;
 	            }
@@ -54,18 +50,15 @@ class maxAreaInHistogram
 	            }
 	            
             //updating max area
-	            if(area > maxArea)
-	            {
-                    maxArea = area;
-                }
+	           maxArea = Math.max(area, maxArea);
 	        }
 	    }
 	    
-	    while(!stack.empty())
+	    while(!stack.isEmpty())
 	    {
 	        int top = stack.pop();
 	            
-            if(stack.empty())
+            if(stack.isEmpty())
             {
                 area = arr[top]*i;
             }
@@ -75,10 +68,7 @@ class maxAreaInHistogram
             }
             
         //updating max area
-            if(area > maxArea)
-            {
-                maxArea = area;
-            }
+           	maxArea = Math.max(area, maxArea);
 	    }
 	    
 	    return maxArea;
