@@ -50,7 +50,7 @@ class countOfElement
 		}
 		else
 		{
-		    return -1;
+		    return 0;
 		}
 	}
 

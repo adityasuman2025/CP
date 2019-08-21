@@ -417,6 +417,36 @@ class BSTNew
         return res;
     }
 
+//all diagonals sum
+	public void diagonalsum(Node root)
+    {
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        
+        while(!q.isEmpty())
+        {
+            int sum = 0;
+            int size = q.size();
+            
+            for(int i=0; i<size; i++)
+            {
+                Node temp = q.poll();
+                
+                while(temp != null)
+                {
+                    if(temp.left !=null)
+                        q.add(temp.left);
+                        
+                    sum +=temp.data;
+                    temp=temp.right;
+                }
+            }
+            
+            System.out.print(sum + " ");
+        }
+        System.out.println();
+    }
+
 //lowest common ancestor in bST
     Node LCA(Node node, int n1, int n2) 
     {
