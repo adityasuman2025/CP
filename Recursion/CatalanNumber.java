@@ -1,8 +1,8 @@
-class catalanNumber
+class CatalanNumber
 {
-	static int numTrees(int n)
+	public static void main(String[] args) 
     {
-        return catlan(n);
+        System.out.println(catlan(4));    
     }
     
     static int catlan(int n)
