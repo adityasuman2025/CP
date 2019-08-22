@@ -178,6 +178,62 @@ class BSTNew
 		}
 	}
 
+//zig-zag or spiral level order transevrsal
+	void printSpiral(Node node) 
+    {
+        Stack<Node> stack1 = new Stack<>();
+        Stack<Node> stack2 = new Stack<>();
+        stack1.push(node);
+        
+        StringBuilder str = new StringBuilder();
+        boolean flag = true;
+        while(!stack1.isEmpty() || !stack2.isEmpty())
+        {
+            if(flag)
+            {
+                while(!stack1.isEmpty())
+                {
+                    Node top = stack1.pop();
+            
+                    str.append(top.data +  " ");
+                     
+                    if(top.right!=null)
+                    {
+                        stack2.push(top.right);
+                    }
+                    
+                    if(top.left!=null)
+                    {
+                        stack2.push(top.left);
+                    }
+                }
+            }
+            else
+            {
+                while(!stack2.isEmpty())
+                {
+                    Node top = stack2.pop();
+            
+                    str.append(top.data +  " ");
+                    
+                    if(top.left!=null)
+                    {
+                        stack1.push(top.left);
+                    }
+                    
+                    if(top.right!=null)
+                    {
+                        stack1.push(top.right);
+                    }
+                }
+            }
+            
+            flag = !flag;
+        }
+        
+        System.out.print(str.toString());
+    }
+    
 //min max in tree
 	int findMin(Node root)
 	{
