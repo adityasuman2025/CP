@@ -80,11 +80,10 @@ class MeetingRoom
 	        
 	        
 	        StringBuffer sb = new StringBuffer();
-	        Integer last = -1;
-	        int ind = 0;
+	        int last = -1;
 	        for(int i=0 ; i<al.size() ; i++)
 	        {
-	            if(last == null)
+	            if(last == -1)
 	            {
 	                last = al.get(i).end;
 	                sb.append(al.get(i).pos+1 + " ");

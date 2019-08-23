@@ -6,8 +6,8 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 
-public class IceParlor {
-
+public class IceParlor 
+{
     // Complete the whatFlavors function below.
     static void whatFlavors(int[] cost, int money) 
     {
