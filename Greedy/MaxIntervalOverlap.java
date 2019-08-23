@@ -17,8 +17,7 @@ There are maximum 3 guests at time 5.
 
 class MaxIntervalOverlap { 
 
-	static void findMaxGuests(int arrl[], int exit[], 
-										int n)	 
+	static void findMaxGuests(int arrl[], int exit[], int n)	 
 	{ 
 	// Sort arrival and exit arrays 
 	Arrays.sort(arrl); 

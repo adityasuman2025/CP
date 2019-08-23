@@ -1,5 +1,5 @@
 import java.util.*;
-public class set
+public class Set
 {
 	public static void main(String args[])
 	{
