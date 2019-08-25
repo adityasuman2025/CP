@@ -2,67 +2,57 @@ import java.util.*;
 import java.lang.*;
 import java.io.*;
 class sumOfPrime
- {
-    public static boolean isPrime(int N)
+{
+    static BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+    public static void main (String[] args) throws Exception
 	{
-		if(N ==1)
-		{
-			return false;
-		}
-		if(N ==2)
-		{
-			return true;
-		}
-		
-		for(int i=2; i*i<=N; i++)
-		{
-			if(N%i ==0)
-			{
-				return false;
-			}
-		}
-
-		return true;
+	    ArrayList<Integer> primes = new ArrayList<>();
+	    for(int i=2; i<10000; i++)
+	    {
+	        if(isPrime(i))
+	            primes.add(i);
+	    }
+	    
+	    int T = Integer.parseInt(bf.readLine().trim());
+	    for(int t=0; t<T; t++)
+	    {
+	        int N = Integer.parseInt(bf.readLine().trim());
+	   
+	        int flag = 0;
+	        StringBuilder str = new StringBuilder();
+	        for(int i=N; i*i>=N; i--)
+	        {
+	            if(primes.contains(i))
+	            {
+	               if(primes.contains(N-i))
+	               {
+	                   str.append(N-i + " " + i);
+	                   flag = 1;
+	                   break;
+	               }
+	            }
+	        }
+	        
+	        System.out.println(str.toString());
+	    }
 	}
 	
-	 static Scanner scanner = new Scanner(System.in);
-	 public static void main (String[] args)
-	 {
-	    int T = Integer.parseInt(scanner.nextLine());
-	    
-	    for(int n = 0; n<T; n++)
-	    {
-	        String no = scanner.nextLine();
-	        
-	        ArrayList<Integer> primes = new ArrayList<>();
-	        
-	        int N = Integer.parseInt(no);
-    		for(int i=2; i<N; i++)
-    		{
-    		    if(isPrime(i))
-    			{
-    				primes.add(i);
-    			}
-    		}
-    		
-    		int flag = -1;
-    		for(int i : primes)
-    		{
-    		    int f = i;
-    		    int s = N-i;
-    		    
-    		    if(primes.contains(s))
-    		    {
-    		        System.out.println(i + " " + s);
-    		        flag =0;
-    		        break;
-    		    }
-    		}
-    		
-    		if(flag == -1)
-    		{
-    		    System.out.println(-1);
-    		}
-	    }
-	 }
+    static boolean isPrime(int n)
+    {
+        if(n<=1)
+            return false;
+        if(n <=3)
+            return true;
+            
+        if(n%2 == 0 || n%3 == 0)
+            return false;
+            
+        for(int i=5; i*i<=n; i+=6)
+        {
+            if(n%i == 0 || n%(i+2) == 0)
+                return false;
+        }
+        
+        return true;
+    }
 }

@@ -2,28 +2,24 @@ import java.util.*;
 
 class Prime 
 {
-	public static boolean isPrime(int N)
-	{
-		if(N ==1)
-		{
-			return false;
-		}
-		if(N ==2)
-		{
-			return true;
-		}
-		
-		for(int i=2; i*i<=N; i++)
-		{
-			if(N%i ==0)
-			{
-				return false;
-			}
-		}
-
-		return true;
-	}
-
+	static boolean isPrime(int n)
+    {
+        if(n<=1)
+            return false;
+        if(n <=3)
+            return true;
+            
+        if(n%2 == 0 || n%3 == 0)
+            return false;
+            
+        for(int i=5; i*i<=n; i+=6)
+        {
+            if(n%i == 0 || n%(i+2) == 0)
+                return false;
+        }
+        
+        return true;
+    }
 
     static Scanner scanner = new Scanner(System.in);
 	public static void main (String[] args) 
@@ -32,11 +28,7 @@ class Prime
         
         int x=1;
 		while(N>0)
-		{
-			// System.out.print(x + " ");
-			// x++;
-			// N--;
-
+		{			
 			if(isPrime(x))
 			{
 				System.out.print(x + " ");
