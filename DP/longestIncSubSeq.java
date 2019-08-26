@@ -19,11 +19,7 @@ public class longestIncSubSeq
 			int val = arr[i];			
 			for(int j=0; j<i; j++)
 			{
-				if(arr[j]>arr[i])
-				{
-					continue;
-				}
-				else
+				if(arr[i]>arr[j])
 				{
 					if(count[j]+1>count[i])
 					{
@@ -47,7 +43,7 @@ public class longestIncSubSeq
 		{
 			if(count[i] == max_count)
 			{
-				max = 3;
+				max = count[i];
 				max_index = i;
 			}
 		}

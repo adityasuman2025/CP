@@ -25,7 +25,11 @@ public class longestComSubSeq
 			}
 		}
 
-		System.out.println(Arrays.toString(L));
+		for(int arr[]: L)
+		{
+			System.out.println(Arrays.toString(arr));	
+		}
+		
 		System.out.println(L[arr1.length()][arr2.length()]);
 	}
 
