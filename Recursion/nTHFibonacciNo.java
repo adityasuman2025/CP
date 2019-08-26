@@ -7,11 +7,9 @@ class nTHFibonacciNo
 		{
 			return n;
 		}
-		else
-		{
-			int k = fibonacci(n-1) + fibonacci(n-2);
-			return k;
-		}
+
+		int k = fibonacci(n-1) + fibonacci(n-2);
+		return k;
 	}
 
 //so trying a itterative solution for fibonacci problems

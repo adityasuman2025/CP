@@ -4,8 +4,8 @@ class NCR
 	{
 		if( r== 0 || n == r)
 			return 1;
-		else
-			return comb(n-1,r)+comb(n-1,r-1);
+		
+		return comb(n-1,r)+comb(n-1,r-1);
 	}
 
 	// Driver code 

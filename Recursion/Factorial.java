@@ -11,10 +11,9 @@ class Factorial
 {
 	static int factorial(int n)
 	{
-		if(n == 0) //base case
-		{
+		if(n<2) //base case		
 			return 1;
-		}
+			
 		return n * factorial(n-1);
 	}
 
