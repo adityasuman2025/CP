@@ -25,7 +25,9 @@ public class subSequenceOfString
 	}
 
 	public static void main(String[] args) {
-		subSeq("abcd");
+		String input = "abbc";
+		
+		printSubSeq(input, "");
 		System.out.println(list);
 	}	
 }
