@@ -57,34 +57,45 @@ This will take O(n^2k)
 If we can find 0 to j-1 then we can reduce complexity.
 */
 
-class maxProfitDp
- {
-  public static int maxProfitDp(int arr[],int k,int n)
-  {
-   int profit[][]=new int[k+1][n+1];
-   for(int i=1;i<=k;++i)
-   {
-    int max=Integer.MIN_VALUE;
-    for(int j=1;j<n;++j)
+class StockBuySell
+{
+    static int maxProfit(int prices[], int K) 
     {
-     max=Math.max(max,profit[i-1][j-1]-arr[j-1]);
-     profit[i][j]=Math.max(profit[i][j-1],max+arr[j]);
+        int N = prices.length;
+        
+        if (K == 0 || N == 0)
+            return 0;
+        
+        int T[][] = new int[K+1][N];
+
+        for (int i = 1; i <= K; i++) 
+        {
+            int maxDiff = -prices[0];
+            for (int j = 1; j < N; j++) 
+            {
+                T[i][j] = Math.max(T[i][j-1], prices[j] + maxDiff);
+                
+                maxDiff = Math.max(maxDiff, T[i-1][j] - prices[j]);
+            }
+        }
+        
+        return T[K][N-1];
     }
-   }
-   return profit[k][n-1];
-  }
- public static void main (String[] args)
-  {
- Scanner ab=new Scanner(System.in);
- int t=ab.nextInt();
- while(t-->0)
- {
-     int k=ab.nextInt();
-     int n=ab.nextInt();
-     int arr[]=new int[n];
-     for(int i=0;i<n;++i)
-     arr[i]=ab.nextInt();
-     System.out.println(maxProfitDp(arr,k,n));
- }
-  }
+
+    public static void main (String[] args)
+    {
+        Scanner ab=new Scanner(System.in);
+        int t=ab.nextInt();
+        while(t-->0)
+        {
+            int k=ab.nextInt();
+            int n=ab.nextInt();
+            int arr[]=new int[n];
+
+            for(int i=0;i<n;++i)
+                arr[i]=ab.nextInt();
+            
+            System.out.println(maxProfit(arr,k));
+        }
+    }
 }
