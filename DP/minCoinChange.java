@@ -4,7 +4,7 @@ public class minCoinChange
 {
 	static void coin(int arr[], int V)
 	{
-	//creating an auxillary array
+	//for min count of coins
 		int table[] = new int[V+1];
 
 		table[0] = 0;
@@ -31,6 +31,40 @@ public class minCoinChange
 
 		System.out.println(Arrays.toString(table));
 		System.out.println(table[V]);
+
+	//for printing the required coins
+		int j = 0;
+        for(j=0; j<N; j++)
+        {
+            if(arr[j]>=V)  
+            {
+                break;
+            }
+        }
+        j--;
+        
+        int temp = V;
+        ArrayList<Integer> list = new ArrayList<>();
+        for(int i=j; i>=0; i--)
+        {
+            int coin = arr[i];
+            
+            if(temp>=coin)   
+            {
+                int count = temp/coin;
+                for(int k=0; k<count; k++)
+                    list.add(coin);
+                    
+                temp -= (coin*count); 
+            }
+        }
+       
+        StringBuilder sb = new StringBuilder();
+        for(int item: list)
+        {
+            sb.append(item + " ");
+        }
+        System.out.println(sb.toString());	
 	}
 	
 	public static void main(String[] args) 
