@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 /*
-Longest alternating subsequence
+Longest alternating subsequence or Longest Zig-Zag Sub Sequence
 A sequence {x1, x2, .. xn} is alternating sequence if its elements satisfy one of the following relations :
 
 x1 < x2 > x3 < x4 > x5..... or  x1 >x2 < x3 > x4 < x5.....
