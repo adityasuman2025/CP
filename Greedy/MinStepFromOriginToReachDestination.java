@@ -68,17 +68,10 @@ class GFG
         if (source == dest)  
             return step; 
   
-        // at each point we can go either way 
-  
-        // if we go on positive side 
-        int pos = steps(source + step + 1, 
-                        step + 1, dest); 
-  
-        // if we go on negative side 
-        int neg = steps(source - step - 1,  
-                        step + 1, dest); 
-  
-        // minimum of both cases 
-        return Math.min(pos, neg); 
+        step++;
+        int pos = steps(source+step, step, dest);
+        int neg = steps(source-step, step, dest);
+        
+        return Math.min(pos, neg);
     }
 }
