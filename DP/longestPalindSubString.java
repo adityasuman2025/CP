@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class longestPalindSubString
 {
 	static void longest(String arr)
@@ -46,6 +48,9 @@ public class longestPalindSubString
 			}
 		}
 
+		for(boolean item[]: table)
+			System.out.println(Arrays.toString(item));
+		
 		System.out.println("length of maximum palindrome substring is: " + max_len);
 		System.out.println("The sub string is: " + arr.substring(start, start+max_len));
 	}
