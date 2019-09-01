@@ -516,6 +516,39 @@ class BSTNew
             
         return node;
     }
+
+//inorder successor in bst
+    public int inorderSuccessor(Node root,Node k)
+    {
+        ArrayList<Integer> list = new ArrayList<>();        
+        inOrderS(root, list);
+        
+        int toFind = k.data;        
+        int i=0;
+        for(i=0; i<list.size(); i++)
+        {
+            if(list.get(i)==toFind)
+                break;
+        }
+        
+        if(i>=list.size()-1)
+            return null;
+            
+        int data = list.get(i+1);
+        
+        return data;
+    }
+    
+    public void inOrderS(Node root, ArrayList<Integer> list)
+    {
+        if(root.left != null)
+            inOrderS(root.left, list);
+            
+        list.add(root.data);
+        
+        if(root.right != null)
+            inOrderS(root.right, list);
+    }
  
 //mirror a binary tree
 	void mirror(Node node)
@@ -531,7 +564,7 @@ class BSTNew
 	    node.right = left;
 	    mirror(node.right);
     }
-        
+
 //main function
 	public static void main(String[] args) 
 	{
