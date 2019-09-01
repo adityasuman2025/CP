@@ -36,7 +36,6 @@ class copyLinkedListWithRandomPointers
 	// Adjusting the original list reference to do transverse from head
 		curr = head;
 
-
     // Traversal of original list again to adjust the next 
         // and random references of clone list using hash map.
 		while(curr != null)

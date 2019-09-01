@@ -516,7 +516,22 @@ class BSTNew
             
         return node;
     }
-    
+ 
+//mirror a binary tree
+	void mirror(Node node)
+    {
+	    if(node == null)
+	        return;
+	        
+	    Node left = node.left;
+	    
+	    node.left = node.right;
+	    mirror(node.left);
+	    
+	    node.right = left;
+	    mirror(node.right);
+    }
+        
 //main function
 	public static void main(String[] args) 
 	{
