@@ -325,7 +325,7 @@ class BSTNew
 
     void getWidth(Node root, int curr) 
 	{ 
-	    if (root == NULL) 
+	    if (root == null) 
 	        return; 
 	  
     // traverse left 
@@ -456,7 +456,7 @@ class BSTNew
     {
         map.clear();
         
-        solve(root, 0);
+        printV(root, 0);
         
         StringBuilder sb = new StringBuilder();
         for(int key: map.keySet())
@@ -480,17 +480,17 @@ class BSTNew
         }
         else
         {
-             map.put(dist, node.data);
+            map.put(dist, node.data);
         }
         
         if(node.left !=null)
         {
-            solve(node.left, dist-1);
+            printV(node.left, dist-1);
         }
         
         if(node.right !=null)
         {
-            solve(node.right, dist+1);
+            printV(node.right, dist+1);
         }
     }
 
@@ -608,7 +608,7 @@ class BSTNew
         }
         
         if(i>=list.size()-1)
-            return null;
+            return 0;
             
         int data = list.get(i+1);
         
@@ -642,7 +642,7 @@ class BSTNew
     }
 
 //left view of the tree
-    static TreeMap<Integer, Integer> map = new TreeMap<>();
+    //static TreeMap<Integer, Integer> map = new TreeMap<>();
     //depth, node.data
     
     void leftView(Node root)
