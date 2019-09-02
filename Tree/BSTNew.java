@@ -381,59 +381,47 @@ class BSTNew
 	}
 
 //vertical sum
+	static TreeMap<Integer, Integer> map = new TreeMap<>();
+
 	void printVertical(Node root)
     {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        printV(root, 0, map);
+        map.clear();
         
-        int c =0;
-        int min = 0;
-        int max = 0;
+        solve(root, 0);
+        
+        StringBuilder sb = new StringBuilder();
         for(int key: map.keySet())
         {
-            if(c ==0)
-            {
-                c++;
-                min = key;
-                max = key;
-            }
-            
-            if(key<min)
-                min = key;
-                
-            if(key>min)
-                max = key;
+            int val = map.get(key);
+            sb.append(val+ " ");
         }
         
-        System.out.print("Vertical sum of given tree is: ");
-        for(int i=min; i<=max; i++)
-        {
-            System.out.print(map.get(i) + " ");
-        }
-        System.out.println();
+        System.out.println(sb.toString());
     }
     
-    static void printV(Node root, int index, HashMap<Integer, Integer> map)
+    static void printV(Node node, int dist)
     {
-        if(root.left != null)
+        if(node == null)
+            return;
+            
+        if(map.containsKey(dist))
         {
-            printV(root.left, index-1, map);
-        }
-        
-        if(map.containsKey(index))
-        {
-            int old = map.get(index);
-            int new_val = old + root.data;
-            map.put(index, new_val);
+            int val = map.get(dist);
+            map.put(dist, val+node.data);
         }
         else
         {
-            map.put(index, root.data);    
+             map.put(dist, node.data);
         }
-       
-        if(root.right != null)
+        
+        if(node.left !=null)
         {
-            printV(root.right, index+1, map);
+            solve(node.left, dist-1);
+        }
+        
+        if(node.right !=null)
+        {
+            solve(node.right, dist+1);
         }
     }
 
