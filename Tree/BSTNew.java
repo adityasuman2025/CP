@@ -286,6 +286,75 @@ class BSTNew
 		return Math.max(leftHeight, rightHeight) + 1;
 	}
 
+//max-width of the tree
+	int getMaxWidth(Node root)
+    {
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        
+        int maxSize = 0;
+        while(!q.isEmpty())
+        {
+            int size = q.size();
+            maxSize = Math.max(size, maxSize);
+            
+            while(size>0)
+            {
+                Node temp = q.poll();
+             
+                if(temp.left!=null)
+                {
+                    q.add(temp.left);
+                }
+                
+                if(temp.right!=null)
+                {
+                    q.add(temp.right);
+                }
+                
+                size--;
+            }
+        }
+        
+        return maxSize;
+    }
+
+//width of the tree
+    static int max = 0;
+    static int min = 0;
+
+    void getWidth(Node root, int curr) 
+	{ 
+	    if (root == NULL) 
+	        return; 
+	  
+    // traverse left 
+	    getWidth(root.left, curr - 1); 
+	  
+	    // if curr is decrease then get 
+	    // value in minimum 
+	    if (curr<min) 
+	        min = curr; 
+	  
+	    // if curr is increase then get 
+	    // value in maximum 
+	    if (curr>max) 
+	        max = curr;
+
+    // traverse right 
+	   	getWidth(root.right, curr + 1); 
+	} 
+	  
+	int width(Node root) 
+	{ 
+	    max = 0;
+	    min = 0; 
+
+	    getWidth(root, 0); 
+	  	    
+	    return (max - (min) + 1); // 1 is added to include root node in the width 
+	}
+
 //delete node with a particular value in tree
 	Node remove(Node root, int data)
 	{
@@ -491,6 +560,25 @@ class BSTNew
         System.out.println();
     }
 
+//root to leaf path sum
+    public static int treePathsSum(Node root)
+    {
+        return t(root,0);        
+	}
+	
+	static int t(Node root,int val)
+    {
+        if(root==null)
+            return 0;
+        
+        val = (val*10+root.data);
+        
+        if(root.right==null && root.left==null)
+            return val;
+        
+        return t(root.left,val)+t(root.right,val);
+    }
+
 //lowest common ancestor in bST
     Node LCA(Node node, int n1, int n2) 
     {
@@ -551,6 +639,162 @@ class BSTNew
 	    
 	    node.right = left;
 	    mirror(node.right);
+    }
+
+//left view of the tree
+    static TreeMap<Integer, Integer> map = new TreeMap<>();
+    //depth, node.data
+    
+    void leftView(Node root)
+    {
+        map.clear();
+        
+        StringBuilder str = new StringBuilder();
+        
+        lView(root, 0);
+        
+        for(int key: map.keySet())
+        {
+            int val = map.get(key);
+            
+            str.append(val + " ");
+        }
+        System.out.print(str.toString());
+    }
+    
+    void lView(Node root, int depth)
+    {
+        if(root == null)
+            return;
+            
+        if(!map.containsKey(depth))
+        {
+            map.put(depth, root.data);
+        }
+        
+        if(root.left !=null)
+            lView(root.left, depth+1);
+            
+        if(root.right !=null)
+            lView(root.right, depth+1);
+    }
+
+//right view of the tree   
+    void rightView(Node root)
+    {
+        map.clear();
+        
+        StringBuilder str = new StringBuilder();
+        
+        rView(root, 0);
+        
+        for(int key: map.keySet())
+        {
+            int val = map.get(key);
+            
+            str.append(val + " ");
+        }
+        System.out.print(str.toString());
+    }
+    
+    void rView(Node root, int depth)
+    {
+        if(root == null)
+            return;
+            
+        if(!map.containsKey(depth))
+        {
+            map.put(depth, root.data);
+        }
+        
+        if(root.right !=null)
+            rView(root.right, depth+1);
+            
+        if(root.left !=null)
+            rView(root.left, depth+1);            
+    }
+
+//bottom view of the tree
+    public void bottomView(Node root)
+    {
+        map.clear();
+        
+        StringBuilder str = new StringBuilder();
+        
+        bView(root, 0);
+        
+        for(int key: map.keySet())
+        {
+            int val = map.get(key);
+            
+            str.append(val + " ");
+        }
+        System.out.print(str.toString());
+    }
+    
+    static void bView(Node root, int index)
+    {
+        if(root == null)
+            return;
+        
+        if(root.left !=null)
+            bView(root.left, index-1);
+            
+        map.put(index, root.data);
+        
+        if(root.right !=null)
+            bView(root.right, index+1);
+    }
+
+//top view of the tree
+    public void topView(Node node)
+    {
+        if(node == null)
+            return;
+            
+        class Pair
+        {
+            Node node;
+            int index;
+            
+            Pair(Node node, int index)
+            {
+                this.node = node;
+                this.index= index;
+            }
+        }
+        
+        TreeMap<Integer, Integer> map = new TreeMap<>();
+        
+        Queue<Pair> q = new LinkedList<>();
+        q.add(new Pair(node , 0));
+        
+        while(!q.isEmpty())
+        {
+            Pair temp = q.poll();
+            Node tempNode = temp.node;
+            int tempIndex = temp.index;
+            
+            if(!map.containsKey(tempIndex))
+            {
+                map.put(tempIndex, tempNode.data);
+            }
+            
+            if(tempNode.left !=null)
+                q.add(new Pair(tempNode.left , tempIndex-1));
+
+           if(tempNode.right !=null)
+                q.add(new Pair(tempNode.right , tempIndex+1));
+        }
+        
+        StringBuilder str = new StringBuilder();
+        for(int key: map.keySet())
+        {
+            int val = map.get(key);
+            
+            str.append(val + " ");
+        }
+        System.out.print(str.toString());
     }
 
 //main function
