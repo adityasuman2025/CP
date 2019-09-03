@@ -797,6 +797,63 @@ class BSTNew
         System.out.print(str.toString());
     }
 
+//left/right/bottom view recursive
+    static LinkedHashSet<Integer> set = new LinkedHashSet<>();
+    
+    void leftViewRecur(Node root)
+	{
+		if(root == null)
+		{
+			return;
+		}
+
+        set.add(root.data);
+        
+        if(root.left != null)
+        {
+            leftViewRecur(root.left);
+        }
+        else if(root.right != null)
+        {
+            leftViewRecur(root.right);
+        }
+	}
+
+    void rightViewRecur(Node root)
+	{
+		if(root == null)
+		{
+			return;
+		}
+        
+        if(root.right != null)
+        {
+            rightViewRecur(root.right);
+        }
+        else if(root.left != null)
+        {
+            rightViewRecur(root.left);
+        }
+        set.add(root.data);
+	}
+	
+	void bottomViewRecur(Node root)
+	{
+		if(root == null)
+		{
+			return;
+		}
+        
+        bottomViewRecur(root.left);
+        
+        if(root.left == null && root.right == null)
+        {
+            set.add(root.data);
+        }
+        
+        bottomViewRecur(root.right);
+	}
+
 //main function
 	public static void main(String[] args) 
 	{
