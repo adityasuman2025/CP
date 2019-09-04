@@ -233,7 +233,40 @@ class BSTNew
         
         System.out.print(str.toString());
     }
-    
+  
+//diagonally transversal
+    public void diagonalPrint(Node root)
+    {
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        
+        StringBuilder sb = new StringBuilder();
+        while(!q.isEmpty())
+        {
+            int size = q.size();
+            
+            while(size>0)
+            {
+                Node temp = q.poll();
+                
+                while(temp != null)
+                {
+                    if(temp.left != null)
+                    {
+                       q.add(temp.left); 
+                    }
+                    
+                    sb.append(temp.data + " ");
+                    temp = temp.right ;
+                }
+                
+                size--;
+            }
+        }
+        
+        System.out.print(sb.toString());
+    }
+
 //min max in tree
 	int findMin(Node root)
 	{
@@ -799,7 +832,7 @@ class BSTNew
 
 //left/right/bottom view recursive
     static LinkedHashSet<Integer> set = new LinkedHashSet<>();
-    
+
     void leftViewRecur(Node root)
 	{
 		if(root == null)
@@ -859,46 +892,52 @@ class BSTNew
 	{
 		Node root = new Node(10);
 		BSTNew bst = new BSTNew();
-		bst.insert(root, 5);
-		bst.insert(root, 1);
-		bst.insert(root, 12);
-		bst.insert(root, 2);
-		bst.insert(root, 30);
-		bst.insert(root, 11);
 
-		int toSearch = 12;
-		boolean ifContains = bst.contains(root, toSearch);
-		System.out.println("If BST contains " + toSearch + ": " + ifContains);
+		for(int i=1; i<10; i++)
+		{
+			bst.insert(root, i);
+		}
+		
+		// bst.insert(root, 5);
+		// bst.insert(root, 1);
+		// bst.insert(root, 12);
+		// bst.insert(root, 2);
+		// bst.insert(root, 30);
+		// bst.insert(root, 11);
 
-		System.out.print("InOrder transversal: ");
-		bst.inOrder(root);
-		System.out.println();
+		// int toSearch = 12;
+		// boolean ifContains = bst.contains(root, toSearch);
+		// System.out.println("If BST contains " + toSearch + ": " + ifContains);
 
-		System.out.print("PreOrder transversal: ");
-		bst.preOrder(root);
-		System.out.println();
+		// System.out.print("InOrder transversal: ");
+		// bst.inOrder(root);
+		// System.out.println();
 
-		System.out.print("PostOrder transversal: ");
-		bst.postOrder(root);
-		System.out.println();
+		// System.out.print("PreOrder transversal: ");
+		// bst.preOrder(root);
+		// System.out.println();
+
+		// System.out.print("PostOrder transversal: ");
+		// bst.postOrder(root);
+		// System.out.println();
 
 		System.out.print("LevelOrder transversal: ");
 		bst.levelOrder(root);
 		System.out.println();
 
-		System.out.println("Minimum value in tree: " + bst.findMin(root));
-		System.out.println("Maximum value in tree: " + bst.findMax(root));
+		// System.out.println("Minimum value in tree: " + bst.findMin(root));
+		// System.out.println("Maximum value in tree: " + bst.findMax(root));
 
-		System.out.println("Height of the tree: " + bst.height(root));
+		// System.out.println("Height of the tree: " + bst.height(root));
 
-		bst.checkBST(root);
+		// bst.checkBST(root);
 
-		bst.printVertical(root);
+		// bst.printVertical(root);
 
-		System.out.println("Maximum level sum: " + bst.maxLevelSum(root));	
+		// System.out.println("Maximum level sum: " + bst.maxLevelSum(root));	
 
-		Node val = bst.search(root, 11);	
+		// Node val = bst.search(root, 11);	
 
-		System.out.println(val.data);
+		// System.out.println(val.data);
 	}	
 }

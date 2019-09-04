@@ -47,8 +47,7 @@ class GFG
   
             // If pre[i] is in right subtree of stack top, 
             // Keep removing items smaller than pre[i] 
-            // and make the last removed item as new 
-            // root. 
+            // and make the last removed item as new root. 
             while (!s.empty() && s.peek() < pre[i]) { 
                 root = s.peek(); 
                 s.pop(); 
