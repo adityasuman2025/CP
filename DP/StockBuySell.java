@@ -1,101 +1,112 @@
 import java.util.*;
-import java.lang.*;
 import java.io.*;
 
 /*
-In stock market , a person buys a stock and sells it on some future date. Given the stock prices of N days in an form of an array A[ ] and a positive integer K, find out the maximum profit a person can make in atmost K transactions. A transaction is equivalent to (buying + selling) of a stock and new transaction can start only when the previous transaction has been completed.
 
-Input
-The first line of input contains an integer T denoting the number of test cases. Then T test cases follow. 
-The first line of each test case contains a positve integer K, denoting the number of transactions.
-The second line of each test case contains a positve integer N, denoting the length of the array A[ ].
-The third line of each test case contains a N space separated positive integers, denoting the prices of each day in the array A[ ].
+https://practice.geeksforgeeks.org/problems/stock-buy-and-sell/0
 
+Stock buy and sell
+The cost of stock on each day is given in an array A[] of size N. Find all the days on which you buy and sell the stock so that in between those days your profit is maximum.
 
-Output
-Print out the maximum profit earned by the person.
-No profit will be equivalent to 0.
+Input: 
+First line contains number of test cases T. First line of each test case contains an integer value N denoting the number of days, followed by an array of stock prices of N days. 
 
+Output:
+For each testcase, output all the days with profit in a single line. And if there is no profit then print "No Profit".
 
-Constraints
+Constraints:
 1 <= T <= 100
-0 <   K <= 10
-2 <= N <=30
-0 <= A[ ] <= 1000
+2 <= N <= 103
+0 <= Ai <= 104
 
-Examples 
-
-Input
-3
+Example
+Input:
 2
-6
-10 22 5 75 65 80
-3
-4
-20 580 420 900
-1
-5
-100 90 80 50 25
+7
+100 180 260 310 40 535 695
+10
+23 13 25 29 33 19 34 45 65 67
 
-Output
-87
-1040
-0
- 
+Output:
+(0 3) (4 6)
+(1 4) (5 9)
 
 Explanation:
-Output 1: Trader earns 87 as sum of 12 and 75  i.e. Buy at price 10, sell at 22, buy at  5 and sell at 80
-Output 2: Trader earns 1040 as sum of 560 and 480 i.e. Buy at price 20, sell at 580, buy at 420 and sell at 900
-Output 3: Trader cannot make any profit as selling price is decreasing day by day.Hence, it is not possible to earn anything.
+Testcase 1: We can buy stock on day 0, and sell it on 3rd day, which will give us maximum profit.
 
-Solution: 
-Idea is to Find Max with position j(sell index) and check from 0 to j-1 (buy) 
-Store it in dp array
-Everytime when we find max we add maximum profit founded by k-1 steps and jth index sell ,
-This will take O(n^2k)
-
-If we can find 0 to j-1 then we can reduce complexity.
+Note: Output format is as follows - (buy_day sell_day) (buy_day sell_day)
+For each input, output should be in a single line.
 */
+
+class Interval
+{
+    int buy,sell;    
+}
 
 class StockBuySell
 {
-    static int maxProfit(int prices[], int K) 
-    {
-        int N = prices.length;
-        
-        if (K == 0 || N == 0)
-            return 0;
-        
-        int T[][] = new int[K+1][N];
-
-        for (int i = 1; i <= K; i++) 
-        {
-            int maxDiff = -prices[0];
-            for (int j = 1; j < N; j++) 
-            {
-                T[i][j] = Math.max(T[i][j-1], prices[j] + maxDiff);
-                
-                maxDiff = Math.max(maxDiff, T[i-1][j] - prices[j]);
+    static BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+    public static void main (String[] args) throws Exception
+	{
+	    int T = Integer.parseInt(bf.readLine().trim());
+	    for(int t=0; t<T; t++)
+	    {
+	        int N = Integer.parseInt(bf.readLine().trim());
+	        String str[] = bf.readLine().split(" ");
+	        
+	        int arr[] = new int[N];
+	        for(int i=0; i<N; i++)
+	        {
+	            arr[i] = Integer.parseInt(str[i]);
             }
-        }
-        
-        return T[K][N-1];
-    }
-
-    public static void main (String[] args)
-    {
-        Scanner ab=new Scanner(System.in);
-        int t=ab.nextInt();
-        while(t-->0)
-        {
-            int k=ab.nextInt();
-            int n=ab.nextInt();
-            int arr[]=new int[n];
-
-            for(int i=0;i<n;++i)
-                arr[i]=ab.nextInt();
             
-            System.out.println(maxProfit(arr,k));
-        }
-    }
+            stockBuySell(arr);
+	    }
+	}
+	
+	static void stockBuySell(int prices[])
+	{
+	    int n = prices.length;
+	    
+	    if(n==1)
+	        return;
+	    
+	    ArrayList<Interval> sol = new ArrayList<Interval>(); 
+	    
+	    int i=0;
+	    while(i<n-1)
+	    {
+	    //for getting buy day
+	        while(i<n-1 && prices[i+1] <= prices[i])
+	            i++;
+	            
+	        if(i == n-1)
+	            break;
+	            
+	        Interval interval = new Interval();
+	        interval.buy = i;
+	        i++;
+	        
+	    //for getting sell day
+	        while(i<n-1 && prices[i+1] >= prices[i])
+	            i++;
+	            
+	        interval.sell = i;
+	        sol.add(interval);
+	    }
+	    
+	    if(sol.size() ==0)
+	    {
+	        System.out.println("No Profit");
+	        return;
+	    }
+	    
+	    for(Interval item: sol)
+	    {
+	        int buy = item.buy;
+	        int sell = item.sell;
+	        System.out.print("(" + buy + " " + sell + ") ");
+	    }
+	    System.out.println();
+	}
 }
