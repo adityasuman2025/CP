@@ -327,6 +327,45 @@ public class Graphs
 		return false;
 	}
 
+//detect cycle in undirected graph
+	static boolean isCyclicUnDirected()
+    {
+       boolean visited[] = new boolean[V];
+       
+       for(int i=0; i<g.V; i++)
+       {
+           if(!visited[i])
+                if(is(i, visited, -1))
+                    return true;
+       }
+       
+       return false;
+    }
+    
+    static boolean is(int i, boolean visited[], int parent)
+    {
+        visited[i] = true;
+        
+        Iterator<Integer> it = g.adjList[i].listIterator();
+		while(it.hasNext())
+		{
+			int c = it.next();
+
+            if(!visited[c])
+            {
+                if(is(c, visited, i))
+                    return true;
+            }
+            else
+            {
+                if(c != parent)
+                    return true;
+            }
+        }
+        
+        return false;
+    }
+
 //to check if undirected graph is tree or not
 //there should not be cycle and should be connected
 	static boolean isCyclic(int i, boolean visited[], int parent)
