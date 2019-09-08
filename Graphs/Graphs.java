@@ -366,6 +366,42 @@ public class Graphs
         return false;
     }
 
+//topological sort
+    static int[] topoSort(ArrayList<ArrayList<Integer>> list, int N)
+    {
+        Stack<Integer> stack = new Stack<>(); 
+  
+        boolean visited[] = new boolean[N]; 
+  
+        for (int i = 0; i < N; i++) 
+            if (visited[i] == false) 
+                topologicalSortUtil(i, visited, list, stack); 
+  
+        int ans[] = new int[N];
+        int i = 0;
+        for(int item: stack)
+        {
+            ans[i] = item;
+            i++;
+        }
+        
+        return ans;
+    }
+    
+    static void topologicalSortUtil(int v, boolean visited[], ArrayList<ArrayList<Integer>> list, Stack<Integer> stack) 
+    { 
+        visited[v] = true; 
+        
+        ArrayList<Integer> child = list.get(v);
+        for(int c: child) 
+        { 
+            if (!visited[c]) 
+                topologicalSortUtil(c, visited, list, stack); 
+        } 
+        
+        stack.push(v); 
+    } 
+    
 //to check if undirected graph is tree or not
 //there should not be cycle and should be connected
 	static boolean isCyclic(int i, boolean visited[], int parent)
