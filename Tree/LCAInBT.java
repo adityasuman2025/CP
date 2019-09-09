@@ -46,21 +46,21 @@ class LCAInBT
    of them return pointer to left.*/
 	Node lca(Node node, int n1,int n2)
 	{
-		if (node == null) 
-            return null; 
+    if (node == null) 
+        return null; 
 
-        if (node.data == n1 || node.data == n2) 
-            return node; 
-            
-        Node left = lca(node.left, n1, n2);
-        Node right = lca(node.right, n1, n2);
+    if (node.data == n1 || node.data == n2) 
+        return node; 
         
-        if(left != null && right != null)
-            return node;
-            
-        if(left == null)
-            return right;
-        else
-            return left;
+    Node left = lca(node.left, n1, n2);
+    Node right = lca(node.right, n1, n2);
+
+    if(left != null && right != null)
+        return node;
+        
+    if(left == null)
+        return right;
+    else
+        return left;
 	}
 }
