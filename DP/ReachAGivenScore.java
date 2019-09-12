@@ -48,7 +48,8 @@ class ReachAGivenScore
 	            dp[i] = 0;
 	        }
 	        dp[0] = 1;
-	        
+	      
+	    // method 1    
 	        for(int i=3; i<=N; i++)
 	        {
 	            dp[i] += dp[i-3];
@@ -66,5 +67,21 @@ class ReachAGivenScore
 	        
 	        System.out.println(dp[N]);
 	    }
+	}
+
+// method 2
+	static int solve(int N, int dp[])
+	{
+	    if(N<0)
+	        return 0;
+	        
+	    if(N==0)
+	        return 1;
+	       
+	    if(dp[N] == 0)
+	    {
+	       dp[N] +=  solve(N-1, dp) + solve(N-2, dp) + solve(N-3, dp);
+	    }
+	    return dp[N];
 	}
 }

@@ -11,6 +11,7 @@ class Node
         next = null;
     }
 }
+ 
  class BinaryIntoDecimal
 {
     Node head;  // head of lisl
