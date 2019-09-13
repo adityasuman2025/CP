@@ -12,7 +12,7 @@ void notWorkingIncrement(int a)
 	a = a + 1;
 }
 
-int sumArray(int *A, int size)
+int sumArray(int A[], int size)
 {	
 	int sum = 0;
 	for(int i=0; i<size; i++)
@@ -119,33 +119,47 @@ int main(int argc, char const *argv[])
 
 //arrays & pointers
 	int A[] = {1,2,3,4,5};
+	
+	int *ptr11 = A;
+    int *ptr12 = ptr11 + 3;
+    
+    cout<<endl;
+    cout<<"hey bro"<<endl;
+    cout<<*ptr12<<endl;
+    cout<<A[3]<<endl;    
+    cout<<"ADDRESS OF pointer ptr11: "<<ptr11<<endl;
+    cout<<"ADDRESS OF pointer ptr12: "<<ptr12<<endl;
+    cout<<ptr12 - ptr11<<endl;
+    cout<<"hey bro"<<endl;
+    cout<<endl;
+    cout<<endl;
 
-	cout<<*A<<endl; //value of first element of array A
-	cout<<A[0]<<endl; //value of first element of array A
-	cout<<&A<<endl; //address of first element of array A
-	cout<<A<<endl; //address of first element of array A
+	cout<<*A+1<<endl; //value of first element of array A
+	// cout<<A[0]<<endl; //value of first element of array A
+	// cout<<&A<<endl; //address of first element of array A
+	// cout<<A<<endl; //address of first element of array A
 
-	for(int i=1; i<5; i++)
-	{
-		cout<<*(A+i)<<endl; //value of i element of array A
-		cout<<A[i]<<endl; //value of i element of array A
-		cout<<&A[i]<<endl; //address of first element of array A
-		cout<<A+i<<endl; //address of i element of array A		
-	}
-	cout<<endl;
+	// for(int i=1; i<5; i++)
+	// {
+	// 	cout<<*(A+i)<<endl; //value of i element of array A
+	// 	cout<<A[i]<<endl; //value of i element of array A
+	// 	cout<<&A[i]<<endl; //address of first element of array A
+	// 	cout<<A+i<<endl; //address of i element of array A		
+	// }
+	// cout<<endl;
 
 	int size = sizeof(A)/sizeof(A[0]);
 
 	cout<<"size of array: "<<size<<endl;
-	cout<<"sum of elements: "<<sumArray(&A[0], size)<<endl;
+	cout<<"sum of elements: "<<sumArray(A, size)<<endl;
 
 
-	Double(A, size);
-	for(int i=0; i<5; i++)
-	{
-		cout<<*(A+i)<<" "; //value of i element of array A
-	}
-	cout<<endl;
+	// Double(A, size);
+	// for(int i=0; i<5; i++)
+	// {
+	// 	cout<<*(A+i)<<" "; //value of i element of array A
+	// }
+	// cout<<endl;
 
 //character array 
 	char str[] = "Bro";
