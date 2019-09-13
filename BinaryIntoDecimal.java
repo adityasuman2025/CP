@@ -12,7 +12,7 @@ class Node
     }
 }
  
- class BinaryIntoDecimal
+class BinaryIntoDecimal
 {
     Node head;  // head of lisl
     /* Inserts a new Node at front of the list. */
@@ -30,6 +30,7 @@ class Node
             temp.next = node;
         }
     }
+
     /* Function to print linked list */
     void printList()
     {
@@ -41,6 +42,7 @@ class Node
         }
         System.out.println();
     }
+
     public static void main(String args[])
     {
         Scanner sc = new Scanner(System.in);
