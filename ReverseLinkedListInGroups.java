@@ -1,12 +1,12 @@
 class ReverseLinkedListInGroups
 {    
-    public static Node reverse(Node curr, int k)
+    public static Node reverse(Node head, int k)
     {
-        if(node == null || node.next == null)
-            return node;
+        if(head == null || head.next == null)
+            return head;
             
         Node prev = null;
-        Node curr = node;
+        Node curr = head;
         Node next = null;;
         
         int i = 0;
@@ -20,10 +20,9 @@ class ReverseLinkedListInGroups
             i++;
         }
         
-        Node nextHead = reverse(curr, k);
-        node.next = nextHead;
+    //head will become last element of that group so head will point to the reverse of the next group
+        head.next = reverse(curr, k);
         
         return prev;
     }
-
 }
