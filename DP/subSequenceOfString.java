@@ -19,11 +19,6 @@ public class subSequenceOfString
 		printSubSeq(input.substring(1), output+ input.charAt(0));
 	}
 
-	static void subSeq(String input)
-	{
-		printSubSeq(input, "");
-	}
-
 	public static void main(String[] args) {
 		String input = "abbc";
 		
