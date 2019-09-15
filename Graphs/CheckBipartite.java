@@ -38,27 +38,31 @@ class CheckBipartite
         
         for(int i=0;i<V;i++) //in case if graph is not connected
         {
-            Queue<Integer>q = new LinkedList<>(); 
-            q.add(i); 
-            
-            while(!q.isEmpty())
+            if(color[i] == -1) //if that verex is not visted yet
             {
-                int u = q.poll();
+            //main algo    
+                Queue<Integer>q = new LinkedList<>(); 
+                q.add(i); 
                 
-                if(G[u][u] == 1) //if graph has self loop
-                    return false;
+                while(!q.isEmpty())
+                {
+                    int u = q.poll();
                     
-                for(int v=0; v<V; ++v) 
-                { 
-                    if(G[u][v]==1 && colorArr[v]==-1) 
+                    if(G[u][u] == 1) //if graph has self loop
+                        return false;
+                        
+                    for(int v=0; v<V; ++v) 
                     { 
-                        colorArr[v] = 1-colorArr[u]; 
-                        q.add(v); 
+                        if(G[u][v]==1 && colorArr[v]==-1) 
+                        { 
+                            colorArr[v] = 1-colorArr[u]; 
+                            q.add(v); 
+                        } 
+                        else if(G[u][v]==1 && colorArr[v]==colorArr[u])  //u & v are of same color meaning both nodes are in same set //i.e  they do not belong to different set
+                            return false; 
                     } 
-                    else if(G[u][v]==1 && colorArr[v]==colorArr[u])  //u & v are of same color meaning both nodes are in same set //i.e  they do not belong to different set
-                        return false; 
-                } 
-            }
+                }
+            }        
         }
         
         return true;

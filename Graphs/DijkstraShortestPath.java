@@ -35,7 +35,7 @@ class DijkstraShortestPath
 
 			for(int i=0; i<V; i++)
 			{				
-				if(!visited[i] && graph[minDistVertex][i] && dist[minDistVertex] != Integer.MAX_VALUE)
+				if(!visited[i] && graph[minDistVertex][i] != 0 && dist[minDistVertex] != Integer.MAX_VALUE)
 				{
 					int newDist = dist[minDistVertex] + graph[minDistVertex][i];
 					dist[v] = Math.min(newDist, dist[v]);
