@@ -1,6 +1,7 @@
 import java.util.*;
 import java.lang.*;
 import java.io.*;
+
 class GFG
 {
     static Scanner scanner = new Scanner(System.in);
@@ -13,33 +14,31 @@ class GFG
 	        
 	        String arr[] = scanner.nextLine().split(" ");
 	        
-	        int pre[] = new int[N];
+	        int preOrder[] = new int[N];
 	        for(int i =0; i<N; i++)
 	        {
-	            pre[i] = Integer.parseInt(arr[i]);
+	            preOrder[i] = Integer.parseInt(arr[i]);
 	        }
 	        
-	        int in[] = pre.clone();
-	        Arrays.sort(in);
+	        int inOrder[] = preOrder.clone();
+	        Arrays.sort(inOrder);
 	        
-	        printPostOrder(in, pre, N);
+	        printPostOrder(inOrder, preOrder, N);
 	        System.out.println();
-	       // System.out.println(Arrays.toString(pre));
-	       // System.out.println(Arrays.toString(in));
 	    }
 	}
 	
-	static void printPostOrder(int in[], int pre[], int n)
+	static void printPostOrder(int inOrder[], int preOrder[], int n) //inOrder array, postOrder array, size of array
 	{
-	    int root = search(in, pre[0], n);
+	    int root = Arrays.binarySearch(inOrder, preOrder[0]);
 	    
 	    if(root != 0)
-	        printPostOrder(in, Arrays.copyOfRange(pre, 1, n), root);
+	        printPostOrder(inOrder, Arrays.copyOfRange(preOrder, 1, n), root);
 	        
         if(root != n-1)
-	        printPostOrder(Arrays.copyOfRange(in, root+1, n), Arrays.copyOfRange(pre, root+1, n), n-1-root);
+	        printPostOrder(Arrays.copyOfRange(inOrder, root+1, n), Arrays.copyOfRange(preOrder, root+1, n), n-1-root);
 	        
-        System.out.print(pre[0] + " ");
+        System.out.print(preOrder[0] + " ");
 	}
 	
 // A utility function to search x in arr[] of size n 
@@ -49,6 +48,5 @@ class GFG
             if (arr[i] == x) 
                 return i; 
         return -1; 
-    } 
-	
+    } 	
 }

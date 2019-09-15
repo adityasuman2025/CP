@@ -55,7 +55,8 @@ class TrappingRainWater
 	            arr[i] = Integer.parseInt(str[i]);
             }
             int result = 0; 
-           
+        
+        //method 1   
             // maximum element on left and right 
             int left_max = 0, right_max = 0; 
                
