@@ -31,7 +31,7 @@ class GFG
 	 static boolean canRepresentBST(int pre[], int n) 
 	 { 
         // Create an empty stack 
-        Stack<Integer> s = new Stack<Integer>(); 
+        Stack<Integer> s = new Stack<>(); 
   
         // Initialize current root as minimum possible 
         // value 

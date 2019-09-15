@@ -816,7 +816,7 @@ class BSTNew
             if(tempNode.left !=null)
                 q.add(new Pair(tempNode.left , tempIndex-1));
 
-           if(tempNode.right !=null)
+            if(tempNode.right !=null)
                 q.add(new Pair(tempNode.right , tempIndex+1));
         }
         
