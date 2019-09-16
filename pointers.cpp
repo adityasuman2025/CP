@@ -221,5 +221,10 @@ int main(int argc, char const *argv[])
 
 	caller(function);
 
+	int k = 2;
+	int l = 8;
+	int m = ++k + l++;
+	cout<<m<<endl;
+
 	return 0;
 }
