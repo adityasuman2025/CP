@@ -17,7 +17,7 @@ public class longestPalindSubSeq
 	//finding palindrome of len greater than or equal to 2
 		for(int len =2; len<=n; len++)
 		{
-			for(int i=0; i<=n-len; i++)
+			for(int i=0; i<n-len+1; i++)
 			{
 				int j = i+len-1;
 				if(s.charAt(i) == s.charAt(j)) //trim if last characters match and add 2

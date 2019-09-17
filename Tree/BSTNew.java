@@ -830,7 +830,7 @@ class BSTNew
         System.out.print(str.toString());
     }
 
-//left/right/bottom view recursive
+//left/right/bottom boundary (boundary not view) of tree (recursive solution)
     static LinkedHashSet<Integer> set = new LinkedHashSet<>();
 
     void leftViewRecur(Node root)

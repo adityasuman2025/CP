@@ -74,24 +74,26 @@ class StockBuySell
 	    ArrayList<Interval> sol = new ArrayList<Interval>(); 
 	    
 	    int i=0;
-	    while(i<n-1)
+	    while(i<n)
 	    {
+	    	int j = i;
+
 	    //for getting buy day
-	        while(i<n-1 && prices[i+1] <= prices[i])
-	            i++;
+	        while(j+1<n && prices[j+1] <= prices[j])
+	            j++;
 	            
-	        if(i == n-1)
+	        if(j == n-1) //buy date is last day (last element of array) then we will not able to sell that stock //so breaking the loop
 	            break;
 	            
 	        Interval interval = new Interval();
-	        interval.buy = i;
-	        i++;
+	        interval.buy = j;
+	        j++;
 	        
 	    //for getting sell day
-	        while(i<n-1 && prices[i+1] >= prices[i])
-	            i++;
+	        while(j+1<n && prices[j+1] >= prices[j])
+	            j++;
 	            
-	        interval.sell = i;
+	        interval.sell = j;
 	        sol.add(interval);
 	    }
 	    

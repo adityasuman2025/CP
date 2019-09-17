@@ -14,6 +14,7 @@ class LongestPalindSubStringNew
 			return;
 
 		boolean dp[][] = new boolean[n][n];
+		//dp[i][j] represents if str[i....j] i.e str.substring(i, j+1) is palindrome or not
 
 		for(int i=0; i<n; i++)
 			dp[i][i] = true;
@@ -34,11 +35,11 @@ class LongestPalindSubStringNew
 		}
 
 	//checking palindrome of length greater than 2
-		for(int k=3; k<=n; k++)
+		for(int size=3; size<=n; size++)
 		{
-			for(int i=0; i<n-k+1; i++)
+			for(int i=0; i<n-size+1; i++)
 			{
-				int j = i+k-1;
+				int j = i+size-1;
 				if(input.charAt(i)==input.charAt(j) && dp[i+1][j-1])
 				{
 					dp[i][j] = true;
@@ -46,7 +47,7 @@ class LongestPalindSubStringNew
 					if(k>maxLen)
 					{
 						start = i;
-						maxLen = k;
+						maxLen = size;
 					}					
 				}
 			}

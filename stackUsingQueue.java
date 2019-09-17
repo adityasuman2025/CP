@@ -1,6 +1,10 @@
 import java.util.*;
 import java.io.*;
 
+/*
+idea is to keep one queue always empty to add new elements in it
+*/
+
 class stackUsingQueue
 {
     Queue<Integer> q1 = new LinkedList<Integer>();
