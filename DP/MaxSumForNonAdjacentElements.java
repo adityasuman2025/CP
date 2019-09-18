@@ -15,6 +15,5 @@ class MaxSumForNonAdjacentElements
 			exc = temp;
 		}
 		System.out.println(inc);
-
 	}
 }
