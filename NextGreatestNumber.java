@@ -35,83 +35,73 @@ class NextGreatestNumber
     static BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
     public static void main (String[] args) throws Exception
 	{
-	    int T = Integer.parseInt(bf.readLine());
-	    for(int a=0; a<T; a++)
+	    int T = Integer.parseInt(bf.readLine().trim());
+	    for(int t=0; t<T; t++)
 	    {
-	        int str= Integer.parseInt(bf.readLine());
+	        int N = Integer.parseInt(bf.readLine().trim());
+	        String str[] = bf.readLine().split(" ");
 	        
-            nextHighestNumber(str);
+	        int arr[] = new int[N]; //stores number
+	        for(int i=0; i<N; i++)
+	        {
+	            arr[i] = Integer.parseInt(str[i]);
+            }
+            
+            int i = N-1;
+            while(i>0 && arr[i-1]>=arr[i])
+            {
+                i--;
+            }
+            //System.out.println(i);
+            
+            StringBuilder sb = new StringBuilder();
+            if(i == 0) //if the given no is largest no
+            {
+               sb.append("Not possible ");
+            }
+            else
+            {
+                int min = arr[i];
+                int minIndex = i;
+                
+            //checking the position/index after which we can do changes
+                for(int j = i; j<N; j++)
+                {
+                    if(arr[j]<min && arr[j]>arr[i-1])
+                    {
+                        min = arr[j];
+                        minIndex = j;
+                    }
+                }
+                
+            //swapping that element with the samllest no after it
+                int temp = arr[i-1];
+                arr[i-1] = arr[minIndex];
+                arr[minIndex] = temp;
+             
+            //sorting elements after i    
+                int sort[] = new int[N-i];
+                for(int k=i; k<N; k++)
+                {
+                    sort[k-i] = arr[k];
+                }
+                Arrays.sort(sort);
+                
+            //storing ans in string    
+                for(int k=0; k<i; k++)
+                {
+                    sb.append(arr[k] + " ");
+                }
+                for(int k=0; k<sort.length; k++)
+                {
+                    sb.append(sort[k] + " ");
+                }
+                
+                // System.out.println(Arrays.toString(arr));
+                // System.out.println(Arrays.toString(sort));
+            }
+            
+            System.out.println(sb.toString());
 	    }
-	}
-	
-	static void nextHighestNumber(int num)
-	{
-    //for converting no into digits
-	    ArrayList<Integer> digits = new ArrayList<>();
-	    
-	    int temp = num;
-	    while(temp>0)
-	    {
-	        int digit = temp%10;
-	        digits.add(digit);
-	        
-	        temp = temp/10;
-	    }
-	    int N = digits.size();
-	    
-	    if(N<2)
-	    {
-	        System.out.println("not possible");
-	        return;   
-	    }
-	    
-    //for getting D1
-	    int i=0;
-	    for(i=0; i<N-1; i++)
-	    {
-	        if(digits.get(i+1)<digits.get(i))
-	            break;
-	    }
-	    i++;
-	    
-	    if(i>=N)
-	    {
-	        System.out.println("not possible");
-	        return;   
-	    }
-	    
-	//for getting D2   
-	    int j=0;
-	    while(j<i)
-	    {
-	        if(digits.get(j)>digits.get(i))
-	            break;
-	        j++;
-	    }
-	    
-    //swapping D1 & D2
-        int t = digits.get(i);
-        digits.set(i, digits.get(j));
-        digits.set(j,t);
-        
-    //sorting elemets after D1
-        List<Integer> subList = digits.subList(0, i);
-	    Collections.sort(subList);
-	    
-    //printing the new number
-        StringBuilder str = new StringBuilder();
-        
-        int m = digits.size() - 1;
-        for(m = N-1; m>=i; m--)
-        {
-            str.append(digits.get(m));
-        }
-        
-        for(m=0; m<subList.size(); m++)
-        {
-            str.append(subList.get(m));
-        }
-        
-        System.out.println(str.toString());
 	}
 }

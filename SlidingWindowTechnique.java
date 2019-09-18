@@ -67,8 +67,7 @@ class SlidingWindowTechnique
         {
             if(sum+arr[i]==S)
             {
-                ptr2++;
-                System.out.println((ptr1+1) + " " + (ptr2));
+                System.out.println((ptr1+1) + " " + (ptr2+1));
                 return;
             }
             else if(sum+arr[i] < S)
