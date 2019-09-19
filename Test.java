@@ -1,7 +1,6 @@
-class A
-{
-	
-}
+import java.util.*;
+import java.io.*;
+
 class Test
 {
 	static int a;
@@ -15,6 +14,9 @@ class Test
 		a = 1;
 		Test a[] = new Test[100];
 		a[0] = new Test();
-		//A ab = new A();
+
+		int arr[] = {1,2,3,5,7,9,11};
+
+		System.out.println(Arrays.binarySearch(arr, 10));
 	}
 }

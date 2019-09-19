@@ -16,8 +16,8 @@ public class Set
 		list.add(9);
 		list.add(1);
 
-		Set<Integer> hash_set = new HashSet<Integer>(list);
-		Set<Integer> tree_set = new TreeSet<Integer>(hash_set);
+		Set<Integer> hash_set = new HashSet<Integer>(list); //remove duplicates
+		Set<Integer> tree_set = new TreeSet<Integer>(hash_set); //arrange in increaing order
 		System.out.println(list);
 		System.out.println(hash_set);
 		System.out.println(tree_set);
