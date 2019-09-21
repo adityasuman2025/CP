@@ -9,6 +9,7 @@ public class CountInversion
         return count;
     }
 
+//method 1 O(nlogn)
 	public void merge_sort(int arr[])
 	{
 		int arr_length = arr.length;
@@ -81,6 +82,34 @@ public class CountInversion
 
 			//count++;
 		}
+	}
+
+//method 2 O(n2)
+	int bubbleSort(int arr[])
+	{
+		count = 0;
+
+		for(int i=0; i<N; i++)
+        {
+            int flag = 0;
+            for(int j = 0; j<N-i-1; j++)
+            {
+                if(arr[j]>arr[j+1])
+                {
+                    flag = 1;
+                //swapping
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                    count++;
+                }
+            }
+            
+            if(flag == 0)
+			    break;
+        }
+
+        return count;
 	}
 
 	public static void main(String[] args) 
