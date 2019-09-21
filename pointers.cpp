@@ -226,5 +226,11 @@ int main(int argc, char const *argv[])
 	int m = ++k + l++;
 	cout<<m<<endl;
 
+//bro
+	int i;
+	int *pi = &i;
+	scanf("%d", pi);
+	printf("%dn", i+5);
+
 	return 0;
 }
