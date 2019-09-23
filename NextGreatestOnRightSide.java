@@ -23,7 +23,7 @@ class NextGreatestOnRightSide
 			int temp = arr[i];
 
 			//higher function of treeset returns next greater element to an element
-			if(set.higher(arr[i]) == null) //no element greater than arr[i] find in the set
+			if(set.higher(arr[i]) == null) //no element greater than arr[i] found in the set
 				sb.append("-1 ");
 			else
 				sb.append(set.higher(arr[i]) + " "); //printing next greatest element present in right side of arr[i]
