@@ -3,6 +3,8 @@ import java.lang.*;
 import java.io.*;
 
 /*
+https://practice.geeksforgeeks.org/problems/maximum-profit/0
+
 In stock market , a person buys a stock and sells it on some future date. Given the stock prices of N days in an form of an array A[ ] and a positive integer K, find out the maximum profit a person can make in atmost K transactions. A transaction is equivalent to (buying + selling) of a stock and new transaction can start only when the previous transaction has been completed.
 
 Input
