@@ -9,6 +9,11 @@ class Test
 		System.out.println(a++);
 	}
 
+	private static void print()
+	{
+		System.out.println("yo man!");
+	}
+
 	public static void main(String[] args) 
 	{
 		a = 1;
@@ -18,5 +23,15 @@ class Test
 		int arr[] = {1,2,3,5,7,9,11};
 
 		System.out.println(Arrays.binarySearch(arr, 10));
+
+		print();
 	}
 }
+
+// class Bro
+// {
+// 	public static void print()
+// 	{
+// 		System.out.println("yo man!");
+// 	}
+// }
