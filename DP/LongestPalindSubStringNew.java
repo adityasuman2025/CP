@@ -44,11 +44,11 @@ class LongestPalindSubStringNew
 				{
 					dp[i][j] = true;
 
-					if(k>maxLen)
+					if(size>maxLen)
 					{
 						start = i;
 						maxLen = size;
-					}					
+					}
 				}
 			}
 		}
