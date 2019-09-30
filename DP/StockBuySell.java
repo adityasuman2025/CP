@@ -95,6 +95,8 @@ class StockBuySell
 	            
 	        interval.sell = j;
 	        sol.add(interval);
+
+	        i=j;
 	    }
 	    
 	    if(sol.size() ==0)
