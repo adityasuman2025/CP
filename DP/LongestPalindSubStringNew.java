@@ -37,7 +37,7 @@ class LongestPalindSubStringNew
 	//checking palindrome of length greater than 2
 		for(int size=3; size<=n; size++)
 		{
-			for(int i=0; i<n-size+1; i++)
+			for(int i=0; i+size-1<n; i++)
 			{
 				int j = i+size-1;
 				if(input.charAt(i)==input.charAt(j) && dp[i+1][j-1])
