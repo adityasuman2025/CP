@@ -3,11 +3,8 @@ import java.io.*;
 
 /*
 https://practice.geeksforgeeks.org/problems/total-decoding-messages/0/?ref=self
+https://leetcode.com/problems/decode-ways/
 
-Practice
-Explore  Courses  Get Hired
-    
-LIVE   BATCHES
 Total Decoding Messages
 A top secret message containing letters from A-Z is being encoded to numbers using the following mapping:
 

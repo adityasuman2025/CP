@@ -30,7 +30,7 @@ Output:
 
 class PalindromePartitioning
 {
-	 static BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+	static BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
     public static void main (String[] args) throws Exception
 	{
 	    int T = Integer.parseInt(bf.readLine().trim());
