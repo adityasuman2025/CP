@@ -60,6 +60,8 @@ class SmallestPositiveMissingNum
 	            if(val<=0 || val>N)
 	                continue;
 	                
+	        //making arr val at index i equal to  i+1 (0 base indexing)
+	        //We make the value at index corresponding to given array element equal to array element.    
 	            while (arr[val - 1] != val) 
 	            { 
                     nextval = arr[val - 1]; 
