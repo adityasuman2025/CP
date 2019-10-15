@@ -37,24 +37,24 @@ class MinDistanceBWTwoNodes
     {
         Node lca = LCA(root,a,b);
         
-        int lDist = distance(lca, a, 0);
-        int rDist = distance(lca, b, 0);
+        int aDist = dist(lca, a);
+        int bDist = dist(lca, b);
         
-        return Math.abs(lDist+rDist);
+        return aDist+bDist;
     }
     
-    static int distance(Node node, int a, int dist)
+    static int dist(Node root, int search)
     {
-        if(node==null)
+        if(root == null)
             return 0;
             
-        if(node.data == a)
-            return dist;
+        if(root.data == search)
+            return 0;
         
-        int lDist = distance(node.left, a, dist+1);
-        int rDist = distance(node.right, a, dist+1);
+        int lDist = dist(root.left, search);
+        int rDist = dist(root.right, search);
         
-        return (lDist+rDist);
+        return Math.min(lDist, rDist) + 1;
     }
     
     static Node LCA(Node node, int a, int b)
