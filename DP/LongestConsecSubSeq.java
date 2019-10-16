@@ -56,16 +56,16 @@ class LongestConsecSubSeq
 	            set.add(arr[i]);
             }
             
-            int ans = 1;
-            for(int i=0; i<N; i++)
+            int ans = 0;
+	        for(int num: set)
 	        {
-	            if(!set.contains(arr[i]-1))
+	            if(!set.contains(num-1))
 	            {
-	                int j = arr[i];
+	                int j = num;
 	                while(set.contains(j))
 	                    j++;
-	               
-	                ans = Math.max(ans, j-arr[i]);
+	                
+	                ans = Math.max(ans, j-num);
 	            }
 	        }
             System.out.println(ans);
