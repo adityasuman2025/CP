@@ -40,12 +40,7 @@ class DijkstraNew
 			}
 		}
 
-		//printing the distance matrix
+	//printing the distance matrix
 		System.out.println(Arrays.toString(dist));
 	}
-
-	public static void main(String[] args) {
-		
-	}
-
 }

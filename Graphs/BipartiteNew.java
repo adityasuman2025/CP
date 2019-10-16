@@ -8,7 +8,7 @@ class BipartiteNew
 		int color[] = new int[];
 		Arrays.fill(color, -1);
 		color[0] = 1;
-		//1: Red;
+		//1: Red
 		//0: Green
 
 		for(int i=0; i<V; i++)
@@ -32,15 +32,10 @@ class BipartiteNew
 					}
 					else if(graph[u][v] == 1 && color[v] == color[u])
 						return false;
-
 				}
 			}
 		}
 
 		return true;
-	}
-
-	public static void main(String[] args) {
-		
 	}
 }
