@@ -7,16 +7,17 @@ class largestSubArrayWith0Sum
         int max = 0;
         for(int i=0; i<n; i++)
         {
-            sum +=arr[i];
-           
+            sum+=arr[i];
+            
+            if(sum==0)
+            {
+                max = Math.max(max,i+1);
+            }
+            
             if(map.containsKey(sum))
             {
                 int oldIndex = map.get(sum);
-                
-                if(sum == 0)
-                    max = i+1;
-                else if((i-oldIndex)>max)
-                    max = (i-oldIndex); //i = new index
+                max = Math.max(max, i-oldIndex);
             }
             else
             {
