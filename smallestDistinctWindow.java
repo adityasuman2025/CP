@@ -10,11 +10,11 @@ class smallestDistinctWindow
 	    for(int a=0; a<T; a++)
 	    {
 	        String s = bf.readLine();
-	        String t=new String();
+	        String t = new String();
 	        
 	        Set<String> set=new HashSet<>();
     	    for(int i=0;i<s.length();i++)
-    	    set.add(Character.toString(s.charAt(i)));
+    	       set.add(Character.toString(s.charAt(i)));
     	    t=String.join("",set);    	        	    
     	    
     	    String res="";
@@ -25,11 +25,13 @@ class smallestDistinctWindow
     	        ++letterCount[c];
     	    }
     	    
-    	    for(int right=0;right<s.length();right++){
+    	    for(int right=0;right<s.length();right++)
+            {
     	        if(--letterCount[s.charAt(right)]>=0)
     	        count++;
     	        
-    	        while(count==t.length()){
+    	        while(count==t.length())
+                {
     	            if(minLen>right-left+1){
     	            minLen=right-left+1;
     	            res=s.substring(left,right+1);
@@ -37,9 +39,7 @@ class smallestDistinctWindow
     	            if(++letterCount[s.charAt(left)]>0)
     	            count--;
     	            
-    	            left++;
-    	            
-    	            
+    	            left++;    	                	          
     	        }
     	    }
     	    System.out.println(minLen);

@@ -3,6 +3,7 @@ import java.io.*;
 
 /*
 https://practice.geeksforgeeks.org/problems/maximum-of-all-subarrays-of-size-k/0
+
 Maximum of all subarrays of size k
 Given an array A and an integer K. Find the maximum for each and every contiguous subarray of size K.
 

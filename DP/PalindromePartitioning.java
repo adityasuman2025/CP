@@ -75,7 +75,7 @@ class PalindromePartitioning
                     C[i] = Integer.MAX_VALUE; 
                     for (int j = 0; j < i; j++) //cutting at jth position i.e string[0...j], string[j+1....i]
                     { 
-                        if(isPal[j + 1][i] && C[i] > 1 + C[j]) 
+                        if(isPal[j + 1][i] && (C[j]+1) < C[i]) 
                             C[i] = 1 + C[j]; 
                     } 
                 } 

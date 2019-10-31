@@ -43,10 +43,6 @@ class ReachAGivenScore
 	        int N = Integer.parseInt(bf.readLine().trim());
 	       
 	        int dp[] = new int[N+1];
-	        for(int i=0; i<=N; i++)
-	        {
-	            dp[i] = 0;
-	        }
 	        dp[0] = 1;
 	      
 	    // method 1    

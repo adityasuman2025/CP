@@ -1,4 +1,4 @@
-simport java.util.*;
+import java.util.*;
 
 public class knapsack 
 {

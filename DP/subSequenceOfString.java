@@ -16,7 +16,7 @@ public class subSequenceOfString
 		}
 
 		printSubSeq(input.substring(1), output);
-		printSubSeq(input.substring(1), output+ input.charAt(0));
+		printSubSeq(input.substring(1), output + input.charAt(0));
 	}
 
 	public static void main(String[] args) {
