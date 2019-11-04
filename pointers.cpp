@@ -232,5 +232,9 @@ int main(int argc, char const *argv[])
 	scanf("%d", pi);
 	printf("%dn", i+5);
 
+	int al = 1;
+	cout<<endl;
+	cout<<al<<++al<<al++<<endl;
+	//printf("%d %d %d", al, ++al, al++);
 	return 0;
 }
