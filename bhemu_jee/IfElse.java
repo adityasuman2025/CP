@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class bhemu {
+class IfElse {
     public static void main(String args[]) {
         Scanner kauaa = new Scanner(System.in);
 
