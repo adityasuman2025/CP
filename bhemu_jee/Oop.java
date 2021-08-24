@@ -1,41 +1,44 @@
-class Scanner {
-    private int a;
-    private int b;
+//ecapsulation
+class Calc{
+    //global variable
+    private int no1;
+    private int no2;
 
     //constructor
-    Scanner(int no1, int no2) {
-        a = no1; //5
-        b = no2; //6
+    Calc(int a, int b){
+        no1 = a;
+        no2 = b;
     }
 
-    int sum() {
-        return a + b;
+    int remainder() {
+        return no1 % no2;
     }
 
-    int sub() {
-        return a - b;
+    //abstraction
+    void setValue(int a, int b) {
+        no1 = a;
+        no2 = b;
     }
 }
 
 class Oop {
     public static void main(String[] args) {
-        Oop ka = new Oop();
-        int b = ka.hru(ka.a);
-        System.out.println(b);
+        Calc calc = new Calc(46, 8);
+        System.out.println(calc.remainder());
+        calc.setValue(50, 5); 
+        System.out.println(calc.remainder());
 
-        Scanner ki = new Scanner(10, 6);
-        int add = ki.sum();
-        int minus = ki.sub();
-        System.out.println(add);
-        System.out.println(minus);
-
-        // System.out.println(ki.a);
+        // // polymorphism
+        // Oop ka = new Oop();
+        // ka.print(100); //will run second function
+        // ka.print("aditya"); //will run first function
     }
 
-    int a = 4;
+    public void print(String name) {
+        System.out.println("My name is " + name);
+    }
 
-    static int hru(int no1){
-        int k = no1;
-        return k;
+    public void print(int age) {
+        System.out.println("My age is " + age);
     }
 }
