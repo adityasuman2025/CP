@@ -18,10 +18,6 @@ class Scanner {
 }
 
 class Oop {
-    class JuniorOOP {
-
-    }
-
     public static void main(String[] args) {
         Oop ka = new Oop();
         int b = ka.hru(ka.a);
