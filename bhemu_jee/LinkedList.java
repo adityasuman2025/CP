@@ -52,22 +52,41 @@ class LinkedList {
         // printReverse(start);
 
         //reversing the linked list
-        LLNode prev = null; 
-        LLNode curr = start;
-        LLNode next = null;
+        // LLNode ka = reverse(null,start,null);
+        // //prev will be at 50 at the end of the loop, curr and next will be null
+        // //printing the linked list
+        // print(ka);
+        
+        LLNode pointer1 = start; 
+        while (pointer1 != null) { 
+            pointer1 = pointer1.nextNodeAddress;      
+            boolean nodo = search(pointer1.data);
+            System.out.println("Ans is " + nodo); 
+        }
+       
+        
+    }
+
+    static void see(LLNode start) {
+        LLNode pointer = start; 
+        while (pointer != null) { 
+            System.out.println(pointer.data + "->");
+            pointer = pointer.nextNodeAddress;        
+        }
+        System.out.println(" ");
+    }
+
+    public static LLNode reverse(LLNode prev, LLNode curr, LLNode next) {
         while (curr != null) {
             next = curr.nextNodeAddress;
             curr.nextNodeAddress = prev;
 
             prev = curr;
             curr = next;
-        }
-        //prev will be at 50 at the end of the loop, curr and next will be null
-
-        //printing the linked list
-        print(prev);
+        }   
+        return prev;
     }
-
+    
     static void print(LLNode start) {
         LLNode iterator = start; // looper or pointer
         while (iterator != null) { 
@@ -85,5 +104,12 @@ class LinkedList {
         printReverse(current.nextNodeAddress);
 
         System.out.print(current.data + " <- ");
+    }
+    static boolean search (String kauaa) {
+        if (Integer.parseInt(kauaa) == 20) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
