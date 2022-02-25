@@ -14,14 +14,14 @@ class Sort {
                     int temp1 = ka[i];
                     ka[i] = ka[i+1];
                     ka[i+1] = temp1;
-                    flag = true;
+                    // flag = true;
                 }
             }
 
             System.out.println(a+1 + "th loop: " + Arrays.toString(ka));
-            if(flag == false) {
-                break;
-            }
+            // if(flag == false) {
+            //     break;
+            // }
         }
         System.out.println(Arrays.toString(ka));
     }

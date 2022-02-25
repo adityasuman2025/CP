@@ -1,0 +1,199 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: #f0f2f5;
+    overflow-x: auto;
+}
+
+/*------------------bar-------------------*/
+#bar {
+    font-weight: 500;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: rgb(255, 255, 255);
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    width: 100%;
+}
+
+a {
+   color: white;
+   text-decoration: none;
+}
+
+#logo {
+    display: flex;
+    align-items: center; /*vertical align */
+    justify-content: flex-start; /*horizontal align */
+    width: 33%;
+}
+
+#desktopMenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33%;
+}
+
+#desktopMenu div{
+    padding: 0px 20px;
+}
+
+#desktopMenu div:hover{
+    transform: scale(1.10);
+    transition-duration: 0.2s;
+}
+
+#mobileMenu {
+    display: none;
+}
+
+#mobileMenu img {
+    height: 26px;
+}
+
+#social {
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
+   width: 33%;
+   margin-right: 30px;
+}
+
+#social div {
+    padding-right: 5px;
+}
+
+#adarsh {
+    font-size: 20px;
+    font-weight: bold;
+}
+/*------------------bar-------------------*/
+
+#content {
+    position: relative;
+}
+
+#content video {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+#mWebBackImg {
+    display: none;        
+}
+
+#myIntro {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 70px;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px #000000;
+    color: #f1f1f1;
+    display: flex;
+    align-items: center;
+}
+
+#myImg {
+    height: 200px;
+    border-radius: 100%;
+    margin-right: 20px;
+}
+
+#myIntro span {
+    color: rgba(255,0,0, .8);
+}
+
+#bhemu {
+    font-size: 23px;
+    font-weight: 500;
+}
+
+/*------------------Bottombar-------------------*/
+
+#backToTop {
+    text-align: center;
+    padding: 15px;
+    color: white;
+    background-color: #2f3d4e;
+}
+
+#backToTop:hover {
+    background-color: #3e4d5f;
+}
+
+#bottomBar {
+    background-color: #232F3E;
+    color: white;
+    font-size: 15px;
+    width: 100%;
+    overflow-x: auto;
+}
+
+#top {
+    display: flex;
+    justify-content: center;
+}
+
+.kauaa {
+    margin: 30px 70px;
+}
+
+.kauaa div {
+    padding: 5px 0px;
+}
+
+.heading {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#amazon {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0px;
+}
+
+#amazon img {
+    margin-top: 10px;
+    padding-right: 70px;
+}
+
+#amazon select {
+    height: 30px;
+    width: 120px;
+    color: white;
+    background-color: inherit;
+    border-radius: 3px;
+}
+
+#language {
+    padding: 10px 200px;
+    text-align: center;
+    font-size: 12px;
+}
+
+#language span {
+    padding: 0px 8px;
+}
+
+#bottomBar3 {
+    background-color: #131A22;
+    color: white;
+    font-size: 12px;
+}
+
+#services {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#services div {
+    padding: 0px 40px;
+}
