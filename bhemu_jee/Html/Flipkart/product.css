@@ -2,19 +2,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 10px;
     background-color: white;
+    width: 97%;
+    overflow-x: auto;
+    margin: auto;
 }
+
 .product {
     margin: 10px;
     font-size: small;
     text-align: center;
     width: 200px;
-    
 }
 
 .prodImg {
-    height: 170px;
+    max-height: 150px;
     width: 99%;
     object-fit: contain;
     padding-bottom: 10px;
@@ -60,3 +62,87 @@
     font-weight: 600;
 }
 
+
+/*------------------Bottombar-------------------*/
+#backToTop {
+    margin-top: 50px;
+    text-align: center;
+    padding: 15px;
+    color: white;
+    background-color: #2f3d4e;
+}
+
+#backToTop:hover {
+    background-color: #3e4d5f;
+}
+
+#bottomBar {
+    background-color: #232F3E;
+    color: white;
+    font-size: 15px;
+    width: 100%;
+    overflow-x: auto;
+}
+
+#top {
+    display: flex;
+    justify-content: center;
+}
+
+.kauaa {
+    margin: 30px 70px;
+}
+
+.kauaa div {
+    padding: 5px 0px;
+}
+
+.heading {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#amazon {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0px;
+}
+
+#amazon img {
+    margin-top: 10px;
+    padding-right: 70px;
+}
+
+#amazon select {
+    height: 30px;
+    width: 120px;
+    color: white;
+    background-color: inherit;
+    border-radius: 3px;
+}
+
+#language {
+    padding: 10px 200px;
+    text-align: center;
+    font-size: 12px;
+}
+
+#language span {
+    padding: 0px 8px;
+}
+
+#bottomBar3 {
+    background-color: #131A22;
+    color: white;
+    font-size: 12px;
+}
+
+#services {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#services div {
+    padding: 0px 40px;
+}

@@ -7,14 +7,28 @@ body {
 
 #bar {
     background-color: #2874f0;
-    display: flex;
-    padding: 10px;
-    padding-left: 50px;
-    align-items: center;
-    justify-content: center;
     position: fixed;
     width: 100%;
     z-index: 1;
+}
+
+#layer1 {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+#layer2 {
+    display: none;
+}
+
+#menu {
+    display: none;
+}
+
+#logo {
+    margin-left: 50px;
 }
 
 #searchBox {
@@ -37,18 +51,19 @@ body {
     outline: none;
 }
 
-#bar #items{
+#items {
     display: flex;
+    align-items: center;
 }
 
-#bar #items div {
+#items div {
     color: white;
     font-weight: 600;
     font-size: 14px;
     padding-right: 40px;
 }
 
-#bar #items img {
+#items img {
     margin-right: 5px;
 }
 
@@ -69,4 +84,3 @@ body {
     height: 65px;
     margin: 10px 40px;
 }
-

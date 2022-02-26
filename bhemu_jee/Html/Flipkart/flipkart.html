@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>FakeKart</title>
         <link rel="stylesheet" href="flipkart.css">
         <link rel="stylesheet" href="product.css">
+        <link rel="stylesheet" href="mWeb.css">
         <style>
             * {box-sizing: border-box;}
             body {font-family: Verdana, sans-serif;}
@@ -43,25 +45,36 @@
 
     <body>
         <div id="bar">
-            <img src="flipkart.png" alt="error" height="20px" />
-            <div id="searchBox">
-                <input type="text" placeholder="Search for porducts.brands and more" autofocus />
-                <img src="search.png" height="20px"/>
-            </div>
+            <div id="layer1">
+                <div id="meLo">
+                    <img src="menu.png" height="20px" id="menu">
+                    <img src="flipkart.png"  height="20px" id="logo"/>
+                </div>
+
+                <div id="searchBox">
+                    <input type="text" placeholder="Search for porducts.brands and more" autofocus />
+                    <img src="search.png" height="20px"/>
+                </div>
+                
+                <div id="items">
+                    <div id="userName">Adarsh</div>
+                    <div id="more">More</div>
+                    <img src="cart.png"  height="20px">
+                    <div>Cart</div>               
+                </div>     
+            </div> 
             
-            <div id="items">
-                <div>Adarsh</div>
-                <div>More</div>
-                <img src="cart.png" alt="error" height="20px">
-                <div>Cart</div>
-            </div>      
+            <div id="layer2">
+                <div id="mSearchBox">
+                    <input type="text" placeholder="Search for porducts.brands and more" />
+                    <img src="search.png" height="20px"/>
+                </div>
+            </div>
         </div>
+
         <br /><br /><br />
 
         <div id="subbar">
-            <div>
-                <img src="offer.png" alt="error"><div>Offers</div>
-            </div>
             <div>
                 <img src="soda.png" alt="error"><div>Grocery</div>
             </div>
@@ -100,10 +113,6 @@
                 <img src="img_2.jpg" style="width:100%">
             </div>
             
-            <div class="mySlides fade">
-                <div class="numbertext"></div>
-                <img src="img_3.jpg" style="width:100%">
-            </div>    
         </div>
         <br>
         
@@ -112,15 +121,11 @@
             <span class="dot"></span> 
             <span class="dot"></span> 
         </div>
-        <hr />
+        
         <div class="productBar">
             <div class="product">
-                <a href="https://www.flipkart.com/">
-                    <img src="Moblie_1.jpeg" alt="error" class="prodImg">
-                </a>
-                <div> 
-                    REDMI Note 11T 5G (Stardust White, 128 GB)
-                </div>
+                <img src="Moblie_1.jpeg" alt="error" class="prodImg">
+                <div>REDMI Note 11T 5G (Stardust White, 128 GB)</div>
                 <div>
                     <span class="prodRating">
                         4.9
@@ -134,8 +139,9 @@
                     <span class="prodOff">10% off</span>
                 </div>
             </div>
+
             <div class="product">
-                <img src="Moblie_2.jpeg" alt="error" class="prodImg">
+                <img src="Moblie_1.jpeg" alt="error" class="prodImg">
                 <div> 
                     Bhemu Note 11T 5G (Stardust White, 128 GB)
                 </div>
@@ -226,6 +232,84 @@
             </div>
         </div>
 
+        <div id="backToTop">Back to Top</div> 
+        <div id="bottomBar">
+            <div id="top">
+                <div class="kauaa">
+                    <div class="heading">Get to Know Us</div >
+                    <div>About Us</div>
+                    <div>Careers</div>
+                    <div>Press Releases</div>
+                    <div>Amazon Cares</div>
+                    <div>Gift a Smile</div>
+                    <div>Amazon Science</div>
+
+                </div>
+
+                <div class="kauaa">	
+                    <div class="heading">Connect with Us</div >
+                    <div>Facebook</div>
+                    <div>Twitter</div>
+                    <div>Instagram</div>
+                </div>
+                <div class="kauaa">
+                    <div class="heading">Make Money with Us</div >
+                    <div>Sell under Amazon Accelerator</div>
+                    <div>Sell on Amazon</div>
+                    <div>Amazon Global Selling</div>
+                    <div>Become an Affiliate</div>
+                    <div>Fulfilment by Amazon</div>
+                    <div>Advertise Your Products</div>
+                    <div>Amazon Pay on Merchants</div>
+                    
+                </div>
+
+                <div class="kauaa">
+                    <div class="heading">Let Us Help You</div >
+                    <div>COVID-19 and Amazon</div>
+                    <div>Your Account</div>
+                    <div>Returns Centre</div>
+                    <div>100% Purchase Protection</div>
+                    <div>Amazon App Download</div>
+                    <div>Amazon Assistant Download</div>
+                    <div>Help</div>
+                </div>
+            </div>
+
+            <hr />
+            <div id="amazon">
+                <div >
+                    <img src="amazon.png" alt="" height="25px" >
+                </div>
+                <div>
+                    <select>
+                        <option>English</option>
+                        <option>Hindi</option>
+                        <option>BhemuLang</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="language">
+                <span>Australia</span>
+                <span>Brazil</span>
+                <span>Canada</span>
+                <span>China</span>
+                <span>France</span>
+                <span>Germany</span>
+                <span>Italy</span>
+                <span>Japan</span>
+                <span>Mexico</span>
+                <span>Netherlands</span>
+                <span>Poland</span>
+                <span>Singapore</span>
+                <span>SpainTurkey</span>
+                <span>United Arab Emirates</span>
+                <span>United Kingdom</span>
+                <span> United States</span>
+            </div>
+        </div>
+        
         <script>
             var slideIndex = 0;
             showSlides();

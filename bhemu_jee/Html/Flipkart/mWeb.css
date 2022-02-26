@@ -1,0 +1,107 @@
+@media screen and (max-width: 700px) {
+    #layer1 {
+        justify-content: space-between;
+    
+    }
+
+    #meLo {
+        display: flex;
+        align-items: center;
+    }
+
+    #menu {
+        display: block;
+        margin-right: 10px;
+    }
+
+    #logo {
+        margin: unset;
+    }
+
+    #searchBox {
+        display: none;
+    }
+
+    #items {
+        justify-content: flex-end;
+    }
+
+    #userName {
+        display: none;
+    }
+
+    #more {
+        display: none;
+    }
+
+    #items div {
+        padding: unset;
+    }
+
+    #layer2 {
+        display: flex;
+        justify-content: center;
+    }
+
+    #mSearchBox {
+        border-radius: 1.5px;
+        height: 35px;
+        width: 95%;
+        background-color: white;
+        margin-bottom: 10px;
+    }
+
+    #mSearchBox input {
+        border: none;
+        padding-left: 10px;
+        height: 100%;
+        width: 90%;
+    }
+    
+    #mSearchBox input:focus {
+        outline: none;
+    }
+
+    #subbar {
+        justify-content: flex-start;
+        margin-top: 30px;
+        font-size: 50%;
+    }
+
+    #subbar img {
+        height: 50px;
+        margin: 5px 10px;
+    }
+
+    .productBar {
+        justify-content: flex-start;
+    }
+
+    .product {
+        margin: 10px;
+        font-size: small;
+        text-align: center;
+        width: 150px;
+    }
+
+    .prodImg {
+        max-height: 100px;
+    }
+
+    .product div:nth-child(2) {
+        margin: auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    #top {
+        display: unset;
+        justify-content: unset;
+        font-size: 12px;
+    }  
+    
+    #language {
+        padding: 10px 10px;
+    }  
+}

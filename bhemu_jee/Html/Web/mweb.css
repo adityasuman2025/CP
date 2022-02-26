@@ -38,19 +38,5 @@
         height: 150px;
         margin-right: unset;
         margin-top: 80px;
-    }
-
-    #backToTop {
-        margin-top: 100px;
-    }
-
-    #top {
-        display: unset;
-        justify-content: unset;
-        font-size: 12px;
     }  
-    
-    #language {
-        padding: 10px 10px;
-    }    
 }
