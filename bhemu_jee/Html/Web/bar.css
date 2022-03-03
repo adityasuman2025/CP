@@ -9,12 +9,12 @@ body {
 /*------------------bar-------------------*/
 #bar {
     position: fixed;
-    z-index: 1;
     font-weight: 500;
     font-size: 18px;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(29, 28, 28, 0.9);
     color: rgb(255, 255, 255);
     width: 100%;
+    z-index: 10;
 }
 
 #topBar {
@@ -95,8 +95,12 @@ a {
     }
     
     #mobileIcon {
-        display: block;
-        margin-right: 20px;
+        display: flex;
+        justify-content: center;
+        padding: 10px 20px 10px 10px;
+        /* background-color: rebeccapurple; */
+    
+
     }
     
     #mobileMenu {
