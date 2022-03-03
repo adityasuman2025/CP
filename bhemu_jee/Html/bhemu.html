@@ -1,69 +1,109 @@
 <html>
+    <head>
+        <link rel="stylesheet" href="bhemu.css">
+        
+    </head>
 
-<head>
-    <link rel="stylesheet" href="bhemu.css">
-</head>
+    <body onscroll="handleScroll()">
+        <div id="navBar">
+            <div><img src="logo.png" alt="bhemu" /></div>
+            <div><a href="https://www.google.com" target="_blank">Google</a></div>
+            <div>Contact</div>
+            <div>About</div>
+            <div>Search</div>
+        </div>
+        
+        <div id="wrapper">
+            <div id="form">
+                <div>
+                    <input type="email" placeholder="Email" id="email" />
+                </div>
+                <div>
+                    <input type="password" placeholder="Password" id="password"/>
+                </div>
+                <div>
+                  <div id="login" onclick="handleLoginClick()" >Login</div>
+                </div>
 
-<body>
-    <div id="navBar">
-        <div><img src="logo.png" alt="bhemu" /></div>
-        <div><a href="https://www.google.com" target="_blank">Google</a></div>
-        <div>Contact</div>
-        <div>About</div>
-        <div>Search</div>
-    </div>
-
-    <div id="wrapper">
-        <form id="form">
-            <div>
-                <input type="email" placeholder="Email" />
+                <div>
+                    <label for="bird">kauaa</label>
+                    <select id="bird">
+                        <option>kala</option>
+                        <option>pila</option>
+                        <option>nila</option>
+                        <option selected>hara</option>
+                    </select>
+                </div>
+                <hr />
+                <div>
+                    <input type="submit" value="Create New Account" id="signup"/>
+                </div>
             </div>
-            <div>
-                <input type="password" placeholder="Password" />
-            </div>
-            <div>
-                <input type="submit" value="Log In" id="login"/>
-            </div>
-
-            <div>
-                <label for="bird">kauaa</label>
-                <select id="bird">
-                    <option>kala</option>
-                    <option>pila</option>
-                    <option selected>hara</option>
-                </select>
-            </div>
-            <hr />
-            <div>
-                <input type="submit" value="Create New Account" id="signup"/>
-            </div>
-        </form>
-    </div>
-    <!-- 
-    <h1 id="name" class="">My name is bhemu kumar</h1>
-
-    <div id="desc"> and im <span id="not">not</span> a <b>pagal </b> <em>kutta</em></div>
+        </div>
     
-    <i>thik hai</i>
-    <br />
-    <img src="bhemu.jpg" alt="bhemu" height="240dp" width="300dp" />
+        <div id="experi" class="experi"></div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Class</th>
-                <th>Roll</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>kauaa</td>
-                <td>10</td>
-                <td>1</td>
-            </tr>
-        </tbody>
-    </table> -->
-</body>
 
+    
+        <h1 id="name" class="">My name is bhemu kumar</h1>
+
+        <div id="desc"> and im <span id="not">not</span> a <b>pagal </b> <em>kutta</em></div>
+        
+        <i>thik hai</i>
+        <br />
+        <img src="bhemu.jpg" alt="bhemu" height="240dp" width="300dp" />
+        <br />
+        <img src="bhemu.jpg" alt="bhemu" height="240dp" width="300dp" />
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Class</th>
+                    <th>Roll</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>kauaa</td>
+                    <td>10</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <script>
+            function printRedGreen() {
+                let no = "";
+                for (let a = 1; a<=100; a++) {
+                    if ( a % 2 == 0){
+                        no = no + "<div class = 'red'> " + a + "</div>";
+                    } else {
+                        no = no + "<div class = 'green'>" + a + "</div>";
+                    }
+                    
+                }
+                document.getElementById("experi").innerHTML = no;
+            }
+
+            function handleLoginClick() {
+                let email = document.getElementById("email").value;
+                let password = document.getElementById("password").value;
+
+                let msg = "";
+                if (email === "" || password === "") {
+                    msg = "plz input email and password details";
+                } else {
+                    msg = "Email :- " + email + " Password :- " + password;
+                    document.getElementById("login").classList.add("disableBtn");
+                }
+                document.getElementById("experi").innerText = msg;
+            }
+
+            function handleScroll() {
+                console.log("ruk bhai")
+            }
+        
+        </script>
+    </body>
 </html>

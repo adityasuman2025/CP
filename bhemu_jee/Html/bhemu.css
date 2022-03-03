@@ -15,7 +15,8 @@ body {
     display: flex;
     align-items: center; /*vertical align */
     justify-content: center; /*horizontal align */
-    position: relative;
+    position: fixed;
+    width: 100%;
 }
 
 #navBar div {
@@ -43,6 +44,7 @@ body {
 }
 
 #wrapper {
+    padding-top: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -73,10 +75,15 @@ hr {
 }
 
 #login {
-    background-color: #1877f2 !important;
+    background-color: #1877f2;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
     font-weight: 700;
     font-size: 100%;
+    margin-bottom: 10px;
 }
 
 #signup {
@@ -86,4 +93,19 @@ hr {
     font-size: 100%;
     width: 50% !important;
     margin-top: 15px;
+}
+
+.red {
+    background-color: red;
+    text-align: center;
+}
+
+.green {
+    background-color: #42b72a;
+    text-align: center;
+}
+
+.disableBtn {
+    background-color: gray !important;
+    pointer-events: none;
 }

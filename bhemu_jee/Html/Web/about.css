@@ -1,0 +1,97 @@
+#content {
+    position: relative;
+}
+
+#content video {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+#mWebBackImg {
+    display: none;        
+}
+
+#myIntro {
+    position: absolute;
+    top: 30%;
+    left: 40%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    align-items: center;
+    font-size: 70px;
+    font-weight: 900;
+    text-shadow: 2px 2px 4px #000000;
+    color: #f1f1f1;
+    background-color: rgba(12, 11, 11, 0.3);
+    border-radius: 5px;
+    padding: 20px;
+    width: fit-content;
+}
+
+#myImg {
+    height: 200px;
+    border-radius: 100%;
+    margin-right: 20px;
+}
+
+#myIntro span {
+    color: rgba(255,0,0, .8);
+}
+
+#bhemu {
+    font-size: 23px;
+    font-weight: 500;
+}
+
+/* ...............................mWeb............................. */
+
+/*tablet*/
+@media screen and (max-width: 1150px) {
+    #content video {
+        display: none;
+     }
+
+     #mWebBackImg {
+         display: block;       
+         width: 100%;
+         height: 100%;
+         object-fit: contain; 
+     }
+
+    #myIntro {
+        font-size: 35px;
+        top: 10%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #content video {
+       display: none;
+    }
+
+    #mWebBackImg {
+        display: block;       
+        width: 100%;
+        height: 100%;
+        object-fit: contain; 
+    }
+
+    #content {
+        text-align: center;
+    }
+
+    #myIntro {
+        top: 30%;
+        left: 50%;
+        /* position: absolute; */
+        /* transform: none; */
+        display: block;
+        font-size: 30px;
+    }
+
+    #myImg {
+        height: 150px;
+        margin: unset;
+    }  
+}
