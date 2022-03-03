@@ -109,3 +109,17 @@ hr {
     background-color: gray !important;
     pointer-events: none;
 }
+
+
+
+#mobileMenu a {
+  display: block;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px #f1f1f1 solid;
+  padding: 10px;
+  font-weight: bold;
+
+}
+

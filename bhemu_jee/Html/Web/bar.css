@@ -8,14 +8,19 @@ body {
 
 /*------------------bar-------------------*/
 #bar {
+    position: fixed;
+    z-index: 1;
+    font-weight: 500;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: rgb(255, 255, 255);
+    width: 100%;
+}
+
+#topBar {
     display: flex;
     align-items: center; 
     justify-content: space-between;
-    font-weight: 500;
-    font-size: 18px;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: rgb(255, 255, 255);
-    width: 100%;
 }
 
 a {
@@ -33,7 +38,7 @@ a {
 }
 
 #adarsh {
-    font-size: 21px;
+    font-size: 20px;
     font-weight: bold;
 }
 
@@ -44,21 +49,25 @@ a {
     width: 33%;
 }
 
-#desktopMenu div{
+#desktopMenu a{
     padding: 0px 20px;
 }
 
-#desktopMenu div:hover{
+#desktopMenu a:hover{
     transform: scale(1.10);
     transition-duration: 0.2s;
 }
 
-#mobileMenu {
+#mobileIcon {
     display: none;
 }
 
-#mobileMenu img {
+#mobileIcon img {
     height: 26px;
+}
+
+#mobileMenu {
+    display: none;
 }
 
 #social {
@@ -69,7 +78,7 @@ a {
    margin-right: 30px;
 }
 
-#social div {
+#social a {
     padding-right: 10px;
 }
 
@@ -78,16 +87,34 @@ a {
     transition-duration: 0.2s;
 }
 
-/*------------------mWebBar-------------------*/
 
+/*------------------mWebBar-------------------*/
 @media screen and (max-width: 700px) {
     #desktopMenu {
         display: none;
     }
-
-    #mobileMenu {
+    
+    #mobileIcon {
         display: block;
         margin-right: 20px;
+    }
+    
+    #mobileMenu {
+        display: none;
+        border-top: 1px solid #f1f1f1;
+    }
+    
+    .show {
+        display: block !important;
+    }
+    #mobileMenu a {
+        display: block;
+        color: white;
+        font-size: 13px;
+        text-decoration: none;
+        border-bottom: 1px #f1f1f1 solid;
+        padding: 10px;
+        text-align: center;
     }
 
     #social {
