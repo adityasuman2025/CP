@@ -9,6 +9,8 @@ body {
 /*------------------bar-------------------*/
 #bar {
     position: fixed;
+    top: 0;
+    left: 0;
     font-weight: 500;
     font-size: 18px;
     background-color: rgba(29, 28, 28, 0.9);
@@ -87,6 +89,57 @@ a {
     transition-duration: 0.2s;
 }
 
+/* ..........................bottomBar.......................... */
+#bottomBar {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: rgba(22, 21, 21, 0.904);
+    color: white;
+    font-size: 14px;
+    z-index: 20;
+}
+
+#bottomBar a {
+    color: white;
+    text-decoration: none;
+}
+
+#footMemu {
+    display: flex;
+    align-items: center;
+    /* padding-top: 30px ; */
+    width: 33.5%;
+    /* background-color: #42b72a; */
+}
+
+#footMemu a{
+    padding-left: 15px;
+}
+
+#footLogo {
+    text-align: center;
+    width: 33%;
+    font-size: 11px;
+    padding-bottom: 20px;
+    /* background-color: blue; */
+}
+
+#footSocial {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 33%;
+    /* background-color: red; */
+}
+
+#footSocial a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    padding-right: 15px;
+}
 
 /*------------------mWebBar-------------------*/
 @media screen and (max-width: 700px) {
