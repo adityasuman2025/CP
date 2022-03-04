@@ -94,7 +94,7 @@ a {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    background-color: rgba(22, 21, 21, 0.904);
+    background-color: rgb(29, 27, 27);
     color: white;
     font-size: 14px;
     z-index: 20;
