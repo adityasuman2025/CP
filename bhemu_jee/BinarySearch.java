@@ -3,8 +3,6 @@ class BinarySearch {
         int arr [] = {5,7,8,11,13,16,20,22};
         boolean tf = obs(arr, 12);
         System.out.print(tf);
-        
-
     }
 
     public static boolean search(int arr[], int toFind) {
@@ -38,6 +36,7 @@ class BinarySearch {
         }
         return false;
     }
+
     public static boolean obs(int arr[], int toFind) {
         int start = 0;
         int end = arr.length-1;

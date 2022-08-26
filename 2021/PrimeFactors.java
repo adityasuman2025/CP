@@ -26,7 +26,7 @@ class PrimeFactors {
 
 	    // n must be odd at this point.  So we can 
         // skip one element because prime nos can't be even (Note i = i +2) 
-        for (int i=3; i*1<=no; i+=2) {
+        for (int i=3; i*i<=no; i+=2) {
             while (no%i == 0) {
                 if (map.containsKey(i)) {
                     int val = map.get(i);

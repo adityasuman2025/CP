@@ -38,11 +38,14 @@ function main() {
     // fibonacciSeriesTillPosition(fibonacciSeries, number);
     // console.log("fibonacciSeries", fibonacciSeries);
 
-    const isNoPrime = isPrime(number);
-    console.log("isNoPrime", isNoPrime);
+    // const isNoPrime = isPrime(number);
+    // console.log("isNoPrime", isNoPrime);
 
     // const primeNosTillNo = primeTillNumber(number);
     // console.log("primeNosTillNo", primeNosTillNo);
+
+    const prFactor = primeFactors(number);
+    console.log("prFactor", prFactor);
 }
 
 function getPowerOfPrime(number, prime) {
@@ -146,4 +149,35 @@ function primeTillNumber(number) {
     }
 
     return primes;
+}
+
+function primeFactors(number) {
+    let factors = {};
+
+    // const primNos = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 35, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101];
+    // primNos.forEach(primeNo => {
+    //     while (number % primeNo == 0) {
+    //         factors[primeNo] = factors[primeNo] ? (factors[primeNo] + 1): 1;
+    //         number = number / primeNo;
+    //     }
+    // });
+
+    let i = 2;
+    while (number % i == 0) {
+        factors[i] = factors[i] ? (factors[i] + 1): 1;
+        number = number / i;
+    }
+
+    for (i = 3; i*i <= number; i += 2) {
+        while (number % i == 0) {
+            factors[i] = factors[i] ? (factors[i] + 1): 1;
+            number = number / i;
+        }
+    }
+
+    if (number > 2) {
+        factors[number] = 1;
+    }
+
+    return factors;
 }
