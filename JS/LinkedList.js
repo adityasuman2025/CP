@@ -145,10 +145,37 @@ class LinkedList {
         this.head = prev;
     }
 
-    reverseInGroup(k) {
+    reverseInGroup(head, k) {
         // 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 
         // k = 3
-        // 3 -> 2 -> 1 -> 6 -> 5 -> 4 -> 9 -> 8 -> 7 
+        // 3 -> 2 -> 1 -> 6 -> 5 -> 4 -> 9 -> 8 -> 7
+
+        if (head !== "ka") {
+            if (head == null || head.next == null) return head;
+        }
+        
+        let curr = head === "ka" ? this.head : head;
+        let prev = null;
+        let next = null;
+
+        let i = 0;
+        while (i< k && curr) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+
+            i++;
+        }
+
+        if (head === "ka") {
+            this.head.next = this.reverseInGroup(curr, k);
+            this.head = prev;
+        } else {
+            head.next = this.reverseInGroup(curr, k);
+        }
+
+        return prev;
     }
 
     printReverse(node) {
@@ -297,3 +324,5 @@ console.log("isLLEmpty", isLLEmpty);
 // let hasCycle = linkedList.detectCycle();
 // console.log("hasCycle", hasCycle);
 
+linkedList.reverseInGroup("ka", 3);
+linkedList.print();
