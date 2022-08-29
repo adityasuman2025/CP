@@ -34,7 +34,6 @@ class MaxAreaInHistogram
 	        if(stack.isEmpty() || arr[i] >= arr[stack.peek()]) //if stack is empty or 
 	        {
 	            stack.push(i++);
-	            //i++;
 	        }
 	        else
 	        {
