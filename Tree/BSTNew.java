@@ -1,8 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-class Node
-{
+class Node {
 	int data;
 	Node left, right;
 
@@ -12,8 +11,7 @@ class Node
 	}
 }
 
-class BSTNew
-{
+class BSTNew {
 //insert function
 	void insert(Node root, int data)
 	{
