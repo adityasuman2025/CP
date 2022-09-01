@@ -560,11 +560,26 @@ class Tree {
 
         this.bottomBoundary(root.right);
 	}
+
+    preOrderToPostOrder(preOrder, inOrder) {
+        console.log("inOrder", inOrder)
+        console.log("preOrder", preOrder)
+
+        let root = preOrder[0];
+        let rootIndexInInOrder = inOrder.indexOf(root);
+        let n = inOrder.length;
+
+        if (rootIndexInInOrder != 0)
+            this.preOrderToPostOrder(preOrder.slice(1, n), inOrder.slice(0, rootIndexInInOrder));
+        
+        if (rootIndexInInOrder != n - 1)
+            this.preOrderToPostOrder(preOrder.splice(rootIndexInInOrder + 1, n), inOrder.splice(rootIndexInInOrder + 1, n));
+
+        console.log(root);
+    }
 }
 
-
 let tree = new Tree();
-
 let root = new Node(54);
 tree.insert(root, 10);
 tree.insert(root, 70);
@@ -616,7 +631,6 @@ tree.insert(root, 30);
 // let lca = tree.lowestCommonAncestor(root, 0, 5)
 // console.log("lowestCommonAncestor", lca.value)
 
-
 // let succ = new Node(-1234)
 // let inOrderSucc = tree.inOrderSuccessor(root, 19, succ);
 // console.log("inOrderSucc", succ.left.value)
@@ -628,5 +642,9 @@ tree.insert(root, 30);
 // console.log("leftViewStr", leftViewStr)
 
 // tree.topView(root)
+// tree.boundaryView(root)
 
-tree.boundaryView(root)
+let preOrder = [1, 2, 4, 5, 3, 6];
+let inOrder = [4, 2, 5, 1, 3, 6];
+
+tree.preOrderToPostOrder(preOrder, inOrder)
