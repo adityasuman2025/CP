@@ -577,6 +577,23 @@ class Tree {
 
         console.log(root);
     }
+
+    isValidBST(root) {
+        let nodes = [];
+        (function inOrder(root) {
+            if (!root) return;
+    
+            inOrder(root.left);
+            nodes.push(parseInt(root.val));
+            inOrder(root.right);
+        })(root);
+    
+        for (let i = 1; i<nodes.length; i++) {
+            if (nodes[i-1] >= nodes[i]) return false
+        }
+        
+        return true;
+    }
 }
 
 let tree = new Tree();
