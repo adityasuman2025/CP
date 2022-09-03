@@ -594,6 +594,41 @@ class Tree {
         
         return true;
     }
+
+    
+    isSymmetric(root) {
+        // we will take left side of the tree and right side of the tree
+        // as 2 different trees and will compare them
+        //of they are same then its a symmetry
+        
+        if (!root) return false;
+        return isMirror(root.left, root.right);
+
+        function isMirror(t1, t2) {
+            if (!t1 && !t2) return true;
+            
+            if (!t1 || !t2) return false;
+            
+            return (t1.val == t2.val) && isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left)
+        }
+    }
+
+    inOrderArrToBST(arr, start, end) {
+        if (start > end) return null;
+        
+        if ((start == null) || (end == null)) {
+            start = 0;
+            end = arr.length - 1;
+        }
+        let mid = parseInt((start+end)/2);
+        
+        let val = arr[mid];
+        let root = new TreeNode(val);
+        root.left = sortedArrayToBST(arr, start, mid-1);
+        root.right = sortedArrayToBST(arr, mid+1, end);
+        
+        return root;
+    }
 }
 
 let tree = new Tree();
