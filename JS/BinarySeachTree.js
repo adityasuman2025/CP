@@ -560,6 +560,7 @@ class Tree {
 
         this.bottomBoundary(root.right);
 	}
+    //boundary traversal
 
     preOrderToPostOrder(preOrder, inOrder) {
         console.log("inOrder", inOrder)
@@ -578,6 +579,7 @@ class Tree {
         console.log(root);
     }
 
+    // time: O(n), space: O(n)
     isValidBST(root) {
         let nodes = [];
         (function inOrder(root) {
@@ -595,6 +597,15 @@ class Tree {
         return true;
     }
 
+    // time: O(n), space: O(1)
+    isValidBST(root, min, max) {
+        if (!root) return true;
+
+        console.log(root.value, min, max);
+
+        if ((root.value < min) || (root.value > max)) return false;
+        return this.isValidBST(root.left, min, root.value - 1) && this.isValidBST(root.right, root.value + 1, max)
+    }
     
     isSymmetric(root) {
         // we will take left side of the tree and right side of the tree
@@ -696,7 +707,11 @@ tree.insert(root, 30);
 // tree.topView(root)
 // tree.boundaryView(root)
 
-let preOrder = [1, 2, 4, 5, 3, 6];
-let inOrder = [4, 2, 5, 1, 3, 6];
+// let preOrder = [1, 2, 4, 5, 3, 6];
+// let inOrder = [4, 2, 5, 1, 3, 6];
 
-tree.preOrderToPostOrder(preOrder, inOrder)
+// tree.preOrderToPostOrder(preOrder, inOrder)
+
+
+let isBST = tree.isValidBST(root, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+console.log("isBST", isBST)
