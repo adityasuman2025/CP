@@ -39,7 +39,7 @@ var isAnagram = function(str1, str2) {
         } else if (map[char] == 1) {
             delete map[char];
         } else {
-             map[char] = map[char] ? map[char] + 1 : 1;
+            map[char] = map[char] ? map[char] + 1 : 1;
         }
     }
     
