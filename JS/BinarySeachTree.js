@@ -574,7 +574,7 @@ class Tree {
             this.preOrderToPostOrder(preOrder.slice(1, n), inOrder.slice(0, rootIndexInInOrder));
         
         if (rootIndexInInOrder != n - 1)
-            this.preOrderToPostOrder(preOrder.splice(rootIndexInInOrder + 1, n), inOrder.splice(rootIndexInInOrder + 1, n));
+            this.preOrderToPostOrder(preOrder.slice(rootIndexInInOrder + 1, n), inOrder.splice(rootIndexInInOrder + 1, n)); //slice makes a new array while splice modify the same array
 
         console.log(root);
     }
@@ -635,8 +635,8 @@ class Tree {
         
         let val = arr[mid];
         let root = new TreeNode(val);
-        root.left = sortedArrayToBST(arr, start, mid-1);
-        root.right = sortedArrayToBST(arr, mid+1, end);
+        root.left = inOrderArrToBST(arr, start, mid-1);
+        root.right = inOrderArrToBST(arr, mid+1, end);
         
         return root;
     }
