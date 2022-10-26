@@ -41,3 +41,16 @@ var maxProfit = function(prices) {
     
     return maxProfit;
 };
+
+//or
+// var maxProfit = function(arr) {
+//     let minPrice = arr[0];
+//     let maxProfit = 0;
+    
+//     for (let i = 1; i<arr.length; i++) {
+//         minPrice = Math.min(minPrice, arr[i]);
+//         maxProfit = Math.max(maxProfit, arr[i] - minPrice);
+//     }
+    
+//     return maxProfit;
+// };
