@@ -39,9 +39,9 @@ class LinkedList {
                 curr = curr.next;
                 i++;
             }
-            let currPrevNext = curr.next;
+            let currOldNext = curr.next;
             curr.next = node;
-            node.next = currPrevNext
+            node.next = currOldNext
         }
     }
 

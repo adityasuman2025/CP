@@ -9,12 +9,11 @@ You must write an algorithm that runs in O(n) time.
  
 
 Example 1:
-
 Input: nums = [100,4,200,1,3,2]
 Output: 4
 Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.
-Example 2:
 
+Example 2:
 Input: nums = [0,3,7,2,5,8,4,6,0,1]
 Output: 9
 */
@@ -44,10 +43,7 @@ const longestConsecutive = function(arr) {
 // optimised
 const longestConsecutiveOptimised = function(arr) {
     //we are storing array value in set, because array can be too large because of repeated values, which can cause TLE
-    let set = new Set();
-    for (let i = 0; i < arr.length; i++) {
-        set.add(arr[i]);
-    }
+    const set = new Set(arr);
     
     let maxSeqLen = 0;
     set.forEach(temp => {

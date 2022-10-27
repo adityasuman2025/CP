@@ -24,6 +24,8 @@ Total amount you can rob = 2 + 9 + 1 = 12.
 //solution: https://www.youtube.com/watch?v=ZwDDLAeeBM0
 
 
+//logic is that, either robber will rob this house or not
+
 /**
  * @param {number[]} nums
  * @return {number}
@@ -34,7 +36,10 @@ var rob = function(nums) {
     
     for (let i = 1; i<nums.length; i++) {
         if (i==1) {
-            dp[i] = Math.max(nums[i], dp[i-1])
+            dp[i] = Math.max(nums[i], dp[i-1]);
+            //for second house
+            //1. if he robs this house then we can't include his first robbery
+            //2. if he not robs this house then we can't include his first robbery
         } else {
             dp[i] = Math.max(dp[i-1], dp[i-2] + nums[i]); 
             //either rob this house or not

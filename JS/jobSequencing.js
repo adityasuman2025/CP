@@ -36,7 +36,7 @@ maximum profit of 127 (100+27).
 
 class Solution {
     JobScheduling(arr, n) {
-        arr.sort((a, b) => b.profit - a.profit);
+        arr.sort((a, b) => b.profit - a.profit); // descending order // bara se chota
         
         let slot = Array(arr.length).fill(false);
         
