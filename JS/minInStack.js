@@ -16,7 +16,6 @@ You must implement a solution with O(1) time complexity for each function.
  
 
 Example 1:
-
 Input
 ["MinStack","push","push","push","getMin","pop","top","getMin"]
 [[],[-2],[0],[-3],[],[],[],[]]

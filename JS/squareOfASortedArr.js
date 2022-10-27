@@ -39,19 +39,20 @@ Follow up: Squaring each element and sorting the new array is very trivial, coul
 */
 
 var sortedSquares = function(arr) {
+    let start = 0, end = arr.length-1;
+
     let result = [];
-    let length = arr.length;
-    
-    for (let i = 0; i<length; i++) {
-        arr[i] = (arr[i] * arr[i]);
+    let i = arr.length-1;
+    while (start<=end) {
+        if (Math.abs(arr[start]) > Math.abs(arr[end])) {
+            result[i] = (arr[start]);
+            start++
+        } else {
+            result[i] = (arr[end]);
+            end--
+        }
+        i--;
     }
-    
-    
-    let frontIndex = 0;
-    let behindIndex = length - 1;
-    for (let i = length - 1; i >= 0; i--) {
-        result[i] = arr[frontIndex] > arr[behindIndex] ? arr[frontIndex++] : arr[behindIndex--];
-    }
-    
-    return result;
+
+    return result.map(item => item*item);
 };
