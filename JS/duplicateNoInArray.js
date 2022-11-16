@@ -34,7 +34,7 @@ Output: 3
     }
         
     //Now, once we detect the cycle, now its time to find the starting point of it. Just like in a linked list, we will reset our slow pointer to again point to first element
-    slow  = nums[0]
+    slow = nums[0]
         
     //And now, we increment both pointers one step at a time until they point to the same element
     while (slow != fast) {

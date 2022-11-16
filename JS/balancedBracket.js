@@ -47,7 +47,7 @@ var isValid = function(s) {
         } else if(char == "]" && stack.peek() == "[") {
             stack.pop();
         } else {
-             stack.push(char);
+            stack.push(char);
         }
     }
     

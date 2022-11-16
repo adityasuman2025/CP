@@ -2,9 +2,11 @@
 https://practice.geeksforgeeks.org/problems/maximum-intervals-overlap5708/1
 
 Maximum Intervals Overlap
-Consider a big party where N guests came to it and a log register for guest’s entry and exit times was maintained. Find the minimum time at which there were maximum guests at the party. Note that entries in the register are not in any order.
+Consider a big party where N guests came to it and a log register for guest’s entry and exit times was maintained.
+Find the minimum time at which there were maximum guests at the party. Note that entries in the register are not in any order.
 
 Note: Guests are leaving after the exit times.
+
 
 Example 1:
 Input:
@@ -28,6 +30,8 @@ You don't need to read input or print anything. Your task is to complete the fun
 Expected Time Complexity: O(N*Log(N) ).
 Expected Auxiliary Space: O(1).
 */
+
+
 
 function findMaxGuests(entry, exit, n) {
     entry.sort((a,b) => a-b); // [1,2,5,5,10]

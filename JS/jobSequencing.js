@@ -12,7 +12,6 @@ Note: Jobs will be given in the form (Jobid, Deadline, Profit) associated with t
 
 
 Example 1:
-
 Input:
 N = 4
 Jobs = {(1,4,20),(2,1,10),(3,1,40),(4,1,30)}
@@ -21,8 +20,8 @@ Output:
 Explanation:
 Job1 and Job3 can be done with
 maximum profit of 60 (20+40).
-Example 2:
 
+Example 2:
 Input:
 N = 5
 Jobs = {(1,2,100),(2,1,19),(3,2,27),

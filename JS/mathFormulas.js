@@ -51,7 +51,7 @@ function main() {
 function getPowerOfPrime(number, prime) {
     let power = 0;
     while (number % prime == 0) {
-        power ++;
+        power++;
         number = number/prime;
     }
 
@@ -73,17 +73,13 @@ function decimalIntoBinary(number) {
 }
 
 function factorial(number) {
-    if ([0, 1].includes(number)) {
-        return 1;
-    }
+    if ([0, 1].includes(number)) return 1;
 
     return number * factorial(number - 1);
 }
 
 function fibonacciNoAtPosition(position) {
-    if ([1, 2].includes(position)) {
-        return position - 1;
-    }
+    if ([1, 2].includes(position)) return position - 1;
 
     return fibonacciNoAtPosition(position - 1) + fibonacciNoAtPosition(position - 2);
 }

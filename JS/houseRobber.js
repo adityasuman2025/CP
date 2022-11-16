@@ -2,7 +2,8 @@
 https://leetcode.com/problems/house-robber/
 
 198. House Robber
-You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, 
+the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
 
 Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
 
@@ -41,7 +42,7 @@ var rob = function(nums) {
             //1. if he robs this house then we can't include his first robbery
             //2. if he not robs this house then we can't include his first robbery
         } else {
-            dp[i] = Math.max(dp[i-1], dp[i-2] + nums[i]); 
+            dp[i] = Math.max(nums[i] + dp[i-2], dp[i-1]); 
             //either rob this house or not
             //1. if robbing this house then we can also include max robbery till prev to prev house (i-2) 
             //2. if not robbing this house then we can include max robbery till prev house (i-1)

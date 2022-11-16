@@ -1,10 +1,10 @@
 function convertCurrency(rates, from, to) {
     const graph = {}
-    for(const [f, t, rate] of rates) {
-        if (!(t in graph)) {
+    for (const [f, t, rate] of rates) {
+        if (!graph.hasOwnProperty(t)) {
             graph[t] = []
         }
-        if (!(f in graph)) {
+        if (!graph.hasOwnProperty(f)) {
             graph[f] = []
         }
         graph[f].push([t, rate])
@@ -13,7 +13,7 @@ function convertCurrency(rates, from, to) {
     console.log("graph", graph)
 
     const visited = new Set()
-    let minRate = Infinity    
+    let minRate = Number.MIN_SAFE_INTEGER    
 
     function convertCurrencyHelper(currency, currRate) {
         if (currency === to) {
@@ -24,7 +24,7 @@ function convertCurrency(rates, from, to) {
         visited.add(currency)
         const neighbors = graph[currency]
 
-        for(const [neighbor, rate] of neighbors) {
+        for (const [neighbor, rate] of neighbors) {
             if (!visited.has(neighbor)) {
                 convertCurrencyHelper(neighbor, rate*currRate)
             }
