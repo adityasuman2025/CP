@@ -171,7 +171,7 @@ class Tree {
         let stack0 = [];
         let stack = [];
         stack.push(node);
-        
+
         let printSpiralStr = "";
         let flag = true;
         while (!stack0.isEmpty() || !stack.isEmpty()) {
