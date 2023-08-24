@@ -37,15 +37,15 @@ Explanation: The balloons can be burst by 2 arrows:
  * @param {number[][]} points
  * @return {number}
  */
-var findMinArrowShots = function(points) {
+var findMinArrowShots = function (points) {
     points.sort((a, b) => a[0] - b[0]);
-    
+
     let arrows = points.length;
     let overlap = 0;
     let prevEnd = points[0][1];
-    for (let i=1; i<points.length; i++) {
-        let [ start, end ] = points[i];
-        
+    for (let i = 1; i < points.length; i++) {
+        let [start, end] = points[i];
+
         if (start <= prevEnd) {
             overlap++;
             prevEnd = Math.min(end, prevEnd)
@@ -56,6 +56,6 @@ var findMinArrowShots = function(points) {
         }
     }
     arrows = arrows - overlap
-    
+
     return arrows;
 };
