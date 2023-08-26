@@ -4,11 +4,11 @@ process.stdin.setEncoding('utf-8');
 let inputString = '';
 let inputStringArr = [];
 
-process.stdin.on('data', function(inputStdin) {
+process.stdin.on('data', function (inputStdin) {
     inputString += inputStdin;
 });
 
-process.stdin.on('end', function() {
+process.stdin.on('end', function () {
     inputStringArr = inputString.split('\n');
 
     main();
@@ -24,9 +24,6 @@ function main() {
 
     // const powerOfPrime = getPowerOfPrime(number, prime);
     // console.log("powerOfPrime", powerOfPrime, inputStringArr);
-
-    // const binary = decimalIntoBinary(number);
-    // console.log("binary", binary, inputStringArr);
 
     // const factorialOfNumber = factorial(number);
     // console.log("factorialOfNumber", factorialOfNumber, inputStringArr);
@@ -52,24 +49,10 @@ function getPowerOfPrime(number, prime) {
     let power = 0;
     while (number % prime == 0) {
         power++;
-        number = number/prime;
+        number = number / prime;
     }
 
     return power;
-}
-
-function decimalIntoBinary(number) {
-    let binary = "";
-
-    while (number >= 2) {
-        let remainder = number % 2;
-        binary = remainder + binary;
-
-        number = parseInt(number/2);
-    }
-    binary = number + binary;
-
-    return binary;
 }
 
 function factorial(number) {
@@ -86,12 +69,12 @@ function fibonacciNoAtPosition(position) {
 
 function fibonacciSeriesTillPosition(fibonacciSeries, position) {
     if ([1, 2].includes(position)) {
-        fibonacciSeries[position - 1 ] = position - 1;
+        fibonacciSeries[position - 1] = position - 1;
         return position - 1;
     }
 
     if (fibonacciSeries[position - 1]) {
-        return fibonacciSeries[position - 1] ;
+        return fibonacciSeries[position - 1];
     }
 
     let thisPosFibo = fibonacciSeriesTillPosition(fibonacciSeries, position - 1) + fibonacciSeriesTillPosition(fibonacciSeries, position - 2);
@@ -108,12 +91,12 @@ function isPrime(number) {
         return true;
     }
 
-    if ((number%2 == 0) || (number%3 == 0)) {
+    if ((number % 2 == 0) || (number % 3 == 0)) {
         return false;
     }
 
     for (let i = 5; i * i <= number; i = i + 6) {
-        if ((number % i == 0) || (number % (i+2) == 0)) {
+        if ((number % i == 0) || (number % (i + 2) == 0)) {
             return false;
         }
     }
@@ -137,7 +120,7 @@ function primeTillNumber(number) {
             primes.push(i);
         }
 
-        if ((i+2 < number) && isPrime(i + 2)) {
+        if ((i + 2 < number) && isPrime(i + 2)) {
             primes.push(i + 2);
         }
 
@@ -160,13 +143,13 @@ function primeFactors(number) {
 
     let i = 2;
     while (number % i == 0) {
-        factors[i] = factors[i] ? (factors[i] + 1): 1;
+        factors[i] = factors[i] ? (factors[i] + 1) : 1;
         number = number / i;
     }
 
-    for (i = 3; i*i <= number; i += 2) {
+    for (i = 3; i * i <= number; i += 2) {
         while (number % i == 0) {
-            factors[i] = factors[i] ? (factors[i] + 1): 1;
+            factors[i] = factors[i] ? (factors[i] + 1) : 1;
             number = number / i;
         }
     }
