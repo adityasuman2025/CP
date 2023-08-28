@@ -148,6 +148,8 @@ function partition(arr, start, end) {
 
 
 
+// goal is to virtually split the array into a sorted and an unsorted part. Values from the unsorted part are picked and placed at the correct position in the sorted part.
+// Insertion sort is a simple sorting algorithm that works similar to the way you sort playing cards in your hands.
 function insertionSort(arr) {
     let length = arr.length;
 

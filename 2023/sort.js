@@ -137,3 +137,21 @@ function partition(arr, start, end) {
 }
 quickSort(arr, 0, arr.length - 1);
 console.log("arr", arr)
+
+function insertionSort(arr) {
+    let length = arr.length;
+
+    for (let i = 1; i < length; i++) {
+        let holeIdx = i;
+        let val = arr[i];
+
+        while (holeIdx > 0 && (val < arr[holeIdx - 1])) {
+            swap(arr, holeIdx, holeIdx - 1);
+
+            holeIdx--;
+        }
+    }
+
+    console.log("arr", arr)
+}
+insertionSort(arr);
