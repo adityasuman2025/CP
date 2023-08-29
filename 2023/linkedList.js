@@ -22,6 +22,18 @@ class LinkedList {
         console.log("print:", str)
     }
 
+    printFromNode(node) {
+        if (!node) return;
+
+        let curr = node, str = "";
+        while (curr) {
+            str += (curr.val + " -> ")
+            curr = curr.next
+        }
+        str = str.substring(0, str.length - 3);
+        console.log("printFromNode:", str)
+    }
+
     add = function (val) {
         if ([undefined, null].includes(val)) return;
 
@@ -193,7 +205,51 @@ class LinkedList {
     }
 
     reverseInGroup(head, k) {
+        if (!this.head) return;
 
+        let len = this.length();
+        if (k > len) return head;
+
+        function rigUtil(head, k) {
+            if (!head) return head;
+
+            let oldHead = head;
+            let curr = head, prev = null, next = null, c = 0;
+            while (curr && c < k) {
+                next = curr.next;
+                curr.next = prev;
+                prev = curr;
+
+                curr = next;
+                c++;
+            }
+            oldHead.next = rigUtil(next, k);
+
+            return prev;
+        }
+
+        return rigUtil(this.head, k);
+    }
+
+    createCycle() {
+        let curr = this.head, head = this.head;
+        while (curr.next) curr = curr.next;
+
+        curr.next = head;
+    }
+
+    detectCycle() {
+        if (!this.head) return false;
+
+        let slow = this.head, fast = this.head.next;
+        while (fast !== null && fast.next !== null) {
+            if (slow === fast) return true;
+
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return false;
     }
 }
 
@@ -217,11 +273,11 @@ ll.insertAtIndex(10, 6);
 // const index = ll.indexOf(5);
 // console.log("index:", index);
 
-// const isEmp = ll.isEmpty();
-// console.log("isEmp:", isEmp);
+const isEmp = ll.isEmpty();
+console.log("isEmp:", isEmp);
 
-// const len = ll.length();
-// console.log("len:", len);
+const len = ll.length();
+console.log("len:", len);
 
 // ll.reverse();
 // ll.printReverse(ll.head);
@@ -229,5 +285,11 @@ ll.insertAtIndex(10, 6);
 // ll.rotateLeftBy(2);
 // ll.rotateRightBy(2);
 
+// const newHead = ll.reverseInGroup(ll.head, 4);
+// ll.printFromNode(newHead);
 
 ll.print();
+
+// ll.createCycle();
+// const hasCycle = ll.detectCycle();
+// console.log("hasCycle:", hasCycle);

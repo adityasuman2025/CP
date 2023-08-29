@@ -22,7 +22,19 @@ class LinkedList {
         console.log("print:", str)
     }
 
-    add(val) {
+    printFromNode(node) {
+        if (!node) return;
+
+        let curr = node, str = "";
+        while (curr) {
+            str += (curr.val + " -> ")
+            curr = curr.next
+        }
+        str = str.substring(0, str.length - 3);
+        console.log("printFromNode:", str)
+    }
+
+    add = function (val) {
         if ([undefined, null].includes(val)) return;
 
         if (this.head === null) this.head = new Node(val);
@@ -76,7 +88,7 @@ class LinkedList {
         }
     }
 
-    removeFromIndex(index) {
+    removeAtIndex(index) {
         if ([undefined, null].includes(index) || this.head === null) return;
 
         if (index === 0) {
@@ -111,6 +123,7 @@ class LinkedList {
 
     isEmpty() {
         if (this.head === null) return true;
+
         return false;
     }
 
@@ -142,34 +155,31 @@ class LinkedList {
     }
 
     printReverse(node) {
-        if (node === null) return;
+        if (!node) return;
 
-        if (node === undefined) {
-            this.printReverse(this.head);
-        } else {
-            this.printReverse(node.next);
-            console.log(node.value);
-        }
+        this.printReverse(node.next);
+
+        console.log(node.val);
     }
 
     rotateLeftBy(k) {
         if ([undefined, null].includes(k) || this.head === null) return;
 
         k = k % this.length();
-        if (k === 0) return; // no rotation required
+        if (k === 0) return;
 
         let oldHead = this.head;
         let curr = this.head, prev = null, c = 0;
-        while (c < k && curr) { // go to the element at k index (curr), it will become the new head
+        while (c < k && curr) {
             prev = curr;
             curr = curr.next;
             c++;
         }
         this.head = curr;
-        prev.next = null; // breaking bond of prev with the new head
+        prev.next = null;
 
-        while (curr.next) curr = curr.next; // will go to the end of the linked list // curr become the last element of the linked list
-        curr.next = oldHead; // and attach the old head with the last element of the linkedlist
+        while (curr.next) curr = curr.next;
+        curr.next = oldHead;
     }
 
     rotateRightBy(k) {
@@ -195,45 +205,35 @@ class LinkedList {
     }
 
     reverseInGroup(head, k) {
-        // 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 
-        // k = 3
-        // 3 -> 2 -> 1 -> 6 -> 5 -> 4 -> 9 -> 8 -> 7
+        if (!this.head) return;
 
-        if (head !== "ka") {
-            if (head == null || head.next == null) return head;
+        let len = this.length();
+        if (k > len) return head;
+
+        function rigUtil(head, k) {
+            if (!head) return head;
+
+            let oldHead = head;
+            let curr = head, prev = null, next = null, c = 0;
+            while (curr && c < k) {
+                next = curr.next;
+                curr.next = prev;
+                prev = curr;
+
+                curr = next;
+                c++;
+            }
+            oldHead.next = rigUtil(next, k);
+
+            return prev;
         }
 
-        let curr = head === "ka" ? this.head : head;
-        let prev = null;
-        let next = null;
-
-        let i = 0;
-        while (i < k && curr) {
-            next = curr.next;
-            curr.next = prev;
-            prev = curr;
-            curr = next;
-
-            i++;
-        }
-
-        if (head === "ka") {
-            this.head.next = this.reverseInGroup(curr, k);
-            this.head = prev;
-        } else {
-            head.next = this.reverseInGroup(curr, k);
-        }
-
-        return prev;
+        return rigUtil(this.head, k);
     }
 
     createCycle() {
-        let head = this.head;
-
-        let curr = this.head;
-        while (curr.next) {
-            curr = curr.next;
-        }
+        let curr = this.head, head = this.head;
+        while (curr.next) curr = curr.next;
 
         curr.next = head;
     }
@@ -241,10 +241,8 @@ class LinkedList {
     detectCycle() {
         if (!this.head) return false;
 
-        let slow = this.head;
-        let fast = this.head.next;
-
-        while (fast && fast.next) {
+        let slow = this.head, fast = this.head.next;
+        while (fast !== null && fast.next !== null) {
             if (slow === fast) return true;
 
             slow = slow.next;
@@ -255,40 +253,43 @@ class LinkedList {
     }
 }
 
-let linkedList = new LinkedList();
-linkedList.add(2);
-linkedList.add(3);
-linkedList.add(4);
-linkedList.add(5);
-linkedList.add(6);
-linkedList.add(7);
-linkedList.add(8);
-linkedList.add(9);
-linkedList.insertAtIndex(1, 0);
-linkedList.removeFromIndex(123);
-linkedList.remove(20);
-linkedList.print();
 
-const indexOfNo = linkedList.indexOf(5);
-console.log("indexOfNo", indexOfNo);
 
-const isLLEmpty = linkedList.isEmpty();
-console.log("isLLEmpty", isLLEmpty);
+const ll = new LinkedList();
 
-// const length = linkedList.length();
-// console.log("length", length);
+ll.add(1);
+ll.add(4);
+ll.insertAtIndex(0, 0);
+ll.insertAtIndex(2, 2);
+ll.add(5);
+ll.insertAtIndex(3, 3);
+ll.insertAtIndex(10, 6);
 
-// linkedList.reverse();
-// linkedList.print();
+// // ll.remove(2.5);
+// // ll.remove(10);
+// // ll.remove(0);
+// ll.removeAtIndex(6);
 
-// linkedList.printReverse();
+// const index = ll.indexOf(5);
+// console.log("index:", index);
 
-// linkedList.rotateLeftBy(3);
-// linkedList.print();
+const isEmp = ll.isEmpty();
+console.log("isEmp:", isEmp);
 
-// linkedList.createCycle();
-// let hasCycle = linkedList.detectCycle();
-// console.log("hasCycle", hasCycle);
+const len = ll.length();
+console.log("len:", len);
 
-linkedList.reverseInGroup("ka", 3);
-linkedList.print();
+// ll.reverse();
+// ll.printReverse(ll.head);
+
+// ll.rotateLeftBy(2);
+// ll.rotateRightBy(2);
+
+// const newHead = ll.reverseInGroup(ll.head, 4);
+// ll.printFromNode(newHead);
+
+ll.print();
+
+// ll.createCycle();
+// const hasCycle = ll.detectCycle();
+// console.log("hasCycle:", hasCycle);
