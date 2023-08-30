@@ -428,7 +428,82 @@ class BST {
     }
 
     rightView(node) {
+        if (!node) return;
 
+        let q = [node], str = "";
+        while (q.length) {
+            let size = q.length;
+
+            while (size) {
+                let front = q.shift();
+
+                if (size === 1) str += (front.val + " ");
+
+                if (front.left) q.push(front.left);
+                if (front.right) q.push(front.right);
+
+                size--;
+            }
+        }
+
+        console.log("rightView:", str);
+    }
+
+    leftView(node) {
+        if (!node) return;
+
+        let q = [node], str = "";
+        while (q.length) {
+            let size = q.length, c = 0;
+
+            while (size) {
+                let front = q.shift();
+
+                if (c === 0) str += (front.val + " ");
+
+                if (front.left) q.push(front.left);
+                if (front.right) q.push(front.right);
+
+                size--;
+                c++;
+            }
+        }
+
+        console.log("leftView:", str);
+    }
+
+    bottomView(node) {
+        if (!node) return;
+
+        let q = [{ node, dist: 0 }], distToNodeMap = {};
+        while (q.length) {
+            let { node: front, dist } = q.shift();
+
+            distToNodeMap[dist] = front.val;
+
+            if (front.left) q.push({ node: front.left, dist: dist - 1 });
+            if (front.right) q.push({ node: front.right, dist: dist + 1 });
+        }
+
+        let distToNodeMapArr = Object.keys(distToNodeMap).sort((a, b) => a - b).map((key) => distToNodeMap[key]);
+        console.log("bottomView:", distToNodeMapArr)
+    }
+
+    topView(node) {
+        if (!node) return;
+
+        let q = [{ node, dist: 0 }], distToNodeMap = {};
+        while (q.length) {
+            let { node: front, dist } = q.shift();
+
+            if (!distToNodeMap.hasOwnProperty(dist)) distToNodeMap[dist] = front.val;
+
+            if (front.left) q.push({ node: front.left, dist: dist - 1 });
+            if (front.right) q.push({ node: front.right, dist: dist + 1 });
+        }
+
+        let distToNodeMapArr = Object.keys(distToNodeMap).sort((a, b) => a - b).map((key) => distToNodeMap[key]);
+        console.log("bottomView:", distToNodeMapArr)
     }
 }
 
@@ -488,5 +563,6 @@ bst.insert(105);
 
 // bst.mirror(bst.root)
 
+bst.topView(bst.root);
 
 bst.inOrder(bst.root);
