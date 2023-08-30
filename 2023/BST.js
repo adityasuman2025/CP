@@ -312,7 +312,122 @@ class BST {
         return maxwidth;
     }
 
+    // O(N)
     getMaxLevelSum(node) {
+        if (!node) return;
+
+        let q = [node], maxSum = 0;
+        while (q.length) {
+            let size = q.length;
+
+
+            let sum = 0;
+            while (size) {
+                let front = q.shift();
+                sum += front.val;
+
+                if (front.left) q.push(front.left);
+                if (front.right) q.push(front.right);
+
+                size--;
+            }
+
+            maxSum = Math.max(maxSum, sum);
+        }
+
+        return maxSum;
+    }
+
+    // O(N)
+    getMaxDiagonalSum(node) {
+        if (!node) return;
+
+        let q = [node], maxSum = 0;
+        while (q.length) {
+            let size = q.length;
+            let sum = 0;
+
+            while (size) {
+                let front = q.shift();
+                while (front) {
+                    sum += front.val;
+
+                    if (front.right) q.push(front.right);
+                    front = front.left;
+                }
+                size--;
+            }
+            maxSum = Math.max(maxSum, sum)
+        }
+
+        return maxSum;
+    }
+
+    // O(N)
+    getMaxRootToLeafSum(node) {
+        if (!node) return 0;
+
+        if (!node.left && !node.right) return node.val;
+
+        let leftSum = this.getMaxRootToLeafSum(node.left);
+        let rightSum = this.getMaxRootToLeafSum(node.right);
+
+        return Math.max(leftSum, rightSum) + node.val;
+    }
+
+    // O(h)
+    lowestCommonAncestor(node, n1, n2) {
+        if (!node) return;
+
+        if (n1 > node.val && n2 > node.val) {
+            return this.lowestCommonAncestor(node.right, n1, n2);
+        } else if (n1 < node.val && n2 < node.val) {
+            return this.lowestCommonAncestor(node.left, n1, n2);
+        } {
+            return node;
+        }
+    }
+
+    // O(h)
+    inOrderSuccessor(node, no, succ) {
+        if (!node) return;
+
+        this.inOrderSuccessor(node.left, no, succ);
+
+        if ((node.val > no) && (succ.left == null)) {
+            succ.left = node;
+            return;
+        }
+
+        this.inOrderSuccessor(node.right, no, succ);
+    }
+
+    // O(N) // create the mirror tree of the given tree
+    mirror(node) {
+        if (!node) return;
+
+        // let left = this.mirror(node.left);
+        // let right = this.mirror(node.right);
+
+        // node.left = right;
+        // node.right = left;
+
+        // return node;
+
+        let q = [node];
+        while (q.length) {
+            let front = q.shift();
+
+            if (front.left) q.push(front.left);
+            if (front.right) q.push(front.right);
+
+            let left = front.left;
+            front.left = front.right;
+            front.right = left;
+        }
+    }
+
+    rightView(node) {
 
     }
 }
@@ -341,7 +456,7 @@ bst.insert(105);
 // console.log("isFound", isFound)
 
 // bst.levelOrder(bst.root);
-bst.printByLevel(bst.root);
+// bst.printByLevel(bst.root);
 // bst.printVertically(bst.root);
 // bst.printDiagonally(bst.root);
 // bst.printSpiral(bst.root);
@@ -354,5 +469,24 @@ bst.printByLevel(bst.root);
 
 // const maxWidth = bst.getMaxWidth(bst.root);
 // console.log("maxWidth", maxWidth);
+
+// const maxLevelSum = bst.getMaxLevelSum(bst.root);
+// console.log("maxLevelSum", maxLevelSum);
+
+// const maxDiagonalSum = bst.getMaxDiagonalSum(bst.root);
+// console.log("maxDiagonalSum", maxDiagonalSum);
+
+// const maxRootToLeafSum = bst.getMaxRootToLeafSum(bst.root);
+// console.log("maxRootToLeafSum", maxRootToLeafSum);
+
+// const lca = bst.lowestCommonAncestor(bst.root, 108, 105);
+// console.log("lca", lca);
+
+// let succ = new Node(-123);
+// bst.inOrderSuccessor(bst.root, 7, succ);
+// console.log("inOrderSucc", succ.left.val);
+
+// bst.mirror(bst.root)
+
 
 bst.inOrder(bst.root);

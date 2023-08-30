@@ -1,4 +1,4 @@
-Array.prototype.isEmpty = function() {
+Array.prototype.isEmpty = function () {
     return this.length == 0;
 }
 
@@ -95,7 +95,7 @@ class Tree {
         if (!node) return;
 
         this.inOrder(node.left);
-    
+
         console.log(node.value)
 
         this.inOrder(node.right);
@@ -105,14 +105,14 @@ class Tree {
         if (!node) return;
 
         console.log(node.value)
-        
+
         this.preOrder(node.left);
         this.preOrder(node.right);
     }
 
     postOrder(node) {
         if (!node) return;
-        
+
         this.postOrder(node.left);
         this.postOrder(node.right);
 
@@ -121,7 +121,7 @@ class Tree {
 
     levelOrder(node) {
         if (!node) return;
-        
+
         let queue = [];
 
         let curr = node;
@@ -143,11 +143,11 @@ class Tree {
 
     printByLevel(node, targetLevel) {
         if (!node) return;
-        
+
         let queue = [];
 
         let curr = node;
-        queue.push({ node: curr, level: 0});
+        queue.push({ node: curr, level: 0 });
 
         let levelOrderStr = "";
         while (!queue.isEmpty()) {
@@ -157,8 +157,8 @@ class Tree {
                 levelOrderStr += `${node.value}, `;
             }
 
-            if (node.left && (level + 1 <= targetLevel)) queue.push({ node: node.left, level: level +1 });
-            if (node.right && (level + 1 <= targetLevel)) queue.push({ node: node.right, level: level +1 });
+            if (node.left && (level + 1 <= targetLevel)) queue.push({ node: node.left, level: level + 1 });
+            if (node.right && (level + 1 <= targetLevel)) queue.push({ node: node.right, level: level + 1 });
         }
 
         levelOrderStr = levelOrderStr.substring(0, levelOrderStr.length - 2); // for removing last ->
@@ -230,20 +230,20 @@ class Tree {
 
     printVertically(node) {
         if (!node) return;
-        
+
         let distToNodeMap = {};
 
         let queue = [];
         queue.push({ node, dist: 0 });
         while (!queue.isEmpty()) {
-            let { node: top, dist} = queue.shift() || {};
+            let { node: top, dist } = queue.shift() || {};
 
-            distToNodeMap[dist] = distToNodeMap[dist] ? [ ...distToNodeMap[dist], top.value ] : [ top.value ];
+            distToNodeMap[dist] = distToNodeMap[dist] ? [...distToNodeMap[dist], top.value] : [top.value];
             if (top.left) queue.push({ node: top.left, dist: dist - 1 });
             if (top.right) queue.push({ node: top.right, dist: dist + 1 });
         }
 
-        const distToNodeMapArr =  Object.keys(distToNodeMap).sort().map((key) => distToNodeMap[key]);
+        const distToNodeMapArr = Object.keys(distToNodeMap).sort().map((key) => distToNodeMap[key]);
         console.log("distToNodeMapArr", distToNodeMapArr)
     }
 
@@ -291,7 +291,7 @@ class Tree {
 
     getMaxWidth(node) {
         if (!node) return 0;
-        
+
         let maxWidth = 0;
         let queue = [];
         queue.push(node);
@@ -301,7 +301,7 @@ class Tree {
 
             while (size) {
                 let top = queue.shift(); //poll
-                
+
                 if (top.left) queue.push(top.left);
                 if (top.right) queue.push(top.right);
 
@@ -395,7 +395,7 @@ class Tree {
         if (!node) return;
 
         this.inOrderSuccessor(node.left, no, succ);
-        
+
         if ((node.value > no) && (succ.left == null)) {
             succ.left = node;
             return;
@@ -438,7 +438,7 @@ class Tree {
             }
         }
 
-        rightViewStr = rightViewStr.substring(0, rightViewStr.length-2);
+        rightViewStr = rightViewStr.substring(0, rightViewStr.length - 2);
         return rightViewStr;
     }
 
@@ -465,7 +465,7 @@ class Tree {
             }
         }
 
-        leftViewStr = leftViewStr.substring(0, leftViewStr.length-2);
+        leftViewStr = leftViewStr.substring(0, leftViewStr.length - 2);
         return leftViewStr;
     }
 
@@ -487,7 +487,7 @@ class Tree {
             if (front.right) queue.push({ node: front.right, dist: dist - 1 });
         }
 
-        let distToNodeMapArr = Object.keys(distToNodeMap).sort((a, b) => a-b).map((key) => distToNodeMap[key]);
+        let distToNodeMapArr = Object.keys(distToNodeMap).sort((a, b) => a - b).map((key) => distToNodeMap[key]);
         console.log("distToNodeMapArr", distToNodeMapArr)
     }
 
@@ -503,13 +503,13 @@ class Tree {
         while (!queue.isEmpty()) {
             let { node: front, dist } = queue.shift();
 
-            distToNodeMap[dist] = distToNodeMap[dist] >=0 ? distToNodeMap[dist] : front.value;
+            distToNodeMap[dist] = distToNodeMap[dist] >= 0 ? distToNodeMap[dist] : front.value;
 
             if (front.left) queue.push({ node: front.left, dist: dist + 1 });
             if (front.right) queue.push({ node: front.right, dist: dist - 1 });
         }
 
-        let distToNodeMapArr = Object.keys(distToNodeMap).sort((a, b) => a-b).map((key) => distToNodeMap[key]);
+        let distToNodeMapArr = Object.keys(distToNodeMap).sort((a, b) => a - b).map((key) => distToNodeMap[key]);
         console.log("distToNodeMapArr", distToNodeMapArr)
     }
 
@@ -526,20 +526,20 @@ class Tree {
     }
 
     leftBoundary(root) {
-		if (!root) return
+        if (!root) return
 
         this.boundarySet.add(root.value);
-        
+
         if (root.left) {
             this.leftBoundary(root.left);
         } else if (root.right) {
             this.leftBoundary(root.right);
         }
-	}
+    }
 
     rightBoundary(root) {
-		if (!root) return
-        
+        if (!root) return
+
         if (root.right) {
             this.rightBoundary(root.right);
         } else if (root.left) {
@@ -547,19 +547,19 @@ class Tree {
         }
 
         this.boundarySet.add(root.value);
-	}
+    }
 
     bottomBoundary(root) {
-		if (!root) return
-        
+        if (!root) return
+
         this.bottomBoundary(root.left);
-        
-        if (!root.right && !root.left) { 
+
+        if (!root.right && !root.left) {
             this.boundarySet.add(root.value);
         }
 
         this.bottomBoundary(root.right);
-	}
+    }
     //boundary traversal
 
     preOrderToPostOrder(preOrder, inOrder) {
@@ -572,7 +572,7 @@ class Tree {
 
         if (rootIndexInInOrder != 0)
             this.preOrderToPostOrder(preOrder.slice(1, n), inOrder.slice(0, rootIndexInInOrder));
-        
+
         if (rootIndexInInOrder != n - 1)
             this.preOrderToPostOrder(preOrder.slice(rootIndexInInOrder + 1, n), inOrder.splice(rootIndexInInOrder + 1, n)); //slice makes a new array while splice modify the same array
 
@@ -584,16 +584,16 @@ class Tree {
         let nodes = [];
         (function inOrder(root) {
             if (!root) return;
-    
+
             inOrder(root.left);
             nodes.push(parseInt(root.val));
             inOrder(root.right);
         })(root);
-    
-        for (let i = 1; i<nodes.length; i++) {
-            if (nodes[i-1] >= nodes[i]) return false
+
+        for (let i = 1; i < nodes.length; i++) {
+            if (nodes[i - 1] >= nodes[i]) return false
         }
-        
+
         return true;
     }
 
@@ -606,38 +606,38 @@ class Tree {
         if ((root.value < min) || (root.value > max)) return false;
         return this.isValidBST(root.left, min, root.value - 1) && this.isValidBST(root.right, root.value + 1, max)
     }
-    
+
     isSymmetric(root) {
         // we will take left side of the tree and right side of the tree
         // as 2 different trees and will compare them
         //of they are same then its a symmetry
-        
+
         if (!root) return false;
         return isMirror(root.left, root.right);
 
         function isMirror(t1, t2) {
             if (!t1 && !t2) return true;
-            
+
             if (!t1 || !t2) return false;
-            
+
             return (t1.val == t2.val) && isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left)
         }
     }
 
     inOrderArrToBST(arr, start, end) {
         if (start > end) return null;
-        
+
         if ((start == null) || (end == null)) {
             start = 0;
             end = arr.length - 1;
         }
-        let mid = parseInt((start+end)/2);
-        
+        let mid = parseInt((start + end) / 2);
+
         let val = arr[mid];
         let root = new TreeNode(val);
-        root.left = inOrderArrToBST(arr, start, mid-1);
-        root.right = inOrderArrToBST(arr, mid+1, end);
-        
+        root.left = inOrderArrToBST(arr, start, mid - 1);
+        root.right = inOrderArrToBST(arr, mid + 1, end);
+
         return root;
     }
 }
