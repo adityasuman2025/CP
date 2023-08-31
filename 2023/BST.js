@@ -1,5 +1,3 @@
-// heap after this
-
 class Node {
     constructor(val) {
         this.val = val;
@@ -86,7 +84,7 @@ class BST {
         }
     }
 
-    // O(N)
+    // O(n)
     inOrder(node) {
         let str = "";
         function inOrderUtil(node) {
@@ -101,8 +99,8 @@ class BST {
         console.log("inOrder:", str)
     }
 
-    // O(N)
-    preOrder(node) {
+    // O(n)
+    preOrder(node) { // root is found at the end in preOrder traversal
         let str = "";
         function preOrderUtil(node) {
             if (!node) return;
@@ -116,7 +114,7 @@ class BST {
         console.log("preOrder:", str)
     }
 
-    // O(N)
+    // O(n)
     postOrder(node) { // root is found at the end in postOrder traversal
         let str = "";
         function postOrderUtil(node) {
@@ -131,7 +129,7 @@ class BST {
         console.log("postOrder:", str)
     }
 
-    // O(N)
+    // O(n)
     levelOrder(node) {
         if (!node) return;
 
@@ -147,7 +145,7 @@ class BST {
         console.log("levelOrder:", str)
     }
 
-    // O(N)
+    // O(n)
     printByLevel(node) {
         if (!node) return;
 
@@ -182,7 +180,7 @@ class BST {
         // console.log(`printByLevel:`, str);
     }
 
-    // O(N)
+    // O(n)
     printVertically(node) {
         if (!node) return;
 
@@ -200,7 +198,7 @@ class BST {
         console.log("printVertically:", res)
     }
 
-    // O(N)
+    // O(n)
     printDiagonally(node) {
         if (!node) return;
 
@@ -229,7 +227,7 @@ class BST {
         console.log("printDiagonally:", str)
     }
 
-    // O(N)
+    // O(n)
     printSpiral(node) {
         if (!node) return;
 
@@ -281,7 +279,7 @@ class BST {
         return curr;
     }
 
-    // avg: O(logN), worst: O(N)
+    // avg: O(logn), worst: O(n)
     getHeight(node) {
         if (!node) return 0;
 
@@ -291,7 +289,7 @@ class BST {
         return Math.max(leftHeight, rightHeight) + 1;
     }
 
-    // O(N)
+    // O(n)
     getMaxWidth(node) {
         if (!node) return null;
 
@@ -312,7 +310,7 @@ class BST {
         return maxwidth;
     }
 
-    // O(N)
+    // O(n)
     getMaxLevelSum(node) {
         if (!node) return;
 
@@ -338,7 +336,7 @@ class BST {
         return maxSum;
     }
 
-    // O(N)
+    // O(n)
     getMaxDiagonalSum(node) {
         if (!node) return;
 
@@ -363,7 +361,7 @@ class BST {
         return maxSum;
     }
 
-    // O(N)
+    // O(n)
     getMaxRootToLeafSum(node) {
         if (!node) return 0;
 
@@ -402,7 +400,7 @@ class BST {
         this.inOrderSuccessor(node.right, no, succ);
     }
 
-    // O(N)
+    // O(n)
     createMirror(node) {
         if (!node) return;
 
@@ -427,7 +425,7 @@ class BST {
         }
     }
 
-    // O(N)
+    // O(n)
     rightView(node) {
         if (!node) return;
 
@@ -450,7 +448,7 @@ class BST {
         console.log("rightView:", str);
     }
 
-    // O(N)
+    // O(n)
     leftView(node) {
         if (!node) return;
 
@@ -474,7 +472,7 @@ class BST {
         console.log("leftView:", str);
     }
 
-    // O(N)
+    // O(n)
     bottomView(node) {
         if (!node) return;
 
@@ -492,7 +490,7 @@ class BST {
         console.log("bottomView:", distToNodeMapArr)
     }
 
-    // O(N)
+    // O(n)
     topView(node) {
         if (!node) return;
 
@@ -510,7 +508,7 @@ class BST {
         console.log("bottomView:", distToNodeMapArr)
     }
 
-    // O(N)
+    // O(n)
     boundaryView(node) {
         if (!node) return;
 
@@ -560,14 +558,14 @@ class BST {
         return false;
     }
 
-    // O(N)
+    // O(n)
     isSymmetric(node) {
         if (!node) return false;
 
         return isMirror(node.left, node.right);
     }
 
-    // O(N)
+    // O(n)
     isMirror(tree1, tree2) {
         if (!tree1 && !tree2) return true;
 
@@ -575,6 +573,88 @@ class BST {
 
         return (tree1.val === tree2.val && isMirror(tree1.left, tree2.right) && isMirror(tree1.right, tree2.left));
     }
+
+    // O(n)
+    isValidBST(node) {
+        // time: O(n), space: O(1)
+        function checkBST(root, min, max) {
+            if (!root) return true;
+
+            console.log(root.val, min, max);
+
+            if ((root.val < min) || (root.val > max)) return false;
+            return checkBST(root.left, min, root.val - 1) && checkBST(root.right, root.val + 1, max)
+        }
+        return checkBST(node, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+
+        // // time: O(n), space: O(h)
+        // let last;
+        // function inOrderHelper(node) {
+        //     if (node === null) return true;
+
+        //     if (!inOrderHelper(node.left)) return false;
+
+        //     if (last !== null && node.val <= last) return false;
+        //     last = node.val;
+
+        //     return inOrderHelper(node.right);
+        // }
+
+        // return inOrderHelper(node);
+    }
+}
+
+function preOrderToPostOrderOfBTButNotBST(preOrder, inOrder) {
+    /*
+        let preOrder = [1, 2, 4, 8, 9, 10, 11, 5, 3, 6, 7];
+        let inOrder = [8, 4, 10, 9, 11, 2, 5, 1, 6, 3, 7];
+
+        first element of the preOrder traversal is always root
+        then we will find the index of the root in inOrder traversal (say it rootIndexInInOrder)
+        and in inOrder traversal, left side of the root is left subtree and right side of the root is right subtree
+
+        now we will divide the preOrder and inOrder traversal into left and right subtree and call the same function recursively
+        and print the root at the end
+
+        // left subtree:
+        preOrder: index 1 to n
+        inOrder: index 0 to rootIndexInInOrder - 1
+
+        // right subtree
+        preOrder: index rootIndexInInOrder + 1 to n
+        inOrder: index rootIndexInInOrder + 1 to n
+    */
+
+    let postOrder = [];
+    function preOrderToPostOrderOfBT(preOrder, inOrder) {
+        const n = inOrder.length;
+        const root = preOrder[0];
+        const rootIndexInInOrder = inOrder.indexOf(root);
+
+        if (rootIndexInInOrder !== 0) preOrderToPostOrderOfBT(preOrder.slice(1, n), inOrder.slice(0, rootIndexInInOrder));
+        if (rootIndexInInOrder !== n - 1) preOrderToPostOrderOfBT(preOrder.slice(rootIndexInInOrder + 1, n), inOrder.slice(rootIndexInInOrder + 1, n));
+
+        postOrder.push(root)
+    }
+    preOrderToPostOrderOfBT(preOrder, inOrder);
+
+    console.log("preOrderToPostOrderOfBTButNotBST:", postOrder);
+}
+
+function inOrderArrToBST(inOrderArr) {
+    function inOrderArrToBSTUtil(inOrderArr, start, end) {
+        if (start > end) return null;
+
+        let mid = parseInt((start + end) / 2);
+        let node = new Node(inOrderArr[mid]);
+
+        node.left = inOrderArrToBSTUtil(inOrderArr, start, mid - 1);
+        node.right = inOrderArrToBSTUtil(inOrderArr, mid + 1, end);
+
+        return node;
+    }
+
+    return inOrderArrToBSTUtil(inOrderArr, 0, inOrderArr.length - 1);
 }
 
 const bst = new BST();
@@ -591,8 +671,10 @@ bst.insert(60);
 bst.insert(9);
 bst.insert(105);
 
-// bst.inOrder(bst.root);
+bst.inOrder(bst.root);
+
 // bst.preOrder(bst.root);
+// bst.inOrder(bst.root);
 // bst.postOrder(bst.root);
 
 // bst.delete(bst.root, 109);
@@ -633,6 +715,16 @@ bst.insert(105);
 
 // bst.createMirror(bst.root)
 
-bst.boundaryView(bst.root);
+// bst.boundaryView(bst.root);
 
-bst.inOrder(bst.root);
+// const isValid = bst.isValidBST(bst.root);
+// console.log("isValid", isValid)
+
+// let preOrder = [1, 2, 4, 8, 9, 10, 11, 5, 3, 6, 7];
+// let inOrder = [8, 4, 10, 9, 11, 2, 5, 1, 6, 3, 7];
+// preOrderToPostOrderOfBTButNotBST(preOrder, inOrder);
+
+
+// let inOrderArr = [7, 9, 10, 15, 40, 59, 60, 100, 105, 108, 109, 110];
+// const node = inOrderArrToBST(inOrderArr);
+// bst.inOrder(node);
