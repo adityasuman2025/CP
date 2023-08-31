@@ -562,6 +562,23 @@ class Tree {
     }
     //boundary traversal
 
+    isSymmetric(root) {
+        // we will take left side of the tree and right side of the tree
+        // as 2 different trees and will compare them
+        //of they are same then its a symmetry
+
+        if (!root) return false;
+        return isMirror(root.left, root.right);
+
+        function isMirror(t1, t2) {
+            if (!t1 && !t2) return true;
+
+            if (!t1 || !t2) return false;
+
+            return (t1.val == t2.val) && isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left)
+        }
+    }
+
     preOrderToPostOrder(preOrder, inOrder) {
         console.log("inOrder", inOrder)
         console.log("preOrder", preOrder)
@@ -605,23 +622,6 @@ class Tree {
 
         if ((root.value < min) || (root.value > max)) return false;
         return this.isValidBST(root.left, min, root.value - 1) && this.isValidBST(root.right, root.value + 1, max)
-    }
-
-    isSymmetric(root) {
-        // we will take left side of the tree and right side of the tree
-        // as 2 different trees and will compare them
-        //of they are same then its a symmetry
-
-        if (!root) return false;
-        return isMirror(root.left, root.right);
-
-        function isMirror(t1, t2) {
-            if (!t1 && !t2) return true;
-
-            if (!t1 || !t2) return false;
-
-            return (t1.val == t2.val) && isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left)
-        }
     }
 
     inOrderArrToBST(arr, start, end) {

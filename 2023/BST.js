@@ -375,7 +375,7 @@ class BST {
         return Math.max(leftSum, rightSum) + node.val;
     }
 
-    // O(h)
+    // O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree
     lowestCommonAncestor(node, n1, n2) {
         if (!node) return;
 
@@ -388,7 +388,7 @@ class BST {
         }
     }
 
-    // O(h)
+    // O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree
     inOrderSuccessor(node, no, succ) {
         if (!node) return;
 
@@ -402,12 +402,12 @@ class BST {
         this.inOrderSuccessor(node.right, no, succ);
     }
 
-    // O(N) // create the mirror tree of the given tree
-    mirror(node) {
+    // O(N)
+    createMirror(node) {
         if (!node) return;
 
-        // let left = this.mirror(node.left);
-        // let right = this.mirror(node.right);
+        // let left = this.createMirror(node.left);
+        // let right = this.createMirror(node.right);
 
         // node.left = right;
         // node.right = left;
@@ -427,6 +427,7 @@ class BST {
         }
     }
 
+    // O(N)
     rightView(node) {
         if (!node) return;
 
@@ -449,6 +450,7 @@ class BST {
         console.log("rightView:", str);
     }
 
+    // O(N)
     leftView(node) {
         if (!node) return;
 
@@ -472,6 +474,7 @@ class BST {
         console.log("leftView:", str);
     }
 
+    // O(N)
     bottomView(node) {
         if (!node) return;
 
@@ -489,6 +492,7 @@ class BST {
         console.log("bottomView:", distToNodeMapArr)
     }
 
+    // O(N)
     topView(node) {
         if (!node) return;
 
@@ -504,6 +508,72 @@ class BST {
 
         let distToNodeMapArr = Object.keys(distToNodeMap).sort((a, b) => a - b).map((key) => distToNodeMap[key]);
         console.log("bottomView:", distToNodeMapArr)
+    }
+
+    // O(N)
+    boundaryView(node) {
+        if (!node) return;
+
+        const boundarySet = new Set();
+
+        const rightBoundary = (node) => {
+            if (!node) return;
+
+            if (node.right) rightBoundary(node.right);
+            else if (node.left) rightBoundary(node.left);
+
+            if (!this.isLeaf(node)) boundarySet.add(node.val);
+        }
+
+        const leftBoundary = (node) => {
+            if (!node) return;
+
+            if (!this.isLeaf(node)) boundarySet.add(node.val);
+
+            if (node.left) leftBoundary(node.left);
+            else if (node.right) leftBoundary(node.right);
+        }
+
+        const bottomBoundary = (node) => {
+            if (!node) return;
+
+            bottomBoundary(node.left);
+
+            if (this.isLeaf(node)) {
+                boundarySet.add(node.val);
+                return;
+            }
+
+            bottomBoundary(node.right);
+        }
+
+        leftBoundary(node);
+        bottomBoundary(node);
+        rightBoundary(node);
+
+        console.log("boundaryView:", boundarySet)
+    }
+
+    // O(1)
+    isLeaf(node) {
+        if (node.left === null && node.right === null) return true;
+        return false;
+    }
+
+    // O(N)
+    isSymmetric(node) {
+        if (!node) return false;
+
+        return isMirror(node.left, node.right);
+    }
+
+    // O(N)
+    isMirror(tree1, tree2) {
+        if (!tree1 && !tree2) return true;
+
+        if (!tree1 || !tree2) return false;
+
+        return (tree1.val === tree2.val && isMirror(tree1.left, tree2.right) && isMirror(tree1.right, tree2.left));
     }
 }
 
@@ -561,8 +631,8 @@ bst.insert(105);
 // bst.inOrderSuccessor(bst.root, 7, succ);
 // console.log("inOrderSucc", succ.left.val);
 
-// bst.mirror(bst.root)
+// bst.createMirror(bst.root)
 
-bst.topView(bst.root);
+bst.boundaryView(bst.root);
 
 bst.inOrder(bst.root);
