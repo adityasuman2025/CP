@@ -29,18 +29,19 @@ Output: [1,2]
 Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We return [1, 2].
 */
 
-var twoSum = function(arr, target) {
+var twoSum = function (arr, target) {
     let start = 0;
     let end = arr.length - 1;
     while (start < end) {
         let sum = arr[start] + arr[end];
-        
+
         if (sum == target) {
-            return [start+1, end+1]
+            return [start + 1, end + 1]
         } else if (sum > target) {
             end--
         } else {
-            start ++;
+            start++;
         }
     }
 };
+

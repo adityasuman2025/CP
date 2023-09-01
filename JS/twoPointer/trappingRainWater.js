@@ -18,40 +18,40 @@ Output: 9
 
 
 //approach 1 time: O(n), space: O(n)
-var trap = function(height) {
+var trap = function (height) {
     let n = height.length;
-    
-    let maxFromFront = [ height[0] ];
-    let maxFromBack = [ ];
-    
+
+    let maxFromFront = [height[0]];
+    let maxFromBack = [];
+
     let maxTillThis = height[0];
-    for (let i=1; i<n; i++) {
+    for (let i = 1; i < n; i++) {
         maxTillThis = Math.max(maxTillThis, height[i]);
         maxFromFront[i] = maxTillThis;
     }
-    
+
     maxTillThis = 0;
-    for (let i=n-1; i>=0; i--) {
+    for (let i = n - 1; i >= 0; i--) {
         maxTillThis = Math.max(maxTillThis, height[i]);
         maxFromBack[i] = maxTillThis;
     }
 
     let water = 0;
-    for (let i=1; i<n; i++) {
+    for (let i = 1; i < n; i++) {
         water += (Math.min(maxFromFront[i], maxFromBack[i]) - height[i])
     }
-    
+
     return water
 };
 
 
 //approach 2 - 2 pointer approach - time: O(n), space: O(1)
-var trap = function(arr) {
+var trap = function (arr) {
     let n = arr.length;
-    
-    let left = 0, right = n-1;
+
+    let left = 0, right = n - 1;
     let leftMax = 0, rightMax = 0;
-    
+
     let water = 0;
     while (left <= right) {
         if (arr[left] < arr[right]) {
@@ -70,6 +70,6 @@ var trap = function(arr) {
             right--
         }
     }
-    
+
     return water
 };
