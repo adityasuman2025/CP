@@ -107,6 +107,26 @@ class LinkedList {
         else console.log("no element found at index", index);
     }
 
+    removeMiddle() {
+        let curr = this.head, c = 0;
+        while (curr) {
+            curr = curr.next;
+            c++;
+        }
+
+        curr = this.head, prev = null;
+        let mid = parseInt(c / 2);
+        while (mid) {
+            prev = curr;
+            curr = curr.next;
+            mid--;
+        }
+        if (prev) prev.next = curr.next;
+        else this.head = curr.next;
+
+        return this.head;
+    }
+
     indexOf(val) {
         if ([undefined, null].includes(val) || this.head === null) return;
 
