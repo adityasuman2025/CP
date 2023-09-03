@@ -1,5 +1,5 @@
 /*
-https://leetcode.com/explore/interview/card/top-interview-questions-easy/92/array/646/
+https://leetcode.com/problems/rotate-array/description/
 
 Given an array, rotate the array to the right by k steps, where k is non-negative.
 
@@ -35,17 +35,17 @@ Try to come up with as many solutions as you can. There are at least three diffe
 Could you do it in-place with O(1) extra space?
 */
 
-var rotate = function(arr, k) {
+var rotate = function (arr, k) {
     let length = arr.length;
     k = k % length;
-    
+
     reverse(arr, 0, length - 1);
     reverse(arr, 0, k - 1);
-    reverse(arr, k, length-1);
+    reverse(arr, k, length - 1);
 };
 
 function reverse(arr, startIndex, endIndex) {
-     while (startIndex < endIndex) {
+    while (startIndex < endIndex) {
         let temp = arr[startIndex];
         arr[startIndex] = arr[endIndex];
         arr[endIndex] = temp;

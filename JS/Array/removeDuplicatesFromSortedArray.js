@@ -26,16 +26,16 @@ It does not matter what you leave beyond the returned k (hence they are undersco
 */
 
 // two pointer
-var removeDuplicates = function(arr) {
+var removeDuplicates = function (arr) {
     let length = arr.length;
-    
+
     let uniqueTillIndex = 0;
     for (let i = 0; i < length; i++) {
         if (arr[i] != arr[uniqueTillIndex]) {
-            uniqueTillIndex ++;
+            uniqueTillIndex++;
             arr[uniqueTillIndex] = arr[i]
         }
     }
-    
+
     return uniqueTillIndex + 1;
 };
