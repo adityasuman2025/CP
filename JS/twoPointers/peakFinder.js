@@ -1,5 +1,5 @@
 /*
-https://leetcode.com/problems/find-peak-element/submissions/
+https://leetcode.com/problems/find-peak-element/
 
 162. Find Peak Element
 A peak element is an element that is strictly greater than its neighbors.
@@ -23,7 +23,7 @@ Output: 5
 Explanation: Your function can return either index number 1 where the peak element is 2, or index number 5 where the peak element is 6.
 */
 
-var findPeakElement = function(arr) {
+var findPeakElement = function (arr) {
     let length = arr.length;
 
     let left = 0;
@@ -31,15 +31,15 @@ var findPeakElement = function(arr) {
     let mid = 0;
 
     while (left <= right) {
-        mid = parseInt((left+right) / 2);
+        mid = parseInt((left + right) / 2);
 
         if (
             (mid == 0 || arr[mid] >= arr[mid - 1])
             && (mid == length - 1 || arr[mid] >= arr[mid + 1])
         ) {
             return mid;
-        } 
-        
+        }
+
         if (arr[mid - 1] > arr[mid]) {
             right = mid - 1;
         } else {
