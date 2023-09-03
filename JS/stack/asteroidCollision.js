@@ -94,3 +94,4 @@ Array.prototype.peek = function () {
 Array.prototype.peek2 = function () {
     return this[this.length - 2];
 }
+
