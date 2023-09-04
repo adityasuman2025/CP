@@ -45,13 +45,13 @@ class BST {
 
     // O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree
     delete(node, toDelete) {
-        if ([null, undefined].includes(toDelete)) return;
+        if ([null, undefined].includes(toDelete)) return node;
 
-        if (!node) return;
+        if (!node) return node;
 
         if (toDelete > node.val) node.right = this.delete(node.right, toDelete)
         else if (toDelete < node.val) node.left = this.delete(node.left, toDelete)
-        else { // toDelete === node.val
+        else if (toDelete === node.val) {
             if (!node.left && !node.right) { // the node we want to delete have no children
                 node = null;
             } else if (!node.left) { // have only right node
@@ -67,6 +67,8 @@ class BST {
                 node.val = minInRight.val;
                 node.right = this.delete(node.right, minInRight.val);
             }
+        } else {
+            // toDelete not found
         }
 
         return node;
