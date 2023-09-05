@@ -33,24 +33,22 @@ Output: []
  * @param {number} target
  * @return {number[][]}
 */
-var combinationSum = function(candidates, target) {
-    res = [];
-    
-    function dfs(i, cur, total) {
-        if (target == total) {
-            res.push([...cur]);
+var combinationSum = function (candidates, target) {
+    let ans = [];
+
+    function bt(start, sum, arr) {
+        if (sum > target) return;
+
+        if (sum === target) {
+            ans.push([...arr]);
             return;
         }
-        
-        if (total > target || i >= candidates.length) return;
-        
-        cur.push(candidates[i]);
-        dfs(i, cur, total + candidates[i]);
-        cur.pop();
-        dfs(i+1, cur, total);
+
+        for (let i = start; i < candidates.length; i++) {
+            bt(i, sum + candidates[i], [...arr, candidates[i]]);
+        }
     }
-    
-    
-    dfs(0, [], 0);
-    return res;
+    bt(0, 0, []);
+
+    return ans;
 };
