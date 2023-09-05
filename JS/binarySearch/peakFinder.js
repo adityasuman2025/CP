@@ -23,29 +23,24 @@ Output: 5
 Explanation: Your function can return either index number 1 where the peak element is 2, or index number 5 where the peak element is 6.
 */
 
+
 var findPeakElement = function (arr) {
-    let length = arr.length;
+    let start = 0, end = arr.length - 1;
 
-    let left = 0;
-    let right = length - 1;
-    let mid = 0;
+    while (start <= end) {
+        let mid = parseInt((start + end) / 2);
+        let midNo = arr[mid];
 
-    while (left <= right) {
-        mid = parseInt((left + right) / 2);
-
-        if (
-            (mid == 0 || arr[mid] >= arr[mid - 1])
-            && (mid == length - 1 || arr[mid] >= arr[mid + 1])
-        ) {
+        let prevNo = mid - 1 < 0 ? Number.MIN_SAFE_INTEGER : arr[mid - 1];
+        let nextNo = mid + 1 >= arr.length ? Number.MIN_SAFE_INTEGER : arr[mid + 1];
+        if (midNo > prevNo && midNo > nextNo) {
             return mid;
-        }
-
-        if (arr[mid - 1] > arr[mid]) {
-            right = mid - 1;
+        } else if (midNo > prevNo && midNo < nextNo) {
+            start = mid + 1;
         } else {
-            left = mid + 1;
+            end = mid - 1;
         }
     }
 
-    return mid;
+    return -1;
 };
