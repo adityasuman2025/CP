@@ -25,7 +25,7 @@ Explanation: The starting pixel is already colored 0, so no changes are made to 
 */
 
 
-Array.prototype.isEmpty = function() {
+Array.prototype.isEmpty = function () {
     return this.length == 0;
 }
 
@@ -36,43 +36,43 @@ Array.prototype.isEmpty = function() {
  * @param {number} color
  * @return {number[][]}
 */
-var floodFill = function(image, sr, sc, color) {
-    let maxRIndex = image.length -1;
-    let maxCIndex = image[0].length -1;
-    
+var floodFill = function (image, sr, sc, color) {
+    let maxRIndex = image.length - 1;
+    let maxCIndex = image[0].length - 1;
+
     let stack = [];
-    if (image[sr][sc] != color) stack.push({sr, sc});
-    
+    if (image[sr][sc] != color) stack.push({ sr, sc });
+
     while (!stack.isEmpty()) {
         const { sr, sc } = stack.pop();
         let thisColor = image[sr][sc];
-         
+
         //top
         let topR = sr - 1, topC = sc;
         if (topR >= 0 && image[topR][topC] != color && image[topR][topC] == thisColor) {
-            stack.push({sr: topR, sc: topC});
+            stack.push({ sr: topR, sc: topC });
         }
-        
+
         //bottom
         let bottomR = sr + 1, bottomC = sc;
         if (bottomR <= maxRIndex && image[bottomR][bottomC] != color && image[bottomR][bottomC] == thisColor) {
-            stack.push({sr: bottomR, sc: bottomC});
+            stack.push({ sr: bottomR, sc: bottomC });
         }
-        
+
         //left
-        let leftR = sr, leftC = sc-1;
+        let leftR = sr, leftC = sc - 1;
         if (leftC >= 0 && image[leftR][leftC] != color && image[leftR][leftC] == thisColor) {
-            stack.push({sr: leftR, sc: leftC});
+            stack.push({ sr: leftR, sc: leftC });
         }
-        
+
         //right
-        let rightR = sr, rightC = sc+1;
+        let rightR = sr, rightC = sc + 1;
         if (rightC <= maxCIndex && image[rightR][rightC] != color && image[rightR][rightC] == thisColor) {
-            stack.push({sr: rightR, sc: rightC});
+            stack.push({ sr: rightR, sc: rightC });
         }
-        
+
         image[sr][sc] = color; //setting the required color
     }
-    
+
     return image;
 };
