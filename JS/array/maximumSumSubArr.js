@@ -33,12 +33,12 @@ Follow up: If you have figured out the O(n) solution, try coding another solutio
  * @param {number[]} nums
  * @return {number}
 */
-var maxSubArray = function(arr) {
+var maxSubArray = function (arr) {
     let maxSoFar = arr[0];
     let currMax = arr[0];
 
-    for (let i =1; i<arr.length; i++) {
-        currMax = Math.max(arr[i], currMax+arr[i]);
+    for (let i = 1; i < arr.length; i++) {
+        currMax = Math.max(arr[i], currMax + arr[i]);
         maxSoFar = Math.max(maxSoFar, currMax);
     }
 
