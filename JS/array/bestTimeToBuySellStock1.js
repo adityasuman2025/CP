@@ -26,31 +26,38 @@ Explanation: In this case, no transactions are done and the max profit = 0.
  * @param {number[]} prices
  * @return {number}
 */
-var maxProfit = function(prices) {
+
+// time: O(n), space: O(1)
+var maxProfit = function (prices) {
     //we can buy and sell only once, 
     //and sell only after buying
     //so moving from behind of the array, to search max sell price, we can have at a element position
-    let maxPrice = prices[prices.length-1];
+    let maxPrice = prices[prices.length - 1];
     let maxProfit = 0;
-    
-    for (let i = prices.length - 2; i>=0; i--) {
+
+    for (let i = prices.length - 2; i >= 0; i--) {
         maxPrice = Math.max(maxPrice, prices[i]);
-        
-        maxProfit = Math.max(maxProfit, maxPrice -  prices[i]);
+
+        maxProfit = Math.max(maxProfit, maxPrice - prices[i]);
     }
-    
+
     return maxProfit;
 };
 
-//or
-// var maxProfit = function(arr) {
-//     let minPrice = arr[0];
-//     let maxProfit = 0;
-    
-//     for (let i = 1; i<arr.length; i++) {
-//         minPrice = Math.min(minPrice, arr[i]);
-//         maxProfit = Math.max(maxProfit, arr[i] - minPrice);
-//     }
-    
-//     return maxProfit;
-// };
+// time: O(n), space: O(n)
+var maxProfit = function (prices) {
+    let n = prices.length;
+
+    let maxPriceArr = [];
+    maxPriceArr[n - 1] = prices[n - 1];
+    for (let i = n - 2; i >= 0; i--) {
+        maxPriceArr[i] = Math.max(prices[i], maxPriceArr[i + 1]);
+    }
+
+    let maxProfit = 0;
+    for (let i = 0; i < n; i++) {
+        maxProfit = Math.max(maxProfit, maxPriceArr[i] - prices[i]);
+    }
+
+    return maxProfit;
+};
