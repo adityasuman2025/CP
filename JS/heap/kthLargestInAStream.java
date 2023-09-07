@@ -28,42 +28,37 @@ kthLargest.add(4);   // return 8
 
 //solution: https://www.youtube.com/watch?v=hOjcdrqMoQ8
 
+import java.util.*;
 
 class KthLargest {
-    PriorityQueue<Integer> q = new PriorityQueue<>();
+    PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>();
     int k;
     
-    public KthLargest(int k, int[] nums) {
+    public KthLargest(int k, int[] arr) {
         this.k = k;
-        
-        for (int i=0; i<k && i<nums.length; i++) {
-            q.add(nums[i]);
+
+        for (int i=0; i<k && i<arr.length; i++) {
+            minHeap.add(arr[i]);
         }
-        
-        for (int i=k; i<nums.length; i++) {
-            if (nums[i] > q.peek()) {
-                q.poll();
-                q.add(nums[i]);
+
+        for (int i=k; i<arr.length; i++) {
+            if (arr[i] > minHeap.peek()) {
+                minHeap.poll();
+                minHeap.add(arr[i]);
             }
         }
     }
     
     public int add(int val) {
-        if (!q.isEmpty() && q.size()>=k) {
-            if (val > q.peek()) {
-                q.poll();
-                q.add(val);
-            }
+        if (minHeap.isEmpty() || minHeap.size()<k) {
+            minHeap.add(val);
         } else {
-            q.add(val);
+            if (val > minHeap.peek()) {
+                minHeap.poll();
+                minHeap.add(val);
+            }
         }
-        
-        return q.peek();
+     
+        return minHeap.peek();
     }
 }
-
-/**
- * Your KthLargest object will be instantiated and called as such:
- * KthLargest obj = new KthLargest(k, nums);
- * int param_1 = obj.add(val);
- */

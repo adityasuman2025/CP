@@ -60,19 +60,19 @@ import java.io.*;
 
 class Solution {
     long minCost(long arr[], int n) {
-        PriorityQueue<Long> q = new PriorityQueue<>(); //priority queue keep elements sorted
-        
-        for (int i=0; i<n; i++) q.add(arr[i]);
-        
-        long cost = 0;
-        while (q.size() > 1) {
-            long f = q.poll();
-            long s = q.poll();
-            
-            cost += (f+s);
-            q.add(f+s);
+        PriorityQueue<Long> minHeap = new PriorityQueue<Long>();
+
+        for (int i = 0; i<n; i++) {
+            minHeap.add(arr[i]);
         }
         
-        return cost;
+        long sum = 0;
+        while (minHeap.size() > 1) {
+            long temp = minHeap.poll() + minHeap.poll();
+            sum += temp;
+            minHeap.add(temp);
+        }
+        
+        return sum;
     }
 }
