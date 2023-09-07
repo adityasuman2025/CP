@@ -102,10 +102,10 @@ class MinHeap {
         }
     }
 
-    printHeap() {
+    print() {
         var heap = "";
         for (let i = 0; i < this.heap.length; i++) heap += `${this.heap[i]} `;
-        console.log("printHeap:", heap);
+        console.log("print:", heap);
     }
 
     // helper functions
@@ -142,7 +142,7 @@ heap.insert(100);
 heap.insert(5);
 
 // Printing the Heap
-heap.printHeap();
+heap.print();
 
 // Peeking And Removing Top Element
 console.log(heap.peek());
@@ -150,4 +150,4 @@ console.log(heap.remove()); // 5
 console.log(heap.remove()); // 10
 
 // Printing the Heap After Deletion
-heap.printHeap();
+heap.print();
