@@ -23,21 +23,33 @@ Explanation: s is an empty string "" after removing non-alphanumeric characters.
 Since an empty string reads the same forward and backward, it is a palindrome.
 */
 
-var isPalindrome = function(str) {
-    str = str.toLowerCase();
- 
-    let cleanedStr = "";
-    for (let i = 0; i<str.length; i++) {
-        let char = str[i];
-        
-        if (char.match(/[a-z0-9]/i)) cleanedStr += char;
-    }
-    
-    let start = 0, end = cleanedStr.length-1;
+var isPalindrome = function (s) {
+    let start = 0, end = s.length - 1;
     while (start < end) {
-        if (cleanedStr[start] != cleanedStr[end]) return false;
-        start++; end--;
+        let startChar = s.charAt(start), endChar = s.charAt(end);
+
+        if (!isAlphaNumeric(startChar)) start++;
+        else if (!isAlphaNumeric(endChar)) end--;
+        else {
+            // if both of them are aplha numeric
+            if (startChar.toLowerCase() !== endChar.toLowerCase()) return false;
+
+            start++;
+            end--;
+        }
     }
-    
+
     return true;
 };
+
+function isAlphaNumeric(char) {
+    let ascii = char.charCodeAt(0);
+
+    if (
+        (ascii >= 97 && ascii <= 122) ||
+        (ascii >= 65 && ascii <= 90) ||
+        (ascii >= 48 && ascii <= 57)
+    ) return true;
+
+    return false;
+}

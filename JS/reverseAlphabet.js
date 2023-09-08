@@ -22,7 +22,7 @@ function reverseStr(str) {
     let n = str.length;
 
     let alphabetIndices = [];
-    for (let i=0; i<n; i++) {
+    for (let i = 0; i < n; i++) {
         if (isAlphabet(str[i])) alphabetIndices.push(i);
     }
 
