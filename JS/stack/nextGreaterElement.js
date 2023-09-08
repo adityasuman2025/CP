@@ -36,31 +36,35 @@ Expected Auxiliary Space : O(N)
 */
 
 
-Array.prototype.peek = function() {
-    return this[this.length-1];
-}
-
+// ref: https://www.youtube.com/watch?v=Du881K7Jtk8, https://takeuforward.org/data-structure/next-greater-element-using-stack/
 class Solution {
     //Function to find the next greater element for each element of the array.
     nextLargerElement(arr, n) {
         let stack = [];
-        stack.push(arr[n-1]);
-        
-        let res = [];
-        res[n-1] = -1;
-        
-        for (let i=n-2; i >=0; i--) {
-            if (stack.peek() > arr[i]) {
-                res[i] = stack.peek();
+
+        let resp = [];
+        for (let i = n - 1; i >= 0; i--) {
+            if (stack.length === 0) {
+                stack.push(arr[i]);
+                resp[i] = -1;
             } else {
-                while (stack.length > 0 && stack.peek() <= arr[i]) {
-                    stack.pop();
+                if (stack.peek() > arr[i]) {
+                    resp[i] = stack.peek();
+                } else {
+                    // popping the elements from stack till element greater then arr[i] is found
+                    while (stack.length && stack.peek() <= arr[i]) stack.pop();
+
+                    resp[i] = stack.peek() || -1;
                 }
-                res[i] = stack.peek() || -1;
+
+                stack.push(arr[i]);
             }
-            stack.push(arr[i]);
         }
-        
-        return res;
+
+        return resp;
     }
+}
+
+Array.prototype.peek = function () {
+    return this[this.length - 1];
 }
