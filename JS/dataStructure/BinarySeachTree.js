@@ -578,31 +578,33 @@ class BST {
 
     // O(n)
     isValidBST(node) {
-        // time: O(n), space: O(1)
-        function checkBST(root, min, max) {
-            if (!root) return true;
+        // time: O(n), space: O(h), because of function call stack
+        // function checkBST(root, min, max) {
+        //     if (!root) return true;
 
-            console.log(root.val, min, max);
+        //     console.log(root.val, min, max);
 
-            if ((root.val < min) || (root.val > max)) return false;
-            return checkBST(root.left, min, root.val - 1) && checkBST(root.right, root.val + 1, max)
-        }
-        return checkBST(node, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
-
-        // // time: O(n), space: O(h)
-        // let last;
-        // function inOrderHelper(node) {
-        //     if (node === null) return true;
-
-        //     if (!inOrderHelper(node.left)) return false;
-
-        //     if (last !== null && node.val <= last) return false;
-        //     last = node.val;
-
-        //     return inOrderHelper(node.right);
+        //     if ((root.val < min) || (root.val > max)) return false;
+        //     return checkBST(root.left, min, root.val - 1) && checkBST(root.right, root.val + 1, max)
         // }
+        // return checkBST(node, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
 
-        // return inOrderHelper(node);
+
+        // time: O(n), space: O(h), because of function call stack
+        let prev = null, isBST = true;
+        function inOrderHelper(root) {
+            if (!root) return;
+
+            if (isBST) inOrderHelper(root.left); // we will stop recursion if we already found that this tree is not BST
+
+            if (![null, undefined].includes(prev) && prev >= root.val) isBST = false; // in order traversal prev value is always less than this value
+            prev = root.val;
+
+            if (isBST) inOrderHelper(root.right); // we will stop recursion if we already found that this tree is not BST
+        }
+        inOrderHelper(node);
+
+        return isBST;
     }
 }
 
@@ -723,8 +725,8 @@ bst.inOrder(bst.root);
 
 // bst.boundaryView(bst.root);
 
-// const isValid = bst.isValidBST(bst.root);
-// console.log("isValid", isValid)
+const isValid = bst.isValidBST(bst.root);
+console.log("isValid", isValid)
 
 // let preOrder = [1, 2, 4, 8, 9, 10, 11, 5, 3, 6, 7];
 // let inOrder = [8, 4, 10, 9, 11, 2, 5, 1, 6, 3, 7];
