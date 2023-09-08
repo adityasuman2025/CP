@@ -18,30 +18,28 @@ Output: 9
 
 
 //approach 1 time: O(n), space: O(n)
-var trap = function (height) {
-    let n = height.length;
+var trap = function (arr) {
+    let n = arr.length;
 
-    let maxFromFront = [height[0]];
-    let maxFromBack = [];
-
-    let maxTillThis = height[0];
+    let maxFromFront = [];
+    maxFromFront.push(arr[0]);
     for (let i = 1; i < n; i++) {
-        maxTillThis = Math.max(maxTillThis, height[i]);
-        maxFromFront[i] = maxTillThis;
+        maxFromFront[i] = Math.max(maxFromFront[i - 1], arr[i]);
     }
 
-    maxTillThis = 0;
-    for (let i = n - 1; i >= 0; i--) {
-        maxTillThis = Math.max(maxTillThis, height[i]);
-        maxFromBack[i] = maxTillThis;
+    let maxFromBack = [];
+    maxFromBack[n - 1] = arr[n - 1];
+    for (let i = n - 2; i >= 0; i--) {
+        maxFromBack[i] = Math.max(maxFromBack[i + 1], arr[i]);
     }
 
     let water = 0;
-    for (let i = 1; i < n; i++) {
-        water += (Math.min(maxFromFront[i], maxFromBack[i]) - height[i])
+    for (let i = 0; i < n; i++) {
+        let temp = Math.min(maxFromFront[i], maxFromBack[i]) - arr[i];
+        water += (temp > 0) ? temp : 0; // if temp is greater than 0 means some water can be stored here
     }
 
-    return water
+    return water;
 };
 
 
