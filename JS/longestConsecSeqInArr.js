@@ -19,41 +19,41 @@ Output: 9
 */
 
 // brute force
-const longestConsecutive = function(arr) {
+const longestConsecutive = function (arr) {
     if (arr.length == 0) return 0;
 
-    arr.sort((a, b) => (a-b));
-    
+    arr.sort((a, b) => (a - b));
+
     arr = [...new Set(arr)];
-    
+
     let maxSeqLen = 1, seqLen = 1;
     for (let i = 1; i < arr.length; i++) {
-        if (arr[i] == arr[i-1] + 1) {
+        if (arr[i] == arr[i - 1] + 1) {
             seqLen++;
         } else {
             seqLen = 1;
         }
-        
+
         maxSeqLen = Math.max(maxSeqLen, seqLen);
     }
-    
+
     return maxSeqLen;
 }
 
 // optimised
-const longestConsecutiveOptimised = function(arr) {
+const longestConsecutiveOptimised = function (arr) {
     //we are storing array value in set, because array can be too large because of repeated values, which can cause TLE
     const set = new Set(arr);
-    
-    let maxSeqLen = 0;
-    set.forEach(temp => {
-        if (!set.has(temp - 1)) {
-            let j = temp;
-	        while (set.has(j)) j++;
-            
-            maxSeqLen = Math.max(maxSeqLen, j - temp)
+
+    let maxLen = 0;
+    set.forEach(item => {
+        if (!set.has(item - 1)) { // if there is no item present smaller than current item // then we started looking for larger elements
+            let j = item;
+            while (set.has(j)) j++;
+
+            maxLen = Math.max(maxLen, j - item)
         }
     });
-    
-    return maxSeqLen;
-}
+
+    return maxLen;
+};

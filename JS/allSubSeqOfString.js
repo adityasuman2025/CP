@@ -1,15 +1,22 @@
-let list = [];
+function getSubSeq(str) {
+    let list = [];
 
-function subSeq(input, output) {
-    if (input.length == 0) {
-        if (output != "") list.push(output);
-        return;
+    function util(start, out) {
+        if (str === out) {
+            list.push(out);
+            return;
+        }
+
+        if (out) list.push(out);
+
+        for (let i = start; i < str.length; i++) {
+            util(i + 1, out + str[i]);
+        }
     }
-    
-    subSeq(input.substring(1), output);
-    subSeq(input.substring(1), output + input[0]);
+    util(0, "");
+
+    return list;
 }
 
 let str = "abcd";
-subSeq(str, "")
-console.log("list", list)
+console.log(getSubSeq(str));

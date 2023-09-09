@@ -35,25 +35,49 @@ lRUCache.get(4);    // return 4
 */
 
 
-var LRUCache = function(capacity) {
-    this.data = new Map(); // Map remembers the original insertion order of the keys
-    this.capacity = capacity;
+/**
+ * @param {number} capacity
+ */
+var LRUCache = function (capacity) {
+    this.cache = new Map();
+    this.currCapi = 0;
+    this.maxCapi = capacity;
 };
 
-LRUCache.prototype.get = function(key) {
-    if (!this.data.has(key)) return -1;
-    
-    let val = this.data.get(key)
-    this.data.delete(key);
-    this.data.set(key, val);
+/** 
+ * @param {number} key
+ * @return {number}
+ */
+LRUCache.prototype.get = function (key) {
+    if (!this.cache.has(key)) return -1;
+
+    const val = this.cache.get(key);
+    this.cache.delete(key);
+    this.cache.set(key, val);
 
     return val;
 };
 
-LRUCache.prototype.put = function(key, value) {
-    if(this.data.has(key)) this.data.delete(key);
- 
-    this.data.set(key, value);
-    
-    if (this.data.size > this.capacity) this.data.delete(this.data.keys().next().value);
+/** 
+ * @param {number} key 
+ * @param {number} value
+ * @return {void}
+ */
+LRUCache.prototype.put = function (key, val) {
+    if (this.cache.has(key)) this.cache.delete(key);
+    this.cache.set(key, val);
+
+    if (this.cache.size > this.maxCapi) { // removing least recently used item i.e first item from map
+        for (let [k, v] of this.cache) {
+            this.cache.delete(k);
+            break;
+        }
+    }
 };
+
+/** 
+ * Your LRUCache object will be instantiated and called as such:
+ * var obj = new LRUCache(capacity)
+ * var param_1 = obj.get(key)
+ * obj.put(key,value)
+ */
