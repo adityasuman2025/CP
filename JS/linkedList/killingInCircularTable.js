@@ -52,6 +52,7 @@ class Node {
 }
 
 var findTheWinner = function (n, k) {
+    // making the linked list for n items
     let head, temp;
     for (let i = 1; i <= n; i++) {
         if (i === 1) {
@@ -62,19 +63,22 @@ var findTheWinner = function (n, k) {
             temp = temp.next;
         }
     }
-    temp.next = head;
+    temp.next = head; // joining last element of the linked list to head // because table is circular so linkedlist should be circular
 
     let size = n, curr = head, prev = head;
     while (size > 1) {
+        size--;
+
         let c = k - 1;
         while (c) {
             prev = curr;
             curr = curr.next;
             c--;
         }
+
+        // deleting the curr element
         prev.next = curr.next;
         curr = curr.next;
-        size--;
     }
     curr.next = null; // only 1 element is left and it is circular to itself, so removing circularity
 
