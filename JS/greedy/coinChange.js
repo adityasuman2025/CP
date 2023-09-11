@@ -53,27 +53,26 @@ function change(target, arr) {
 }
 
 // memoised recursion, time: exponential O(N x T), space: O(N x T)
-function change(target, arr) {
-    if (target === 0) return 1;
+var change = function (amount, coins) {
+    if (amount === 0) return 1;
 
-    let memo = {}; // whenever we apply memoization on any function, key is its arguments (not a single argument but all arguments)
+    let memo = {};
     function dfs(start, sum) {
-        if (sum === target) return 1;
+        if (sum === amount) return 1;
 
-        let k = 0
-        for (let i = start; i < arr.length; i++) {
-            let newSum = sum + arr[i];
-            let key = newSum + " " + i;
-            if (newSum <= target) {
-                k += (memo.hasOwnProperty(key)) ? memo[key] : dfs(i, newSum);
+        let k = 0;
+        for (let i = start; i < coins.length; i++) {
+            let thisSum = sum + coins[i], thisKey = i + " " + thisSum;
+            if (thisSum <= amount) {
+                k += memo.hasOwnProperty(thisKey) ? memo[thisKey] : dfs(i, thisSum);
             }
         }
 
-        let key = sum + " " + start;
+        let key = start + " " + sum;
         memo[key] = k;
         return memo[key];
     }
     dfs(0, 0);
 
     return memo["0 0"];
-}
+};
