@@ -56,6 +56,11 @@ class Solution {
     /*
         The main idea of this solution is to use a min-heap with a maximum size of k. 
         By doing this, we ensure that the smallest of the k largest elements is always on the top of the heap.
+
+        before pushing more elements in the min-heap (of size k), we will check if the coming element is greater than top of the min-heap (smallest element) 
+        then we will remove the top element (poll) and add the new element in the min-heap
+
+        because we want Kth largest element, so all elements smaller than that should not exist in the min-heap and Kth largest lie on top
     */
     // Time: O(Nlogk), Space: O(k)
     public int findKthLargest(int[] nums, int k) {
@@ -65,7 +70,7 @@ class Solution {
         }
         
         for (int i = k; i < nums.length; i++) {
-            if (nums[i] > minHeap.peek()) {
+            if (nums[i] > minHeap.peek()) { // if this element is greater than top of the minHeap
                 minHeap.poll();
                 minHeap.offer(nums[i]);
             }
