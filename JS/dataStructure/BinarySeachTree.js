@@ -235,7 +235,10 @@ class BST {
 
         let str = "";
 
-        let stack1 = [node], stack2 = [], flag = true;
+        let stack1 = [], stack2 = [], flag = true;
+        
+        if (node) stack1.push(node);
+
         while (stack1.length || stack2.length) {
             if (flag) {
                 while (stack1.length) {
