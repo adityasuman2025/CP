@@ -236,7 +236,7 @@ class BST {
         let str = "";
 
         let stack1 = [], stack2 = [], flag = true;
-        
+
         if (node) stack1.push(node);
 
         while (stack1.length || stack2.length) {
@@ -650,22 +650,17 @@ function preOrderToPostOrderOfBTButNotBST(preOrder, inOrder) {
 }
 
 // O(n)
-function inOrderArrToBST(inOrderArr) {
-    function inOrderArrToBSTUtil(inOrderArr, start, end) {
-        if (start > end) return null;
+function binaryTreeFromPreAndInOrder(preorder, inorder) {
+    if (!preorder || !inorder || !preorder.length || !inorder.length) return null;
 
-        let mid = parseInt((start + end) / 2);
-        let node = new Node(inOrderArr[mid]);
+    const root = preorder[0];
+    const rootNode = new TreeNode(root);
+    const indexOfRootInInOrder = inorder.indexOf(root);
 
-        node.left = inOrderArrToBSTUtil(inOrderArr, start, mid - 1);
-        node.right = inOrderArrToBSTUtil(inOrderArr, mid + 1, end);
-
-        return node;
-    }
-
-    return inOrderArrToBSTUtil(inOrderArr, 0, inOrderArr.length - 1);
+    rootNode.left = buildTree(preorder.slice(1), inorder.slice(0, indexOfRootInInOrder));
+    rootNode.right = buildTree(preorder.slice(indexOfRootInInOrder + 1), inorder.slice(indexOfRootInInOrder + 1));
+    return rootNode;
 }
-
 
 
 const bst = new BST();
