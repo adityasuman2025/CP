@@ -89,6 +89,8 @@ class BST {
     // O(n)
     inOrder(node) {
         let str = "";
+
+        // recursive
         function inOrderUtil(node) {
             if (!node) return;
 
@@ -97,6 +99,22 @@ class BST {
             inOrderUtil(node.right);
         }
         inOrderUtil(node);
+
+        // iterative
+        let stack = [], curr = node;
+        while (stack.length || curr) {
+            while (curr) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            // curr will be null now
+
+            curr = stack.pop();
+
+            str += (curr.val + " ");
+
+            curr = curr.right;
+        }
 
         console.log("inOrder:", str)
     }
