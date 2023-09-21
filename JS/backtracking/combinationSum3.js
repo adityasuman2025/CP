@@ -41,22 +41,21 @@ Using 4 different numbers in the range [1,9], the smallest sum we can get is 1+2
  * @param {number} n
  * @return {number[][]}
  */
-var combinationSum3 = function (k, target) { // target is n here
+var combinationSum3 = function(k, target) {
     let ans = [];
+    function dfs(start, sum, arr) {
+        if (arr.length > k || sum > target) return;
 
-    function bt(start, sum, arr) {
-        if (sum > target) return;
-
-        if (sum === target) {
-            if (arr.length === k) ans.push(arr);
+        if (sum === target && arr.length === k) {
+            ans.push(arr);
             return;
         }
 
         for (let i = start; i <= 9; i++) {
-            bt(i + 1, sum + i, [...arr, i]);
+            dfs(i + 1, sum + i, [...arr, i]);
         }
     }
-    bt(1, 0, []);
+    dfs(1, 0, []);
 
     return ans;
 };

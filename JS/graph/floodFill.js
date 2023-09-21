@@ -24,11 +24,6 @@ Output: [[0,0,0],[0,0,0]]
 Explanation: The starting pixel is already colored 0, so no changes are made to the image.
 */
 
-
-Array.prototype.isEmpty = function() {
-    return this.length == 0;
-}
-
 /**
  * @param {number[][]} image
  * @param {number} sr
@@ -37,41 +32,30 @@ Array.prototype.isEmpty = function() {
  * @return {number[][]}
 */
 var floodFill = function(image, sr, sc, color) {
-    let maxRIndex = image.length - 1;
-    let maxCIndex = image[0].length - 1;
+    let m = image.length, n = image[0].length;
 
-    let stack = [];
-    if (image[sr][sc] != color) stack.push({ sr, sc });
+    let q = [[sr, sc]];
+    while (q.length) {
+        let [thisR, thisC] = q.shift();
 
-    while (!stack.isEmpty()) {
-        const { sr, sc } = stack.pop();
-        let thisColor = image[sr][sc];
+        let prevColor = image[thisR][thisC];
+        if (image[thisR][thisC] !== color) image[thisR][thisC] = color;
 
-        //top
-        let topR = sr - 1, topC = sc;
-        if (topR >= 0 && image[topR][topC] != color && image[topR][topC] == thisColor) {
-            stack.push({ sr: topR, sc: topC });
+        if ((thisR - 1 >= 0) && (image[thisR - 1][thisC] === prevColor) && image[thisR - 1][thisC] !== color) {
+            q.push([thisR - 1, thisC]);
         }
 
-        //bottom
-        let bottomR = sr + 1, bottomC = sc;
-        if (bottomR <= maxRIndex && image[bottomR][bottomC] != color && image[bottomR][bottomC] == thisColor) {
-            stack.push({ sr: bottomR, sc: bottomC });
+        if ((thisR + 1 < m) && (image[thisR + 1][thisC] === prevColor) && image[thisR + 1][thisC] !== color) {
+            q.push([thisR + 1, thisC]);
         }
 
-        //left
-        let leftR = sr, leftC = sc - 1;
-        if (leftC >= 0 && image[leftR][leftC] != color && image[leftR][leftC] == thisColor) {
-            stack.push({ sr: leftR, sc: leftC });
+        if ((thisC - 1 >= 0) && (image[thisR][thisC - 1] === prevColor) && image[thisR][thisC - 1] !== color) {
+            q.push([thisR, thisC - 1]);
         }
 
-        //right
-        let rightR = sr, rightC = sc + 1;
-        if (rightC <= maxCIndex && image[rightR][rightC] != color && image[rightR][rightC] == thisColor) {
-            stack.push({ sr: rightR, sc: rightC });
+        if ((thisC + 1 < n) && (image[thisR][thisC + 1] === prevColor) && image[thisR][thisC + 1] !== color) {
+            q.push([thisR, thisC + 1]);
         }
-
-        image[sr][sc] = color; //setting the required color
     }
 
     return image;
