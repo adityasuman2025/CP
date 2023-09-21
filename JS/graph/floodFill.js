@@ -25,7 +25,7 @@ Explanation: The starting pixel is already colored 0, so no changes are made to 
 */
 
 
-Array.prototype.isEmpty = function () {
+Array.prototype.isEmpty = function() {
     return this.length == 0;
 }
 
@@ -36,7 +36,7 @@ Array.prototype.isEmpty = function () {
  * @param {number} color
  * @return {number[][]}
 */
-var floodFill = function (image, sr, sc, color) {
+var floodFill = function(image, sr, sc, color) {
     let maxRIndex = image.length - 1;
     let maxCIndex = image[0].length - 1;
 
