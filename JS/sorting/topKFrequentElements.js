@@ -70,9 +70,8 @@ var topKFrequent = function(nums, k) {
     for (let i = freqArr.length - 1; i >= 0; i--) {
         if (freqArr[i]) ans.push(...freqArr[i]);
 
-        if (ans.length >= k) return ans;
+        if (ans.length === k) return ans;
     }
-
 
     return ans;
 };
