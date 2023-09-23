@@ -24,21 +24,18 @@ Explanation: Your function can return either index number 1 where the peak eleme
 */
 
 
-var findPeakElement = function (arr) {
+var findPeakElement = function(arr) {
     let start = 0, end = arr.length - 1;
 
     while (start <= end) {
         let mid = parseInt((start + end) / 2);
-        let midNo = arr[mid];
 
-        let prevNo = mid - 1 < 0 ? Number.MIN_SAFE_INTEGER : arr[mid - 1];
-        let nextNo = mid + 1 >= arr.length ? Number.MIN_SAFE_INTEGER : arr[mid + 1];
-        if (midNo > prevNo && midNo > nextNo) {
-            return mid;
-        } else if (midNo > prevNo && midNo < nextNo) {
+        if (arr[mid + 1] > arr[mid]) { // if something greater is found at mid+1 then looking towards right i.e. start = mid + 1;
             start = mid + 1;
-        } else {
+        } else if (arr[mid - 1] > arr[mid]) { // if something greater is found at mid-1 then looking towards left i.e. end = mid - 1;
             end = mid - 1;
+        } else { // else this element (mid) is greater than its left (mid-1) and right (mid+1) element
+            return mid;
         }
     }
 
