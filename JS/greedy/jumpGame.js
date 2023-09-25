@@ -24,7 +24,34 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum jump 
  * @param {number[]} nums
  * @return {boolean}
  */
-var canJump = function (nums) {
+// dfs (more intutive) // time: O(N^2)
+var canJump = function(nums) {
+    if (nums.length === 1) return true;
+
+    let lastIdx = nums.length - 1;
+    const visited = new Set();
+
+    let stack = [0];
+    visited.add(0);
+
+    while (stack.length) {
+        let topIdx = stack.pop();
+
+        for (let i = Math.min(nums[topIdx], lastIdx - topIdx); i >= 1; i--) { // && topIdx + i<=lastIdx
+            if (topIdx + i >= lastIdx) return true;
+
+            if (!visited.has(topIdx + i)) {
+                stack.push(topIdx + i);
+                visited.add(topIdx + i);
+            }
+        }
+    }
+
+    return false;
+};
+
+// greedy // time: O(N)
+var canJump = function(nums) {
     let max = 0;
     // keep checking maximum reach at each index, if an index is greater than max
     // it means this index is not reachable, hence last element can't be reached and return false
