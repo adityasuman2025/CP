@@ -34,13 +34,12 @@ function coinChange(coins, amount) {
     // Initialize an array to store the minimum number of coins needed for each amount from 0 to amount
     const dp = new Array(amount + 1).fill(Infinity);
 
-    // Base case: 0 coins needed for 0 amount
-    dp[0] = 0;
+    dp[0] = 0; // Base case: 0 coins needed for 0 amount
 
-    for (let i = 1; i <= amount; i++) {
+    for (let thisAmount = 1; thisAmount <= amount; thisAmount++) { // we will try to make 1 to amount using the given coins and store in dp[thisAmount]
         for (let coin of coins) {
-            if (i >= coin) {
-                dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+            if (coin <= thisAmount) { // if the current coin is less than amount only then we can use that coin
+                dp[thisAmount] = Math.min(dp[thisAmount], dp[thisAmount - coin] + 1); // min of, if we pick that coin or not pick that coin // if we pick then we can use the dp of thisAmount - coin
             }
         }
     }
