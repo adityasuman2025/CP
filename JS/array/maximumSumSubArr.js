@@ -1,7 +1,7 @@
 /*
 https://leetcode.com/problems/maximum-subarray/
 
-53. Maximum Subarray
+53. Maximum Subarray / Kadane's Algorithm
 Given an integer array nums, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
 A subarray is a contiguous part of an array.
 
@@ -33,7 +33,7 @@ Follow up: If you have figured out the O(n) solution, try coding another solutio
  * @param {number[]} nums
  * @return {number}
 */
-var maxSubArray = function (arr) {
+var maxSubArray = function(arr) {
     let maxSoFar = arr[0];
     let currMax = arr[0];
 
