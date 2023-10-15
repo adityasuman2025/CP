@@ -30,6 +30,8 @@ Input: nums = [1,1,5]
 Output: [1,5,1]
 */
 
+
+// time: O(n), space: O(1)
 var nextPermutation = function(arr) {
     let n = arr.length;
 

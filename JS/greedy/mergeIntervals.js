@@ -19,6 +19,7 @@ Explanation: Intervals [1,4] and [4,5] are considered overlapping.
  
 */
 
+// time: O(nlogn), space: O(1)
 /**
  * @param {number[][]} intervals
  * @return {number[][]}
