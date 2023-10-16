@@ -26,6 +26,7 @@ Explanation: 2-2 = 1/22 = 1/4 = 0.25
  * @param {number} n
  * @return {number}
  */
+// time: O(logn), space: O(1)
 var myPow = function(x, n) {
     if (n < 0) { // if n is negative then making x as oposite, i.e. fraction
         x = 1 / x;
@@ -42,4 +43,29 @@ var myPow = function(x, n) {
     }
 
     return pow(x, n);
+};
+
+// time: O(logn), space: O(logn)
+var myPow = function(x, n) {
+    if (n < 0) x = 1 / x;
+    n = Math.abs(n);
+
+    let memo = {};
+    function util(x, n) {
+        if (n < 1) return 1;
+
+        if (n % 2 === 0) { // even
+            let temp = memo.hasOwnProperty(n / 2) ? memo[n / 2] : util(x, n / 2);
+            memo[n / 2] = temp;
+
+            return temp * temp;
+        } else {
+            let temp1 = memo.hasOwnProperty(n - 1) ? memo[n - 1] : util(x, n - 1);
+            memo[n - 1] = temp1;
+
+            return x * temp1;
+        }
+    }
+
+    return util(x, n);
 };
