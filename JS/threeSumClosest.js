@@ -27,32 +27,32 @@
 */
 function threeSumClosest(arr, target) {
     let n = arr.length;
-        arr = arr.sort((a, b) => a-b)
-        
-        let ans = 0;
-        let closestDist = Number.MAX_SAFE_INTEGER;
-        for (let i = 0; i<n-2; i++) {
-            let start = i+1, end = n-1;
-            
-            // 2 sum approach
-            while (start < end) {
-                let sum = arr[i] + arr[start] + arr[end];
-                
-                // Check if this total is closer than the previous one
-                if (Math.abs(sum - target) < closestDist) {
-                    closestDist = Math.abs(sum - target)
-                    ans = sum;
-                }
-                
-                if (sum == target) {
-                    return sum;
-                } else if (sum > target) {
-                    end--;
-                } else {
-                    start++;
-                }
+    arr = arr.sort((a, b) => a - b)
+
+    let ans = 0;
+    let closestDist = Number.MAX_SAFE_INTEGER;
+    for (let i = 0; i < n - 2; i++) {
+        let start = i + 1, end = n - 1;
+
+        // 2 sum approach
+        while (start < end) {
+            let sum = arr[i] + arr[start] + arr[end];
+
+            // Check if this total is closer than the previous one
+            if (Math.abs(sum - target) < closestDist) {
+                closestDist = Math.abs(sum - target)
+                ans = sum;
+            }
+
+            if (sum == target) {
+                return sum;
+            } else if (sum > target) {
+                end--;
+            } else {
+                start++;
             }
         }
-        
-        return ans;
+    }
+
+    return ans;
 };
