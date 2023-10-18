@@ -32,9 +32,9 @@ Expected Auxiliary Space: O(N).
     1. we keep storing prefixSum at each index in a map
     2. we loop over the array and keep doing prefix sum
     3. if we encounter the same prefixSum at any point then we know that, sum of array b/w this index and the already present prefixSum's index in map is 0
-    4. so length of that array will be thisIndex - prevPrefixSumIdx
-
+    4. so length of that sub-array will be thisIndex - prevPrefixSumIdx
 */
+// time: O(n), space: O(n)
 class Solution {
     maxLen(arr, n) {
         let map = new Map(); // sum to index map

@@ -28,23 +28,22 @@ Notice that the answer must be a substring, "pwke" is a subsequence and not a su
  * @param {string} s
  * @return {number}
  */
-var lengthOfLongestSubstring = function (s) {
+// time: O(n), space: O(n)
+var lengthOfLongestSubstring = function(s) {
     let maxLen = 0;
 
-    let window = new Map(), start = 0;
-    for (let i = 0; i < s.length; i++) {
-        let char = s.charAt(i);
+    let start = 0, window = new Map();
+    for (let end = 0; end < s.length; end++) {
+        let char = s[end];
 
         while (window.has(char)) {
-            let len = i - start;
-            maxLen = Math.max(maxLen, len);
-            window.delete(s.charAt(start));
+            window.delete(s[start]);
             start++;
         }
-
         window.set(char, 1);
+
+        maxLen = Math.max(window.size, maxLen);
     }
-    maxLen = Math.max(maxLen, window.size);
 
     return maxLen;
 };

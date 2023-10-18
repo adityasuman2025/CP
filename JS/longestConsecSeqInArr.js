@@ -18,30 +18,31 @@ Input: nums = [0,3,7,2,5,8,4,6,0,1]
 Output: 9
 */
 
-// brute force
-const longestConsecutive = function (arr) {
-    if (arr.length == 0) return 0;
+// time: O(nlogn), space: O(1)
+const longestConsecutive = function(nums) {
+    if (nums.length === 0) return 0;
+    nums.sort((a, b) => a - b);
 
-    arr.sort((a, b) => (a - b));
-
-    arr = [...new Set(arr)];
-
-    let maxSeqLen = 1, seqLen = 1;
-    for (let i = 1; i < arr.length; i++) {
-        if (arr[i] == arr[i - 1] + 1) {
-            seqLen++;
+    let c = 1, maxC = 1, prev = nums[0];
+    for (let i = 1; i < nums.length;) {
+        if (nums[i] === prev + 1) {
+            c++;
+            prev = nums[i];
+            maxC = Math.max(maxC, c);
         } else {
-            seqLen = 1;
+            c = 1;
+            prev = nums[i];
         }
 
-        maxSeqLen = Math.max(maxSeqLen, seqLen);
+        i++;
+        while (nums[i - 1] === nums[i]) i++;
     }
 
-    return maxSeqLen;
+    return maxC;
 }
 
-// optimised
-const longestConsecutiveOptimised = function (arr) {
+// time: O(n), space: O(n)
+const longestConsecutiveOptimised = function(arr) {
     //we are storing array value in set, because array can be too large because of repeated values, which can cause TLE
     const set = new Set(arr);
 
