@@ -30,7 +30,7 @@ Notice that the answer must be a substring, "pwke" is a subsequence and not a su
  */
 // time: O(n), space: O(n)
 var lengthOfLongestSubstring = function(s) {
-    let maxLen = 0;
+    let maxLen = 0, maxLenStart = 0, maxLenEnd = 0;
 
     let start = 0, window = new Map();
     for (let end = 0; end < s.length; end++) {
@@ -42,9 +42,13 @@ var lengthOfLongestSubstring = function(s) {
         }
         window.set(char, 1);
 
-        maxLen = Math.max(window.size, maxLen);
+        if (window.size > maxLen) {
+            maxLen = window.size;
+            maxLenStart = start, maxLenEnd = end;
+        }
     }
 
+    // return s.substring(maxLenStart, maxLenEnd + 1); // longest sub string
     return maxLen;
 };
 
