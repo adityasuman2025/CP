@@ -11,7 +11,7 @@ class LinkedList {
         this.head = null;
     }
 
-    print = function () {
+    print = function() {
         let curr = this.head, str = "";
         while (curr) {
             str += (curr.val + " -> ")
@@ -34,7 +34,7 @@ class LinkedList {
         console.log("printFromNode:", str)
     }
 
-    add = function (val) {
+    add = function(val) {
         if ([undefined, null].includes(val)) return;
 
         if (this.head === null) this.head = new Node(val);
@@ -70,7 +70,7 @@ class LinkedList {
         }
     }
 
-    remove = function (val) {
+    remove = function(val) {
         if ([undefined, null].includes(val)) return;
 
         let curr = this.head, prev = null;
@@ -172,6 +172,18 @@ class LinkedList {
         }
 
         this.head = prev;
+    }
+
+    getMiddle() {
+        if (!head) return head;
+
+        let slow = head, fast = head;
+        while (fast && fast.next) {
+            slow = slow.next;
+            fast = fast.next.next
+        }
+
+        return slow;
     }
 
     printReverse(node) {
