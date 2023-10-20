@@ -21,7 +21,8 @@ Output: false
     3. iterate from head and from mid+1 and compare value . It should match if its palindrome
 */
 
-var isPalindrome = function (head) {
+// time: 0(n), space: O(1)
+var isPalindrome = function(head) {
     // finding center/middle of the list
     let slow = head, fast = head.next;
     while (fast && fast.next) {
