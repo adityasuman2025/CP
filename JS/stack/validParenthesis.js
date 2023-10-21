@@ -29,27 +29,25 @@ Output: false
  * @param {string} s
  * @return {boolean}
  */
-var isValid = function (s) {
+var isValid = function(str) {
     let stack = [];
-    const openBracks = ["[", "{", "("], closeBracks = ["]", "}", ")"];
+    for (let i = 0; i < str.length; i++) {
+        let char = str[i];
 
-    for (let i = 0; i < s.length; i++) {
-        let char = s.charAt(i);
-
-        if (stack.length === 0) {
-            stack.push(char);
+        if (
+            (char === "}" && stack.peek() === "{") ||
+            (char === "]" && stack.peek() === "[") ||
+            (char === ")" && stack.peek() === "(")
+        ) {
+            stack.pop();
         } else {
-            if (openBracks.includes(char)) stack.push(char);
-            else if (stack.peek() === "[" && char === "]") stack.pop();
-            else if (stack.peek() === "{" && char === "}") stack.pop();
-            else if (stack.peek() === "(" && char === ")") stack.pop();
-            else stack.push(char);;
+            stack.push(char);
         }
     }
 
-    return stack.length === 0;
+    return stack.length === 0
 };
 
-Array.prototype.peek = function () {
+Array.prototype.peek = function() {
     return this[this.length - 1];
 }; 
