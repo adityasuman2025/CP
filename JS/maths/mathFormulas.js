@@ -144,22 +144,49 @@ function primeFactors(number) {
 }
 
 
+
+// ref: https://bigfrontend.dev/problem/the-angle-between-hour-hand-and-minute-hand-of-a-clock
 function angleBWHourAndMinuteHand() {
-    const [hour, min] = time.split(':').map((seg) => parseInt(seg))
+    let [hours, minutes] = time.split(":");
 
-    const h = (hour >= 12 ? hour - 12 : hour)
-    const m = min
+    minutes = Number(minutes);
+    hours = Number(hours);
 
-    const angleMin = (m / 60) * 360
-    const angleHour = (h / 12) * 360 + angleMin / 12
+    if (hours >= 12) hours = hours - 12; // because a clock has hand till 12 only
 
+    let minuteAngle = (minutes / 60) * 360; // because 60 mins equals to 360 degree
+    let hourAngle = ((hours / 12) * 360) + ((minutes / 60) * 30); // because 12 hours equals to 360 degree and hour hand move a little as minute hand move
+    // on full round of minute hand (360 degree) hour hand moves by 30 degree
 
-    const angle = Math.abs(angleHour - angleMin)
-    const finalAngle = angle > 180 ? 360 - angle : angle
-    return Math.round(finalAngle)
+    let angle = Math.abs(minuteAngle - hourAngle);
+    angle = angle > 180 ? 360 - angle : angle; // because we have to return smallest angle
+
+    return Math.round(angle);
 }
-angle('12:00')
-// 0
+console.log(angleBWHourAndMinuteHand('12:00')); // 0
+console.log(angleBWHourAndMinuteHand('23:30')); // 165
 
-angle('23:30')
-// 165
+
+
+// ref: https://bigfrontend.dev/problem/roman-numerals-to-integer
+const SYMBOL_TO_NO = { "I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000 };
+function romanToInteger(str) {
+    let res = 0;
+
+    for (let i = 0; i < str.length; i++) {
+        let char = str[i];
+
+        if (SYMBOL_TO_NO[char] < SYMBOL_TO_NO[str[i + 1]]) {
+            let temp = SYMBOL_TO_NO[str[i + 1]] - SYMBOL_TO_NO[char];
+            res += temp;
+            i++;
+        } else {
+            res += SYMBOL_TO_NO[char];
+        }
+    }
+
+    return res;
+}
+
+console.log(romanToInteger('MCMXCIX')); // 1999
+console.log(romanToInteger('MMMCDXX')); // 3420
