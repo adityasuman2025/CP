@@ -25,6 +25,9 @@ function getWeight(char) {
 }
 
 function doCalculation(no1, no2, operator) {
+    no1 = Number(no1);
+    no2 = Number(no2);
+
     if (operator == "+") {
         return no1 + no2
     } else if (operator == "-") {
@@ -43,13 +46,14 @@ function doCalculation(no1, no2, operator) {
 function infixToPostfix(str) {
     let stack = [];
 
-    let postfix = "";
+    let postfix = "", postFixArr = [];
     for (let i = 0; i < str.length; i++) {
         let char = str[i].trim();
         if (!char) continue; //if character is space
 
         if (!isOperator(char)) {
             postfix += char;
+            postFixArr.push(char);
         } else {
             if (stack.isEmpty()) {
                 stack.push(char);
@@ -58,10 +62,11 @@ function infixToPostfix(str) {
                 stack.push(char);
             } else if (char == ')') {
                 // closing bracket
-                
+
                 let top = stack.peek();
                 while ((top != "(") && !stack.isEmpty()) {
                     postfix += top;
+                    postFixArr.push(top);
                     stack.pop();
 
                     if (!stack.isEmpty()) top = stack.peek();
@@ -74,6 +79,7 @@ function infixToPostfix(str) {
                 let top = stack.peek();
                 while ((getWeight(char) <= getWeight(top)) && !stack.isEmpty()) {
                     postfix += top;
+                    postFixArr.push(top);
                     stack.pop();
 
                     if (!stack.isEmpty()) top = stack.peek();
@@ -87,13 +93,60 @@ function infixToPostfix(str) {
     while (!stack.isEmpty()) {
         let topPop = stack.pop();
         postfix += topPop;
+        postFixArr.push(topPop);
     }
 
-    return postfix;
+    return { postfix, postFixArr };
 }
 
-let infix = "a+b*(c^d-e)^(f+g*h)-i"; // "A+B*C-D*E";
-console.log("infix", infix)
+function tokenize(str) { // convert string mathematical equation to array
+    let arr = [];
 
-let postfix = infixToPostfix(infix);
-console.log("postfix", postfix)
+    let prev = str[0], temp = str[0];
+    for (let i = 1; i < str.length; i++) {
+        if (!isNaN(Number(prev)) && !isNaN(Number(str[i]))) {
+            temp += str[i];
+        } else if (isNaN(Number(prev)) && !isNaN(Number(str[i]))) {
+            temp = str[i];
+        } else {
+            if (temp.trim()) arr.push(temp.trim());
+            if (str[i].trim()) arr.push(str[i].trim());
+
+            temp = "";
+        }
+
+        prev = str[i];
+    }
+    if (temp.trim()) arr.push(temp.trim());
+
+    return arr;
+}
+
+function calculate(str) {
+    const tokens = tokenize(str);
+    const postFix = infixToPostfix(tokens).postFixArr;
+
+    let numbers = [], operators = [];
+    postFix.forEach(i => {
+        if (isOperator(i)) operators.push(i);
+        else numbers.push(i);
+
+        if (numbers.length >= 2 && isOperator(operators.peek())) {
+            const second = numbers.pop(), first = numbers.pop();
+            const operator = operators.pop();
+
+            numbers.push(doCalculation(first, second, operator));
+        }
+    });
+
+    return numbers.peek();
+}
+
+const infix = "a+b*(c^d-e)^(f+g*h)-i"; // "A+B*C-D*E";
+console.log("infix", infix);
+
+const postfix = infixToPostfix(infix).postfix;
+console.log("postfix", postfix);
+
+const ans = calculate('1 * (20 -   300      ) ');
+console.log("ans", ans);
