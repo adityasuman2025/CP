@@ -32,7 +32,7 @@ Total amount you can rob = 2 + 9 + 1 = 12.
  * @param {number[]} nums
  * @return {number}
  */
-var rob = function (nums) {
+var rob = function(nums) {
     let dp = [];
     dp[0] = nums[0];
 
