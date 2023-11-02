@@ -10,7 +10,7 @@ class Stack {
     pop() {
         if (this.items.length < 1) return "Underflow";
 
-        let ele = this.items[this.items.length - 1];
+        const ele = this.items[this.items.length - 1];
         this.items = this.items.slice(0, this.items.length - 1);
         return ele;
     }
@@ -30,8 +30,6 @@ class Stack {
     }
 
     search(toSearch) {
-        this.items.search;
-
         for (let i = 0; i < this.items.length; i++) {
             if (this.items[i] === toSearch) return true;
         }

@@ -25,7 +25,7 @@ class BST {
         In Worst case (skewed BST): O(n)
     */
 
-    // O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree
+    /* O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree */
     insert(val) {
         if ([null, undefined].includes(val)) return;
 
@@ -43,7 +43,7 @@ class BST {
         }
     }
 
-    // O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree
+    /* O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree */
     delete(node, toDelete) {
         if ([null, undefined].includes(toDelete)) return node;
 
@@ -58,7 +58,7 @@ class BST {
                 let temp = node;
                 node = node.right;
                 temp = null;
-            } else if (!node.right) {// have only left node
+            } else if (!node.right) { // have only left node
                 let temp = node;
                 node = node.left;
                 temp = null;
@@ -74,7 +74,7 @@ class BST {
         return node;
     }
 
-    // O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree
+    /* O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree */
     search(node, toSearch) {
         if (!node) return false;
 
@@ -86,7 +86,7 @@ class BST {
         }
     }
 
-    // O(n)
+    /* O(n) */
     inOrder(node) {
         let str = "";
 
@@ -119,7 +119,7 @@ class BST {
         console.log("inOrder:", str)
     }
 
-    // O(n)
+    /* O(n) */
     preOrder(node) { // root is found at the end in preOrder traversal
         let str = "";
         function preOrderUtil(node) {
@@ -134,7 +134,7 @@ class BST {
         console.log("preOrder:", str)
     }
 
-    // O(n)
+    /* O(n) */
     postOrder(node) { // root is found at the end in postOrder traversal
         let str = "";
         function postOrderUtil(node) {
@@ -149,7 +149,7 @@ class BST {
         console.log("postOrder:", str)
     }
 
-    // O(n)
+    /* O(n) */
     levelOrder(node) {
         if (!node) return;
 
@@ -165,42 +165,40 @@ class BST {
         console.log("levelOrder:", str)
     }
 
-    // O(n)
+    /* O(n) */
     printByLevel(node) {
         if (!node) return;
 
-        let q = [{ node, level: 0 }], nodesByLevel = {};
-        while (q.length) { // while queue is not empty
-            let { node, level } = q.shift(); // removed 1st element from array 
-            nodesByLevel[level] ? nodesByLevel[level].push(node.val) : nodesByLevel[level] = [node.val];
+        // let q = [{ node, level: 0 }], nodesByLevel = {};
+        // while (q.length) { // while queue is not empty
+        //     let { node, level } = q.shift(); // removed 1st element from array 
+        //     nodesByLevel[level] ? nodesByLevel[level].push(node.val) : nodesByLevel[level] = [node.val];
 
-            if (node.left) q.push({ node: node.left, level: level + 1 });
-            if (node.right) q.push({ node: node.right, level: level + 1 });
-        }
-
-        console.log(`printByLevel:`, nodesByLevel);
-
-
-        // let q = [node], str = "";
-        // while (q.length) {
-        //     let size = q.length;
-        //     while (size) {
-        //         let front = q.shift();
-
-        //         str += (front.val + " ");
-
-        //         if (front.left) q.push(front.left);
-        //         if (front.right) q.push(front.right);
-
-        //         size--;
-        //     }
-        //     str += "\n";
+        //     if (node.left) q.push({ node: node.left, level: level + 1 });
+        //     if (node.right) q.push({ node: node.right, level: level + 1 });
         // }
 
-        // console.log(`printByLevel:`, str);
+        // console.log(`printByLevel:`, nodesByLevel);
+
+
+        let q = [node], str = "";
+        while (q.length) {
+            let size = q.length;
+            while (size--) {
+                let front = q.shift();
+
+                str += (front.val + " ");
+
+                if (front.left) q.push(front.left);
+                if (front.right) q.push(front.right);
+            }
+            str += "\n";
+        }
+
+        console.log(`printByLevel:\n`, str);
     }
 
-    // O(n)
+    /* O(n) */
     printVertically(node) {
         if (!node) return;
 
@@ -218,7 +216,7 @@ class BST {
         console.log("printVertically:", res)
     }
 
-    // O(n)
+    /* O(n) */
     printDiagonally(node) {
         if (!node) return;
 
@@ -228,7 +226,7 @@ class BST {
         while (q.length) {
             let size = q.length;
 
-            while (size) {
+            while (size--) {
                 let front = q.shift();
 
                 while (front) {
@@ -237,8 +235,6 @@ class BST {
                     if (front.right) q.push(front.right);
                     front = front.left;
                 }
-
-                size--;
             }
 
             str += '\n'
@@ -247,7 +243,7 @@ class BST {
         console.log("printDiagonally:", str)
     }
 
-    // O(n)
+    /* O(n) */
     printSpiral(node) {
         if (!node) return;
 
@@ -282,7 +278,7 @@ class BST {
         console.log("printSpiral:", str);
     }
 
-    // O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree
+    /* O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree */
     findMin(node) {
         if (!node) return;
 
@@ -292,7 +288,7 @@ class BST {
         return curr;
     }
 
-    // O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree
+    /* O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree */
     findMax(node) {
         if (!node) return;
 
@@ -302,7 +298,7 @@ class BST {
         return curr;
     }
 
-    // avg: O(logn), worst: O(n)
+    /* avg: O(logn), worst: O(n) */
     getHeight(node) {
         if (!node) return 0;
 
@@ -312,7 +308,7 @@ class BST {
         return Math.max(leftHeight, rightHeight) + 1;
     }
 
-    // O(n)
+    /* O(n) */
     getMaxWidth(node) {
         if (!node) return null;
 
@@ -321,19 +317,17 @@ class BST {
             let size = q.length;
             maxwidth = Math.max(size, maxwidth);
 
-            while (size) {
+            while (size--) {
                 let front = q.shift();
                 if (front.left) q.push(front.left);
                 if (front.right) q.push(front.right);
-
-                size--;
             }
         }
 
         return maxwidth;
     }
 
-    // O(n)
+    /* O(n) */
     getMaxLevelSum(node) {
         if (!node) return;
 
@@ -341,16 +335,13 @@ class BST {
         while (q.length) {
             let size = q.length;
 
-
             let sum = 0;
-            while (size) {
+            while (size--) {
                 let front = q.shift();
                 sum += front.val;
 
                 if (front.left) q.push(front.left);
                 if (front.right) q.push(front.right);
-
-                size--;
             }
 
             maxSum = Math.max(maxSum, sum);
@@ -359,7 +350,7 @@ class BST {
         return maxSum;
     }
 
-    // O(n)
+    /* O(n) */
     getMaxDiagonalSum(node) {
         if (!node) return;
 
@@ -368,7 +359,7 @@ class BST {
             let size = q.length;
             let sum = 0;
 
-            while (size) {
+            while (size--) {
                 let front = q.shift();
                 while (front) {
                     sum += front.val;
@@ -376,7 +367,6 @@ class BST {
                     if (front.right) q.push(front.right);
                     front = front.left;
                 }
-                size--;
             }
             maxSum = Math.max(maxSum, sum)
         }
@@ -384,7 +374,7 @@ class BST {
         return maxSum;
     }
 
-    // O(n)
+    /* O(n) */
     getMaxRootToLeafSum(node) {
         if (!node) return 0;
 
@@ -396,7 +386,7 @@ class BST {
         return Math.max(leftSum, rightSum) + node.val;
     }
 
-    // O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree
+    /* O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree */
     lowestCommonAncestor(node, n1, n2) {
         if (!node) return;
 
@@ -409,7 +399,7 @@ class BST {
         }
     }
 
-    // O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree
+    /* O(h), h: height of the tree i.e. root to the deepest leaf node, O(h) can be O(N) too if all the nodes are in one side of the tree */
     inOrderSuccessor(node, no, succ) {
         if (!node) return;
 
@@ -423,7 +413,7 @@ class BST {
         this.inOrderSuccessor(node.right, no, succ);
     }
 
-    // O(n)
+    /* O(n) */
     createMirror(node) {
         if (!node) return;
 
@@ -448,7 +438,7 @@ class BST {
         }
     }
 
-    // O(n)
+    /* O(n) */
     rightView(node) {
         if (!node) return;
 
@@ -471,7 +461,7 @@ class BST {
         console.log("rightView:", str);
     }
 
-    // O(n)
+    /* O(n) */
     leftView(node) {
         if (!node) return;
 
@@ -495,7 +485,7 @@ class BST {
         console.log("leftView:", str);
     }
 
-    // O(n)
+    /* O(n) */
     bottomView(node) {
         if (!node) return;
 
@@ -513,7 +503,7 @@ class BST {
         console.log("bottomView:", distToNodeMapArr)
     }
 
-    // O(n)
+    /* O(n) */
     topView(node) {
         if (!node) return;
 
@@ -531,7 +521,7 @@ class BST {
         console.log("bottomView:", distToNodeMapArr)
     }
 
-    // O(n)
+    /* O(n) */
     boundaryView(node) {
         if (!node) return;
 
@@ -575,20 +565,20 @@ class BST {
         console.log("boundaryView:", boundarySet)
     }
 
-    // O(1)
+    /* O(1) */
     isLeaf(node) {
         if (node.left === null && node.right === null) return true;
         return false;
     }
 
-    // O(n)
+    /* O(n) */
     isSymmetric(node) {
         if (!node) return false;
 
         return isMirror(node.left, node.right);
     }
 
-    // O(n)
+    /* O(n) */
     isMirror(tree1, tree2) {
         if (!tree1 && !tree2) return true;
 
@@ -597,7 +587,7 @@ class BST {
         return (tree1.val === tree2.val && isMirror(tree1.left, tree2.right) && isMirror(tree1.right, tree2.left));
     }
 
-    // O(n)
+    /* O(n) */
     isValidBST(node) {
         // time: O(n), space: O(h), because of function call stack
         // function checkBST(root, min, max) {
@@ -629,7 +619,7 @@ class BST {
     }
 }
 
-// O(n)
+/* O(n) */
 function preOrderToPostOrderOfBTButNotBST(preOrder, inOrder) {
     /*
         let preOrder = [1, 2, 4, 8, 9, 10, 11, 5, 3, 6, 7];
@@ -667,7 +657,7 @@ function preOrderToPostOrderOfBTButNotBST(preOrder, inOrder) {
     console.log("preOrderToPostOrderOfBTButNotBST:", postOrder);
 }
 
-// O(n)
+/* O(n) */
 function binaryTreeFromPreAndInOrder(preorder, inorder) {
     if (!preorder || !inorder || !preorder.length || !inorder.length) return null;
 
@@ -707,7 +697,7 @@ bst.inOrder(bst.root);
 // console.log("isFound", isFound)
 
 // bst.levelOrder(bst.root);
-// bst.printByLevel(bst.root);
+bst.printByLevel(bst.root);
 // bst.printVertically(bst.root);
 // bst.printDiagonally(bst.root);
 // bst.printSpiral(bst.root);
@@ -741,8 +731,8 @@ bst.inOrder(bst.root);
 
 // bst.boundaryView(bst.root);
 
-const isValid = bst.isValidBST(bst.root);
-console.log("isValid", isValid)
+// const isValid = bst.isValidBST(bst.root);
+// console.log("isValid", isValid)
 
 // let preOrder = [1, 2, 4, 8, 9, 10, 11, 5, 3, 6, 7];
 // let inOrder = [8, 4, 10, 9, 11, 2, 5, 1, 6, 3, 7];

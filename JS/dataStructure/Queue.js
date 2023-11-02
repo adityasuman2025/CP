@@ -10,7 +10,7 @@ class Queue {
     dequeue() {
         if (this.items.length < 1) return "Underflow";
 
-        let ele = this.items[0];
+        const ele = this.items[0];
         this.items = this.items.slice(1);
         return ele;
     }
