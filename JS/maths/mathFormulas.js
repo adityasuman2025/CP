@@ -165,28 +165,3 @@ function angleBWHourAndMinuteHand() {
 }
 console.log(angleBWHourAndMinuteHand('12:00')); // 0
 console.log(angleBWHourAndMinuteHand('23:30')); // 165
-
-
-
-// ref: https://bigfrontend.dev/problem/roman-numerals-to-integer
-const SYMBOL_TO_NO = { "I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000 };
-function romanToInteger(str) {
-    let res = 0;
-
-    for (let i = 0; i < str.length; i++) {
-        let char = str[i];
-
-        if (SYMBOL_TO_NO[char] < SYMBOL_TO_NO[str[i + 1]]) {
-            let temp = SYMBOL_TO_NO[str[i + 1]] - SYMBOL_TO_NO[char];
-            res += temp;
-            i++;
-        } else {
-            res += SYMBOL_TO_NO[char];
-        }
-    }
-
-    return res;
-}
-
-console.log(romanToInteger('MCMXCIX')); // 1999
-console.log(romanToInteger('MMMCDXX')); // 3420
