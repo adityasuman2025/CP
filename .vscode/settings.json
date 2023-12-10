@@ -10,6 +10,7 @@
         "*.css": "css",
         "*.html": "html",
         "*.java": "java",
+        "*.json": "json",
     },
     "[javascript]": {
         "editor.formatOnSave": true,
@@ -32,6 +33,9 @@
     "[java]": {
         "editor.formatOnSave": true,
     },
+    "[json]": {
+        "editor.formatOnSave": true,
+    },
     "eslint.alwaysShowStatus": true,
     "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
     "javascript.updateImportsOnFileMove.enabled": "always",
@@ -42,7 +46,7 @@
     "scss.lint.universalSelector": "warning",
     "typescript.updateImportsOnFileMove.enabled": "always",
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": "explicit"
     },
     "editor.accessibilitySupport": "off",
 }
