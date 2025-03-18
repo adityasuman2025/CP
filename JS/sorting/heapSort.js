@@ -1,3 +1,5 @@
+// ref: https://www.youtube.com/watch?v=RU08pp_VPSs&list=PLEJXowNB4kPyP2PdMhOUlTY6GrRIITx28&index=1
+
 function heapSort(arr) {
     let len = arr.length;
 
@@ -16,8 +18,6 @@ function heapSort(arr) {
     // for max-heap
     function buildHeap() {
         /*
-            ref: https://www.youtube.com/watch?v=VkKmmwzfIG4&list=PLEJXowNB4kPyP2PdMhOUlTY6GrRIITx28&index=5
-
             (For a complete binary tree)
             In a Heap of size N, represented in an array
             Range of internal nodes: 0 to Math.ceil(N/2) - 1
