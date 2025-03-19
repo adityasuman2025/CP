@@ -1,4 +1,8 @@
-// ref: https://www.youtube.com/watch?v=RU08pp_VPSs&list=PLEJXowNB4kPyP2PdMhOUlTY6GrRIITx28&index=1
+/* 
+    ref: 
+    heaps: https://www.youtube.com/watch?v=RU08pp_VPSs&list=PLEJXowNB4kPyP2PdMhOUlTY6GrRIITx28&index=1
+    heap sort: https://www.youtube.com/watch?v=kU4KBD4NFtw&list=PLEJXowNB4kPyP2PdMhOUlTY6GrRIITx28&index=7
+*/
 
 function heapSort(arr) {
     let len = arr.length;
