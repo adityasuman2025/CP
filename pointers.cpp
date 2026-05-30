@@ -55,7 +55,7 @@ void printHello(string str)
 	cout<<"Hello "<<str<<endl;
 }
 
-void function() //call-back function
+void callbackFunction() //call-back function
 {
 	cout<<"Hello "<<"frnds"<<endl;
 }
@@ -219,7 +219,7 @@ int main(int argc, char const *argv[])
 	void (*pf1)(string) = printHello; //declaring pointer to point a function and pointing the pointer to the fucntion
 	pf1("Brother"); //executing the function
 
-	caller(function);
+	caller(callbackFunction);
 
 	int k = 2;
 	int l = 8;
@@ -234,7 +234,9 @@ int main(int argc, char const *argv[])
 
 	int al = 1;
 	cout<<endl;
-	cout<<al<<++al<<al++<<endl;
+	cout<<al;
+	cout<<++al;
+	cout<<al++<<endl;
 	//printf("%d %d %d", al, ++al, al++);
 	return 0;
 }
