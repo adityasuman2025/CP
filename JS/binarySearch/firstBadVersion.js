@@ -40,24 +40,21 @@ Output: 1
  * @param {function} isBadVersion()
  * @return {function}
  */
-var solution = function (isBadVersion) {
+function solution(isBadVersion) {
     /**
      * @param {integer} n Total versions
      * @return {integer} The first bad version
      */
-    return function (n) {
-        let start = 1, end = n, minBadVer = n;
-        while (start <= end) {
-            let mid = parseInt((start + end) / 2);
+    return function(n) {
+        let start = 1, end = n;
 
-            if (isBadVersion(mid) === true) {
-                minBadVer = Math.min(n, mid);
-                end = mid - 1;
-            } else {
-                start = mid + 1;
-            }
+        while (start <= end) {
+            let mid = Math.floor((start + end) / 2);
+
+            if (isBadVersion(mid)) end = mid - 1
+            else start = mid + 1;
         }
 
-        return minBadVer;
+        return start;
     };
 };
