@@ -28,7 +28,7 @@ Explanation: The square root of 8 is 2.82842..., and since we round it down to t
 var mySqrt = function(x) {
     let start = 0, end = x;
     while (start <= end) {
-        const mid = parseInt((start + end) / 2);
+        const mid = Math.floor((start + end) / 2);
         const midSqr = mid * mid;
 
         if (midSqr === x) return mid;

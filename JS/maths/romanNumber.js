@@ -44,7 +44,7 @@ function integerToRoman(num) {
     let char = "";
 
     romanSymbols.forEach(roman => {
-        const repeatCount = parseInt(num / roman.value);
+        const repeatCount = Math.floor(num / roman.value);
         char += repeatChar(roman.symbol, repeatCount);
 
         num = num % roman.value;

@@ -38,7 +38,7 @@ var minEatingSpeed = function (piles, h) {
 
     let ans = Number.MAX_SAFE_INTEGER;
     while (minBan <= maxBan) {
-        let mid = parseInt((minBan + maxBan) / 2);
+        let mid = Math.floor((minBan + maxBan) / 2);
 
         let hoursNeededToFinishAtSpeedOfMid = 0;
         for (let i = 0; i < piles.length; i++) {

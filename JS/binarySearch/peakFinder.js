@@ -28,7 +28,7 @@ var findPeakElement = function(arr) {
     let start = 0, end = arr.length - 1;
 
     while (start <= end) {
-        let mid = parseInt((start + end) / 2);
+        let mid = Math.floor((start + end) / 2);
 
         if (arr[mid + 1] > arr[mid]) { // if something greater is found at mid+1 then looking towards right i.e. start = mid + 1;
             start = mid + 1;

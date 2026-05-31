@@ -133,7 +133,7 @@ class LinkedList {
         }
 
         curr = this.head, prev = null;
-        let mid = parseInt(c / 2);
+        let mid = Math.floor(c / 2);
         while (mid) {
             prev = curr;
             curr = curr.next;

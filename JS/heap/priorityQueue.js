@@ -89,7 +89,7 @@ class PriorityQueue {
 
 
     getParentIdx(i) {
-        return parseInt((i - 1) / 2);
+        return Math.floor((i - 1) / 2);
     }
 
     getLeftChildIdx(i) {

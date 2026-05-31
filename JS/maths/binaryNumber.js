@@ -6,7 +6,7 @@ function decimalToBinary(num) {
         let rem = no % 2;
         binary = rem + binary;
 
-        no = parseInt(no / 2);
+        no = Math.floor(no / 2);
     }
 
     console.log("binary of", num, "is", binary)

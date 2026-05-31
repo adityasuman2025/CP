@@ -36,7 +36,7 @@ var searchMatrix = function(matrix, target) {
 
     let startI = 0, endI = m - 1;
     while (startI <= endI) {
-        let midI = parseInt((startI + endI) / 2);
+        let midI = Math.floor((startI + endI) / 2);
 
         if (target >= matrix[midI][0] && target <= matrix[midI][n - 1]) {
             return binarySearch(matrix[midI], target, 0, n - 1);
@@ -52,7 +52,7 @@ var searchMatrix = function(matrix, target) {
 
 function binarySearch(arr, target, start, end) {
     while (start <= end) {
-        let mid = parseInt((start + end) / 2);
+        let mid = Math.floor((start + end) / 2);
 
         if (arr[mid] === target) {
             return true;

@@ -21,7 +21,7 @@
     right child: 2*i+2
 
     if child: i
-    parent: Math.ceil(i/2) - 1 or parseInt((index - 1) / 2) or Math.floor((index - 1) / 2)
+    parent: Math.ceil(i/2) - 1 or Math.floor((index - 1) / 2) or Math.floor((index - 1) / 2)
 */
 
 
@@ -118,7 +118,7 @@ class MinHeap {
     }
 
     getParentIndex(index) {
-        return parseInt((index - 1) / 2);
+        return Math.floor((index - 1) / 2);
     }
 
     swap(i, j) {

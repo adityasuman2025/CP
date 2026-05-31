@@ -40,7 +40,7 @@ var searchRange = function(arr, target) {
 
     let k = -1;
     while (start <= end) {
-        let mid = parseInt((start + end) / 2);
+        let mid = Math.floor((start + end) / 2);
 
         if (arr[mid] === target) {
             k = mid;
@@ -57,7 +57,7 @@ var searchRange = function(arr, target) {
     start = 0, end = arr.length - 1;
     k = -1;
     while (start <= end) {
-        let mid = parseInt((start + end) / 2);
+        let mid = Math.floor((start + end) / 2);
 
         if (arr[mid] === target) {
             k = mid;

@@ -71,7 +71,7 @@ function mergeSort(arr) {
 
     if (length < 2) return;
 
-    let mid = parseInt(length / 2);
+    let mid = Math.floor(length / 2);
     let leftArr = arr.slice(0, mid), rightArr = arr.slice(mid, length);
 
     mergeSort(leftArr);

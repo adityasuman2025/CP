@@ -19,8 +19,8 @@
 //     // ws.write(result + '\n');
 //     // ws.end();
 
-//     const number = parseInt(inputStringArr[0]);
-//     const prime = parseInt(inputStringArr[1]);
+//     const number = Math.floor(inputStringArr[0]);
+//     const prime = Math.floor(inputStringArr[1]);
 
 // }
 
@@ -78,7 +78,7 @@ function getPowerOfPrime(number, prime) {
     let c = 0;
 
     while (number > 1) {
-        number = parseInt(number / prime);
+        number = Math.floor(number / prime);
         c++;
     }
 

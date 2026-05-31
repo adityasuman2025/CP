@@ -40,7 +40,7 @@ var sortedArrayToBST = function (arr) {
     function util(start, end) {
         if (start > end) return null;
 
-        let mid = parseInt((start + end) / 2);
+        let mid = Math.floor((start + end) / 2);
 
         let root = new TreeNode(arr[mid]);
         root.left = util(start, mid - 1);

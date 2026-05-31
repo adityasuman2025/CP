@@ -25,7 +25,7 @@ var maximalRectangle = function(matrix) {
     for (let i = 1; i<matrix.length; i++) {
         for (let j = 0; j < matrix[i].length; j++) {
             if (matrix[i][j] == 1)
-                matrix[i][j] = parseInt(matrix[i-1][j]) + parseInt(matrix[i][j]);
+                matrix[i][j] = Math.floor(matrix[i-1][j]) + Math.floor(matrix[i][j]);
         }
 
         let area = maxInHistogram(matrix[i], matrix[i].length);
