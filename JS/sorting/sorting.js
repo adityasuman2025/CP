@@ -1,6 +1,6 @@
 /*
-    1. Selection Sort: O(N^2) 
-    2. Bubble Sort: O(N^2) 
+    1. Bubble Sort: O(N^2) 
+    2. Selection Sort: O(N^2) 
     3. Merge Sort: O(NlogN) 
     4. Quick Sort: Randomized Quick Sort: O(NlogN), Normal Quick Sort: O(N^2) 
     5. Insertion Sort: O(N^2) 
@@ -19,31 +19,9 @@ function swap(arr, index1, index2) {
 
 
 
-// goal is find minimum array value index in each iteration and swap it with i index
-function selectionSort(arr) {
-    let length = arr.length;
-    let minIndex;
-
-    for (let i = 0; i < length - 1; i++) {
-        minIndex = i;
-
-        for (let j = i + 1; j < length; j++) {
-            if (arr[j] < arr[minIndex]) minIndex = j;
-        }
-
-        if (minIndex == i) continue;
-
-        swap(arr, i, minIndex);
-    }
-}
-// selectionSort(arr);
-// console.log("selectionSort sorted arr", arr)
-
-
-
 // goal is to compare every array element in each iteration and keep pushing the largest element to the end
 function bubbleSort(arr) {
-    let length = arr.length;
+    const length = arr.length;
 
     for (let i = 0; i < length - 1; i++) {
         let isSwapped = false;
@@ -60,6 +38,26 @@ function bubbleSort(arr) {
 }
 // bubbleSort(arr);
 // console.log("bubbleSort sorted arr", arr)
+
+
+
+// goal is find minimum array value index in each iteration and swap it with i index
+function selectionSort(arr) {
+    let length = arr.length;
+    let minIndex;
+
+    for (let i = 0; i < length - 1; i++) {
+        minIndex = i;
+
+        for (let j = i + 1; j < length; j++) {
+            if (arr[j] < arr[minIndex]) minIndex = j;
+        }
+
+        if (minIndex !== i) swap(arr, i, minIndex);
+    }
+}
+// selectionSort(arr);
+// console.log("selectionSort sorted arr", arr)
 
 
 
@@ -81,16 +79,17 @@ function mergeSort(arr) {
 
 function merge(leftArr, rightArr, arr) {
     let lLength = leftArr.length, rLength = rightArr.length;
-    let i = 0; l = 0, r = 0;
+    let i = 0, l = 0, r = 0;
 
     while ((l < lLength) && (r < rLength)) {
-        if (leftArr[l] < rightArr[r]) {
+        if (leftArr[l] <= rightArr[r]) {
             arr[i] = leftArr[l];
             l++;
         } else {
             arr[i] = rightArr[r];
             r++;
 
+            // If rightArr[r] is strictly smaller than leftArr[l], it is also smaller than all remaining elements in leftArr (since leftArr is sorted).
             inversionCount += (lLength - l);
         }
         i++;
@@ -99,7 +98,7 @@ function merge(leftArr, rightArr, arr) {
     while (l < lLength) {
         arr[i] = leftArr[l];
         l++;
-        i++
+        i++;
     }
     while (r < rLength) {
         arr[i] = rightArr[r];
@@ -117,23 +116,21 @@ function merge(leftArr, rightArr, arr) {
 function quickSort(arr, start, end) {
     if (start >= end) return;
 
-    let partitionIdx = partition(arr, start, end);
+    const partitionIdx = getPartitionIdx(arr, start, end);
 
     quickSort(arr, start, partitionIdx - 1);
     quickSort(arr, partitionIdx + 1, end);
 }
 
-function partition(arr, start, end) {
-    // for choosing any random pivot
-    let randomPivotIndex = Math.floor(Math.random() * (end - start + 1) + start);
-    swap(arr, randomPivotIndex, end);
-    // for choosing any random pivot
+function getPartitionIdx(arr, start, end) {
+    const randomIdx = Math.floor(Math.random() * (end - start + 1) + start);
+    swap(arr, randomIdx, end);
 
-    let pivot = arr[end];
+    const pivot = arr[end];
 
     let partitionIdx = start;
     for (let i = start; i < end; i++) {
-        if (arr[i] <= pivot) {
+        if (arr[i] < pivot) {
             swap(arr, i, partitionIdx);
             partitionIdx++;
         }
@@ -151,17 +148,22 @@ function partition(arr, start, end) {
 // goal is to virtually split the array into a sorted and an unsorted part. Values from the unsorted part are picked and placed at the correct position in the sorted part.
 // Insertion sort is a simple sorting algorithm that works similar to the way you sort playing cards in your hands.
 function insertionSort(arr) {
-    let length = arr.length;
+    const len = arr.length;
 
-    for (let i = 1; i < length; i++) {
-        let holeIdx = i;
-        let val = arr[i];
+    for (let i = 1; i < len; i++) {
+        let value = arr[i], holeIdx = i;
 
-        while (holeIdx > 0 && (val < arr[holeIdx - 1])) {
-            swap(arr, holeIdx, holeIdx - 1);
+        let start = i - 1;
+        while (start >= 0) {
+            if (value < arr[start]) {
+                arr[holeIdx] = arr[start];
+                holeIdx--;
+            } else break;
 
-            holeIdx--;
+            start--;
         }
+
+        arr[holeIdx] = value;
     }
 }
 insertionSort(arr);

@@ -32,7 +32,7 @@ Output: 23
  * @param {number} h
  * @return {number}
  */
-var minEatingSpeed = function (piles, h) {
+var minEatingSpeed = function(piles, h) {
     let minBan = 1; // minimum 1 banana should be eaten per hour, otherwise no progress
     let maxBan = Math.max(...piles); // at max, max(piles) bananas are required to be eaten per hour
 
@@ -40,16 +40,19 @@ var minEatingSpeed = function (piles, h) {
     while (minBan <= maxBan) {
         let mid = Math.floor((minBan + maxBan) / 2);
 
-        let hoursNeededToFinishAtSpeedOfMid = 0;
+        // checking how many hours is needed to finish all piles at speed of mid
+        let reqdHrsAtSpeedOfMid = 0;
         for (let i = 0; i < piles.length; i++) {
-            hoursNeededToFinishAtSpeedOfMid += Math.ceil(piles[i] / mid); // ceil because if finished earlier then need to take upper bond (GIF: Greatest Integer Function)
+            reqdHrsAtSpeedOfMid += Math.ceil(piles[i] / mid); // ceil because if finished earlier then need to take upper bond (GIF: Greatest Integer Function)
         }
 
-        if (hoursNeededToFinishAtSpeedOfMid <= h) {
+        if (reqdHrsAtSpeedOfMid > h) {
+            // is need more hours than available h then we have to increase the speed so start = mid +1
+            minBan = mid + 1
+        } else {
+            // is he is able to eat all at speed of mid then trying less than that speed so that he does not get tired
             ans = Math.min(ans, mid);
             maxBan = mid - 1;
-        } else {
-            minBan = mid + 1;
         }
     }
 
