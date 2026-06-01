@@ -34,12 +34,16 @@ var rotate = function(matrix) {
         }
     }
 
-    // flip / reverse each column
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n / 2; j++) {
-            let temp = matrix[i][j];
-            matrix[i][j] = matrix[i][n - 1 - j];
-            matrix[i][n - 1 - j] = temp;
+    // flip / reverse each row
+    for (let i = 0; i < len; i++) {
+        let start = 0; end = len - 1;
+        while (start < end) {
+            let temp = arr[i][start];
+            arr[i][start] = arr[i][end];
+            arr[i][end] = temp;
+
+            start++;
+            end--;
         }
     }
 };

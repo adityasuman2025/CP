@@ -22,10 +22,10 @@ Input: nums = [1]
 Output: 1
 */
 
-// bit operation with itself is 0
+// XOR (^) operation with itself is 0 -> Returns 1 if the two bits are different, Returns 0 if they are the same.
 var singleNumber = function(nums) {
     let x = nums[0];
-        
+
     for (let i = 1; i < nums.length; i++)
         x = x ^ nums[i];
 
