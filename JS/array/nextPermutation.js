@@ -35,7 +35,10 @@ Output: [1,5,1]
 var nextPermutation = function(arr) {
     let n = arr.length;
 
-    // find the dip (non increasing index) from behind
+    // Step 1: Find the first "dip" from the right.
+    // Intuition: As long as the suffix is non-increasing (e.g., [5, 4, 3, 2, 0]), it's in its 
+    // maximum permutation. The first place where arr[i-1] < arr[i] is the earliest spot we can
+    // increase to get a lexicographically larger permutation.
     let dipIdx = -1;
     for (let i = n - 1; i > 0; i--) {
         if (arr[i - 1] < arr[i]) {
@@ -44,21 +47,31 @@ var nextPermutation = function(arr) {
         }
     }
 
-    if (dipIdx === -1) { // if the given array is last permutation, then the next permutation will be the first permutation, i.e reverse of the given array
+    // Step 2: If no dip exists, the entire array is in descending order (last permutation).
+    // Intuition: The next lexicographical permutation wraps around to the smallest possible order (sorted ascending).
+    // Since it's descending, reversing it makes it ascending in O(n).
+    if (dipIdx === -1) {
         reverse(arr, 0, n - 1);
     } else {
-        // find the nearest/next greater element to the dip element
+        // Step 3: Find the smallest element in the suffix that is greater than the dip element.
+        // Intuition: We want to make the value at dipIdx slightly larger. Since the suffix is sorted 
+        // descending, scanning backward (right-to-left) allows us to find the first element strictly 
+        // greater than arr[dipIdx], which is guaranteed to be the smallest such element.
         let nearestGreaterIdx;
-        for (let i = dipIdx + 1; i < n; i++) {
+        for (let i = n - 1; i > dipIdx; i--) {
             if (arr[i] > arr[dipIdx]) {
                 nearestGreaterIdx = i;
+                break;
             }
         }
 
-        // swapping the dip with its nearest greater element to its right
+        // Step 4: Swap the dip element with its next greater element.
         swap(arr, dipIdx, nearestGreaterIdx);
 
-        // reversing the right part of the dip (they will be in sorted order)
+        // Step 5: Reverse the suffix to make it as small as possible.
+        // Intuition: After swapping, the suffix remains in descending order. To make the entire 
+        // number lexicographically as small as possible (the next immediate permutation), 
+        // we must reverse the suffix to turn it into ascending order.
         reverse(arr, dipIdx + 1, n - 1);
     }
 };

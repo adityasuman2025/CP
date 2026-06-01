@@ -28,7 +28,7 @@ Explanation: In this case, no transactions are done and the max profit = 0.
 */
 
 // time: O(n), space: O(1)
-var maxProfit = function (prices) {
+var maxProfit = function(prices) {
     //we can buy and sell only once, 
     //and sell only after buying
     //so moving from behind of the array, to search max sell price, we can have at a element position
@@ -45,7 +45,7 @@ var maxProfit = function (prices) {
 };
 
 // time: O(n), space: O(n)
-var maxProfit = function (prices) {
+var maxProfit = function(prices) {
     let n = prices.length;
 
     let maxPriceArr = [];

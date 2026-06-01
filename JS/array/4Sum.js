@@ -30,43 +30,38 @@ Output: [[2,2,2,2]]
 var fourSum = function(arr, target) {
     arr.sort((a, b) => a - b);
 
-    let res = [];
-    for (let i = 0; i < arr.length;) {
-        for (let j = i + 1; j < arr.length;) {
+    const len = arr.length;
+    const ans = [];
+
+    for (let i = 0; i < len; i++) {
+        for (let j = i + 1; j < len; j++) {
             let start = j + 1, end = arr.length - 1;
 
             while (start < end) {
-                let sum = arr[i] + arr[j] + arr[start] + arr[end];
+                const sum = arr[i] + arr[j] + arr[start] + arr[end];
+
                 if (sum === target) {
-                    res.push([arr[i], arr[j], arr[start], arr[end]]);
+                    ans.push([arr[i], arr[j], arr[start], arr[end]]);
 
-                    // to avoid duplicates
                     start++;
-                    while (arr[start] === arr[start - 1]) start++;
+                    while (arr[start] === arr[start - 1]) start++; // to avoid duplicates
 
-                    // to avoid duplicates
                     end--;
-                    while (arr[end] === arr[end + 1]) end--;
+                    while (arr[start] === arr[end + 1]) end--; // to avoid duplicates
                 } else if (sum > target) {
-                    // to avoid duplicates
                     end--;
-                    while (arr[end] === arr[end + 1]) end--;
+                    while (arr[end] === arr[end + 1]) end--; // to avoid duplicates
                 } else {
-                    // to avoid duplicates
                     start++;
-                    while (arr[start] === arr[start - 1]) start++;
+                    while (arr[start] === arr[start - 1]) start++; // to avoid duplicates
                 }
             }
 
-            // to avoid duplicates
-            j++
-            while (arr[j] == arr[j - 1]) j++;
+            while (arr[j] === arr[j + 1]) j++; // to avoid duplicates
         }
 
-        // to avoid duplicates
-        i++;
-        while (arr[i] == arr[i - 1]) i++;
+        while (arr[i] == arr[i + 1]) i++; // to avoid duplicates
     }
 
-    return res;
+    return ans;
 };

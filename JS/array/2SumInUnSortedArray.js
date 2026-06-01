@@ -30,6 +30,7 @@ Output: [0,1]
  * @param {number} target
  * @return {number[]}
  */
+// time: O(n); space: O(n)
 var twoSum = function(arr, target) {
     let map = new Map();
     for (let i = 0; i < arr.length; i++) {
@@ -37,5 +38,23 @@ var twoSum = function(arr, target) {
 
         if (map.has(req)) return [i, map.get(req)]
         else map.set(arr[i], i);
+    }
+};
+
+// time: O(nlogn); space: O(n)
+var twoSum = function(arr, target) {
+    const obj = {};
+    arr.forEach((item, idx) => obj[item] = obj[item] ? [...obj[item], idx] : [idx]);
+
+    arr.sort((a, b) => a - b);
+
+    let start = 0, end = arr.length - 1;
+    while (start < end) {
+        if (arr[start] + arr[end] === target) {
+            if (obj[arr[start]].length > 1) return obj[arr[start]];
+            else if (obj[arr[end]].length > 1) return obj[arr[end]];
+            else return [obj[arr[start]][0], obj[arr[end]][0]];
+        } else if (arr[start] + arr[end] > target) end--;
+        else start++;
     }
 };
