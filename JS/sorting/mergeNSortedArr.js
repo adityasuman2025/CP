@@ -22,38 +22,42 @@ merge(
  * non-descending integer array
  * @return {number[]} 
  */
-// time: O(nk), space: O(nk)
-function merge(arr) {
-  let len = arr.length;
 
-  let idxArr = new Array(len).fill(0);
-  let allLen = arr.reduce((acc, arr) => acc + arr.length, 0);
-  
-  let ans = [];
-  while (allLen) {
-    let minVal = Number.MAX_SAFE_INTEGER
-    let minValIdx = -1;
+function merge(arrList) {
+    if (!arrList.length) return arrList;
 
-    for (let i=0; i<len; i++) {
-      if (arr[i][idxArr[i]] && arr[i][idxArr[i]] < minVal) {
-        minVal = arr[i][idxArr[i]];
-        minValIdx = i;
-      }
+    let result = arrList[0];
+
+    for (let i = 1; i < arrList.length; i++) {
+        result = mergeTwoSorted(result, arrList[i]);
     }
 
-    ans.push(minVal);
-    idxArr[minValIdx] = idxArr[minValIdx] + 1;
-
-    allLen--;
-  }
-
-  return ans;
+    return result;
 }
 
-let arr = [
-  [1,1,1,100,1000,10000],
-  [1,2,2,2,200,200,1000],
-  [1000000,10000001],
-  [2,3,3]
-];
-console.log(merge(arr))
+function mergeTwoSorted(a, b) {
+    let result = [];
+
+    let i = 0, j = 0;
+    while (i < a.length && j < b.length) {
+        if (a[i] <= b[j]) {
+            result.push(a[i]);
+            i++;
+        } else {
+            result.push(b[j]);
+            j++;
+        }
+    }
+
+    while (i < a.length) {
+        result.push(a[i]);
+        i++;
+    }
+
+    while (j < b.length) {
+        result.push(b[j]);
+        j++;
+    }
+
+    return result;
+}

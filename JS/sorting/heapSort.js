@@ -7,6 +7,7 @@
 function heapSort(arr) {
     let len = arr.length;
 
+    // first we will build a heap from the array (convert the array to a heap)
     buildHeap();
 
     for (let i = len - 1; i > 0; i--) {
@@ -31,7 +32,8 @@ function heapSort(arr) {
             so for building a heap we only need to heapify internal nodes, not leaves
         */
 
-        for (let i = Math.floor(len / 2) - 1; i >= 0; i--) {
+        // starting building heap from behind of the internal nodes
+        for (let i = Math.ceil(len / 2) - 1; i >= 0; i--) {
             heapify(i, len);
         }
     }

@@ -39,7 +39,8 @@ Note that because m = 0, there are no elements in nums1. The 0 is only there to 
  * @param {number} n
  * @return {void} Do not return anything, modify nums1 in-place instead.
  */
-var merge = function (nums1, m, nums2, n) {
+
+var merge = function(nums1, m, nums2, n) {
     let i = m - 1, j = n - 1, k = m + n - 1;
 
     while (j >= 0) {

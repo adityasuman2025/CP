@@ -6,7 +6,7 @@
     2. Min Heap: It keeps track of smallest element (min heap is used if asked for Kth largest element)
                 Root Node should be smaller than all left and right sub-tree nodes and recursively true for all its sub-trees
     
-    Priority Queue: Priority Sueue is implementation of Min-Heap in Java) -> min heap is a binary tree in which root node(parent node) is always less then its children nodes
+    Priority Queue: Priority Queue is implementation of Min-Heap in Java) -> min heap is a binary tree in which root node(parent node) is always less then its children nodes
     Heapify: The process of re-arranging the heap by comparing each parent with its children recursively is k/n as heapify.
             We can heapify index i, only if all the elements in both its left and right sub-trees are following heap property.
 */
@@ -21,7 +21,7 @@
     right child: 2*i+2
 
     if child: i
-    parent: Math.ceil(i/2) - 1 or Math.floor((index - 1) / 2) or Math.floor((index - 1) / 2)
+    parent: Math.ceil(i/2) - 1 or Math.floor((i - 1) / 2)
 */
 
 
