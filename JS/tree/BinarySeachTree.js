@@ -154,15 +154,18 @@ class BST {
         if (!node) return;
 
         let q = [node], str = "";
-        while (q.length) { // while queue is not empty
-            let front = q.shift(); // removed 1st element from array 
-            str += (front.val + " ");
+        let i = 0;
 
-            if (front.left) q.push(front.left);
-            if (front.right) q.push(front.right);
+        while (i < q.length) {
+            const curr = q[i]; // not using Array.shift, because it is expensive
+            str += (" " + curr.val);
+            i++;
+
+            if (curr.left) q.push(curr.left);
+            if (curr.right) q.push(curr.right);
         }
 
-        console.log("levelOrder:", str)
+        console.log("levelOrder:", str);
     }
 
     /* O(n) */
@@ -202,17 +205,22 @@ class BST {
     printVertically(node) {
         if (!node) return;
 
-        let q = [{ node, dist: 0 }], nodesByDist = {};
-        while (q.length) {
-            const { node, dist } = q.shift();
+        let obj = {}, i = 0;
 
-            nodesByDist[dist] ? nodesByDist[dist].push(node.val) : nodesByDist[dist] = [node.val];
+        const q = [{ node, level: 0 }];
+        while (i < q.length) {
+            const { node, level } = q[i];
 
-            if (node.left) q.push({ node: node.left, dist: dist - 1 });
-            if (node.right) q.push({ node: node.right, dist: dist + 1 });
+            if (!obj[level]) obj[level] = []
+            obj[level].push(node.val);
+
+            i++;
+
+            if (node.left) q.push({ node: node.left, level: level - 1 });
+            if (node.right) q.push({ node: node.right, level: level + 1 });
         }
 
-        const res = Object.keys(nodesByDist).sort((a, b) => a - b).map((key) => nodesByDist[key]);
+        const res = Object.keys(obj).sort((a, b) => a - b).map((key) => obj[key]);
         console.log("printVertically:", res)
     }
 
@@ -220,27 +228,24 @@ class BST {
     printDiagonally(node) {
         if (!node) return;
 
-        let str = "\n";
+        const obj = {};
 
-        let q = [node];
-        while (q.length) {
-            let size = q.length;
+        function util(curr, level) {
+            if (!curr) return;
 
-            while (size--) {
-                let front = q.shift();
+            if (!obj[level]) obj[level] = [];
+            obj[level].push(curr.val);
 
-                while (front) {
-                    str += (front.val + " ");
-
-                    if (front.right) q.push(front.right);
-                    front = front.left;
-                }
-            }
-
-            str += '\n'
+            if (curr.left) util(curr.left, level - 1);
+            if (curr.right) util(curr.right, level);
         }
+        util(node, 0);
 
-        console.log("printDiagonally:", str)
+        Object.keys(obj)
+            .sort((a, b) => Number(b) - Number(a))
+            .forEach((key) => {
+                console.log(obj[key].join(" "));
+            });
     }
 
     /* O(n) */
@@ -352,26 +357,23 @@ class BST {
 
     /* O(n) */
     getMaxDiagonalSum(node) {
-        if (!node) return;
+        if (!node) return 0;
 
-        let q = [node], maxSum = 0;
-        while (q.length) {
-            let size = q.length;
-            let sum = 0;
+        const q = [{ node, level: 0 }];
+        const sums = {};
 
-            while (size--) {
-                let front = q.shift();
-                while (front) {
-                    sum += front.val;
+        let i = 0;
+        while (i < q.length) {
+            const { node: curr, level } = q[i];
+            i++;
 
-                    if (front.right) q.push(front.right);
-                    front = front.left;
-                }
-            }
-            maxSum = Math.max(maxSum, sum)
+            sums[level] = (sums[level] || 0) + curr.val;
+
+            if (curr.left) q.push({ node: curr.left, level: level });
+            if (curr.right) q.push({ node: curr.right, level: level - 1 });
         }
 
-        return maxSum;
+        return Math.max(...Object.values(sums));
     }
 
     /* O(n) */
