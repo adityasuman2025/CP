@@ -23,7 +23,7 @@
  * @param {number[]} height
  * @return {number}
  */
-var maxArea = function (arr) {
+var maxArea = function(arr) {
     const len = arr.length;
     let start = 0, end = len - 1;
 

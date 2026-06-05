@@ -18,7 +18,7 @@ Output: 9
 
 
 //approach 1 time: O(n), space: O(n)
-var trap = function (arr) {
+var trap = function(arr) {
     let n = arr.length;
 
     let maxFromFront = [];
@@ -44,7 +44,7 @@ var trap = function (arr) {
 
 
 //approach 2 - 2 pointer approach - time: O(n), space: O(1)
-var trap = function (arr) {
+var trap = function(arr) {
     let n = arr.length;
 
     let left = 0, right = n - 1;
