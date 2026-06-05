@@ -39,31 +39,31 @@ Explanation: The only possible triplet sums up to 0.
  * @param {number[]} nums
  * @return {number[][]}
  */
-var threeSum = function (arr) {
+var threeSum = function(arr) {
+    const target = 0;
+
     arr.sort((a, b) => a - b);
 
-    let ans = [];
-    for (let i = 0; i < arr.length && arr[i] <= 0; i++) {
-        let target = 0 - arr[i];
-
-        if (i > 0 && arr[i - 1] === arr[i]) continue; // to avoid duplicates
+    const resp = [];
+    for (let i = 0; i < arr.length - 2; i++) {
+        if (i > 0 && arr[i] === arr[i - 1]) continue; // to avoid duplicates
 
         let start = i + 1, end = arr.length - 1;
         while (start < end) {
-            let sum = arr[start] + arr[end];
+            const sum = arr[i] + arr[start] + arr[end];
 
             if (sum === target) {
-                ans.push([arr[i], arr[start], arr[end]]);
+                resp.push([arr[i], arr[start], arr[end]]);
 
                 start++;
-                while (arr[start] === arr[start - 1] && start < end) start++;  // to avoid duplicates
-            } else if (target > sum) {
-                start++;
-            } else {
+                while ((start < end) && (arr[start] === arr[start - 1])) start++; // to avoid duplicates
+            } else if (sum > target) {
                 end--;
+            } else {
+                start++;
             }
         }
     }
 
-    return (ans);
+    return resp;
 };

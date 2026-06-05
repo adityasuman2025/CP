@@ -23,31 +23,26 @@ Output: "leotcede"
  * @param {string} s
  * @return {string}
  */
-var reverseVowels = function (s) {
-    let arr = s.split("");
-    let left = 0, right = s.length - 1;
 
-    const vowels = ["a", "e", "i", "o", "u"];
+const v = "aeiouAEIOU";
 
-    while (left < right) {
-        let leftChar = arr[left].toLowerCase();
-        let rightChar = arr[right].toLowerCase();
+var reverseVowels = function(s) {
+    const arr = s.split("");
 
-        if (vowels.includes(leftChar) && vowels.includes(rightChar)) {
-            //swap
-            let temp = arr[left];
-            arr[left] = arr[right];
-            arr[right] = temp;
+    let start = 0, end = arr.length;
+    while (start < end) {
+        if (v.includes(arr[start]) && v.includes(arr[end])) {
+            const temp = arr[start];
+            arr[start] = arr[end];
+            arr[end] = temp;
 
-            right--;
-            left++;
-        } else if (vowels.includes(leftChar) && !vowels.includes(rightChar)) {
-            right--;
-        } else if (!vowels.includes(leftChar) && vowels.includes(rightChar)) {
-            left++;
-        } else {
-            right--;
-            left++;
+            start++;
+            end--;
+        } else if (v.includes(arr[start])) end--;
+        else if (v.includes(arr[end])) start++;
+        else {
+            start++;
+            end--;
         }
     }
 

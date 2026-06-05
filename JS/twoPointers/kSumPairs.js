@@ -22,13 +22,13 @@ There are no more pairs that sum up to 5, hence a total of 2 operations.
 
 
 // two pointers
-// time complexity: O(nlong), space complexity: 0(1)
+// time complexity: O(nlogn), space complexity: 0(1)
 /**
  * @param {number[]} nums
  * @param {number} k
  * @return {number}
  */
-var maxOperations = function (nums, k) {
+var maxOperations = function(nums, k) {
     nums.sort((a, b) => a - b);
 
     let c = 0;
@@ -39,11 +39,8 @@ var maxOperations = function (nums, k) {
             c++;
             start++;
             end--;
-        } else if (sum > k) {
-            end--;
-        } else {
-            start++;
-        }
+        } else if (sum > k) end--;
+        else start++;
     }
 
     return c;
@@ -52,7 +49,7 @@ var maxOperations = function (nums, k) {
 
 // hashmap
 // time complexity: O(n), space complexity: 0(n)
-var maxOperations = function (nums, k) {
+var maxOperations = function(nums, k) {
     let map = {}
 
     let c = 0;
