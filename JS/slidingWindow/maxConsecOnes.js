@@ -21,7 +21,12 @@ Bolded numbers were flipped from 0 to 1. The longest subarray is underlined.
 */
 
 // This question is basically asking maximum number of 0's we can have in our window such that this number is less than or equal to k
-var longestOnes = function (arr, k) {
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+var longestOnes = function(arr, k) {
     let left = 0, numZeroes = 0;
     let maxC = 0;
     for (let right = 0; right < arr.length; right++) {
@@ -30,9 +35,9 @@ var longestOnes = function (arr, k) {
         if (numZeroes > k) {
             if (arr[left] == 0) numZeroes--;
             left++;
-        } else {
-            maxC = Math.max(maxC, right - left + 1);
         }
+
+        maxC = Math.max(maxC, right - left + 1);
     }
 
     return maxC;

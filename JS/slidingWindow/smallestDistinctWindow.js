@@ -26,7 +26,7 @@ Explanation : Sub-string -> "GEEKSFOR"
 let input = "ABAAbCaBB"; //AbCaB 3-7
 
 let uniqueCharsSet = new Set();
-for (let i=0; i<input.length; i++) uniqueCharsSet.add(input[i]);
+for (let i = 0; i < input.length; i++) uniqueCharsSet.add(input[i]);
 let uniqueCharsSetLen = uniqueCharsSet.size;
 console.log("uniqueCharsSetLen", uniqueCharsSetLen)
 
@@ -47,7 +47,7 @@ while (start <= end && (end < input.length)) {
             thisWindowLength = Object.values(charToCountMapping).reduce((acc, item) => { return acc + item }, 0);
             minWindowLength = Math.min(minWindowLength, thisWindowLength);
             console.log(thisWindowLength, charToCountMapping, start, end)
-        } else {           
+        } else {
             delete charToCountMapping[char];
 
             console.log(charToCountMapping, "deleted ", char)
