@@ -24,28 +24,28 @@ Input: s = "leetcode", k = 3
 Output: 2
 Explanation: "lee", "eet" and "ode" contain 2 vowels.
 */
+/**
+ * @param {string} s
+ * @param {number} k
+ * @return {number}
+ */
 
-var maxVowels = function (s, k) {
-    let vowels = ["a", "e", "i", "o", "u"];
+const VOWELS = { a: 1, e: 1, i: 1, o: 1, u: 1 };
+var maxVowels = function(s, k) {
+    let max = 0;
 
-    let vowC = 0, maxVowC = 0;
-    for (let i = 0; i < k; i++) {
-        let char = s.charAt(i);
-        if (vowels.includes(char)) vowC++;
+    let v = 0, start = 0;
+    for (let end = 0; end < s.length; end++) {
+        const char = s[end];
+        if (VOWELS.hasOwnProperty(char)) v++;
 
-        maxVowC = Math.max(maxVowC, vowC);
+        if (end - start + 1 > k) {
+            if (VOWELS.hasOwnProperty(s[start])) v--;
+            start++;
+        }
+
+        max = Math.max(max, v);
     }
 
-    let left = 0;
-    for (let right = k; right < s.length; right++) {
-        let char = s.charAt(right);
-
-        if (vowels.includes(char)) vowC++;
-        if (vowels.includes(s.charAt(left))) vowC--;
-
-        maxVowC = Math.max(maxVowC, vowC);
-        left++;
-    }
-
-    return maxVowC;
+    return max;
 };

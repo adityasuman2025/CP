@@ -19,41 +19,24 @@ Input: nums = [5], k = 1
 Output: 5.00000
 */
 
-
 /**
  * @param {number[]} nums
  * @param {number} k
  * @return {number}
  */
+var findMaxAverage = function(arr, k) {
+    let maxSum = -Infinity;
 
-// var findMaxAverage = function(nums, k) {
-//     let len = nums.length, sum = Number.MIN_SAFE_INTEGER;
+    let start = 0, sum = 0;
+    for (let end = 0; end < arr.length; end++) {
+        sum += arr[end];
 
-//     for (let i=0; i<len-k+1; i++) {
-//         let thisSum = 0;
-//         for (let j=i; (j<i+k) && (j<len) ; j++) {
-//             thisSum += nums[j];
-//         }
-
-//         sum = Math.max(sum, thisSum);
-//     }
-
-//     return sum/k;
-// };
-
-var findMaxAverage = function (nums, k) {
-    let len = nums.length, maxSum = Number.MIN_SAFE_INTEGER;
-
-    let left = 0, thisSum = 0;
-    for (let right = 0; right < len; right++) {
-        thisSum += nums[right];
-
-        if (right >= k - 1) {
-            maxSum = Math.max(thisSum, maxSum);
-
-            thisSum -= nums[left];
-            left++;
+        if (end - start + 1 > k) {
+            sum = sum - arr[start];
+            start++;
         }
+
+        if (end - start + 1 === k) maxSum = Math.max(maxSum, sum);
     }
 
     return maxSum / k;
