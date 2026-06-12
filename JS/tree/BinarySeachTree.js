@@ -592,15 +592,17 @@ class BST {
     /* O(n) */
     isValidBST(node) {
         // time: O(n), space: O(h), because of function call stack
-        // function checkBST(root, min, max) {
-        //     if (!root) return true;
+        // if (!node) return true;
 
-        //     console.log(root.val, min, max);
+        // if (min !== null && node.val <= min) return false;
+        // if (max !== null && node.val >= max) return false;
 
-        //     if ((root.val < min) || (root.val > max)) return false;
-        //     return checkBST(root.left, min, root.val - 1) && checkBST(root.right, root.val + 1, max)
-        // }
-        // return checkBST(node, Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER);
+        // const isLeftValid = this.isValidBST(node.left, min, node.val)
+        // const isRightValid = this.isValidBST(node.right, node.val, max)
+
+        // if (!isLeftValid || !isRightValid) return false;
+
+        // return true;
 
 
         // time: O(n), space: O(h), because of function call stack
