@@ -33,18 +33,18 @@ var maxPathSum = function(root) {
 
     (function pathSum(root) {
         if (!root) return 0;
-        
+
         let left = pathSum(root.left);
         let right = pathSum(root.right);
-        
+
         let maxSingleSum = Math.max(Math.max(left, right) + root.val, root.val);
-        
+
         let maxTopSum = Math.max(maxSingleSum, left + right + root.val);
-        
+
         maxSum = Math.max(maxTopSum, maxSum)
-        
+
         return maxSingleSum;
     })(root)
-    
+
     return maxSum;
 };

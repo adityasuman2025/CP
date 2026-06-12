@@ -47,7 +47,7 @@ Explanation: Root is considered as good.
  * @param {TreeNode} root
  * @return {number}
  */
-var goodNodes = function (root) {
+var goodNodes = function(root) {
 
     let c = 0;
 

@@ -18,25 +18,40 @@ Input: root = [5,3,6,2,4,null,null,1], k = 3
 Output: 3
 */
 
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {number} k
+ * @return {number}
+ */
 
 // recursive
 var kthSmallest = function(root, k) {
-    let num;
+    let nums, c = 0;
 
-    let c = 0;
-    function inOrder(root, k) {
+    function inOrder(root) {
         if (!root) return;
 
-        inOrder(root.left, k);
+        inOrder(root.left);
 
         c++;
-        if (c === k) num = root.val;
+        if (c === k) {
+            nums = root.val
+            return;
+        }
 
-        inOrder(root.right, k);
+        inOrder(root.right);
     }
-    inOrder(root, k);
+    inOrder(root)
 
-    return num;
+    return nums;
 };
 
 // iterative
