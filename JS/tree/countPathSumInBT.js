@@ -36,7 +36,7 @@ Output: 3
 
 
 // ref: https://www.youtube.com/watch?v=UQzXYDN49cs
-var pathSum = function (node, targetSum) {
+var pathSum = function(node, targetSum) {
     let c = 0;
 
     function getSum(node, targetSum) {

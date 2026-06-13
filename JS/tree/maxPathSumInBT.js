@@ -21,30 +21,38 @@ Output: 42
 Explanation: The optimal path is 15 -> 20 -> 7 with a path sum of 15 + 20 + 7 = 42.
 */
 
-//solution: https://www.geeksforgeeks.org/find-maximum-path-sum-in-a-binary-tree/
-
-
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
 /**
  * @param {TreeNode} root
  * @return {number}
-*/
+ */
 var maxPathSum = function(root) {
-    let maxSum = Number.MIN_SAFE_INTEGER;
+    let maxSum = -Infinity;
 
-    (function pathSum(root) {
-        if (!root) return 0;
+    function getGain(node) {
+        if (!node) return 0;
 
-        let left = pathSum(root.left);
-        let right = pathSum(root.right);
+        // 1 & 2. Get max sum from left/right subtrees. Ignore them if they are negative.
+        const leftGain = Math.max(0, getGain(node.left));
+        const rightGain = Math.max(0, getGain(node.right));
 
-        let maxSingleSum = Math.max(Math.max(left, right) + root.val, root.val);
+        // 3. The max path sum where this node is the highest turning point
+        const currentPathSum = node.val + leftGain + rightGain;
 
-        let maxTopSum = Math.max(maxSingleSum, left + right + root.val);
+        // Update the global maximum path sum
+        maxSum = Math.max(maxSum, currentPathSum);
 
-        maxSum = Math.max(maxTopSum, maxSum)
-
-        return maxSingleSum;
-    })(root)
+        // 4. Return the maximum single-branch path sum this node can extend to its parent
+        return node.val + Math.max(leftGain, rightGain);
+    }
+    getGain(root);
 
     return maxSum;
 };

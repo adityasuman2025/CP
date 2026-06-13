@@ -48,27 +48,23 @@ Output: 0
  * @param {TreeNode} root
  * @return {number}
  */
-var longestZigZag = function (node) {
+var longestZigZag = function(root) {
+    let max = 0;
 
-    let maxDepth = 0;
-    function getLen(node, cameFrom, depth) {
+    function util(node, depth, goLeft) {
         if (!node) return;
 
-        maxDepth = Math.max(maxDepth, depth);
+        max = Math.max(max, depth)
 
-        if (cameFrom === null || cameFrom === "right") {
-            getLen(node.left, "left", depth + 1)
+        if (goLeft) {
+            if (node.left) util(node.left, depth + 1, !goLeft);
+            util(node.right, 1, goLeft);
         } else {
-            getLen(node.left, "left", 1);
-        }
-
-        if (cameFrom === null || cameFrom === "left") {
-            getLen(node.right, "right", depth + 1)
-        } else {
-            getLen(node.right, "right", 1);
+            if (node.right) util(node.right, depth + 1, !goLeft);
+            util(node.left, 1, goLeft);
         }
     }
-    getLen(node, null, 0);
+    util(root, 0, false);
 
-    return maxDepth;
+    return max;
 };

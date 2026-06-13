@@ -42,18 +42,39 @@ Explanation: Since the tree is empty, there are no root-to-leaf paths.
  * @param {number} targetSum
  * @return {boolean}
  */
-var hasPathSum = function (root, targetSum) {
-    let has = false;
 
-    function pathSum(root, targetSum) {
-        if (!root || has) return;
+// DFS
+var hasPathSum = function(node, targetSum) {
+    if (!node) return false;
 
-        if (targetSum === root.val && !root.left && !root.right) has = true; // if the left target sum is equal to the node val and that node is a leaf, i.e. node.left == null && node.right == null
-
-        if (!has) pathSum(root.left, targetSum - root.val); // if already found a target sum then not looking again // going left with target sum subtracted with that node val 
-        if (!has) pathSum(root.right, targetSum - root.val); // if already found a target sum then not looking again // going right with target sum subtracted with that node val 
+    if (!node.left && !node.right) {
+        if (targetSum - node.val === 0) return true;
     }
-    pathSum(root, targetSum);
 
-    return has;
+    const hasLeft = hasPathSum(node.left, targetSum - node.val)
+    const hasRight = hasPathSum(node.right, targetSum - node.val)
+    if (hasLeft || hasRight) return true;
+
+    return false;
+};
+
+// BFS
+var hasPathSum = function(node, targetSum) {
+    if (!node) return false;
+
+    const q = [{ node, req: targetSum - node.val }];
+    let i = 0;
+    while (i < q.length) {
+        const { node, req } = q[i];
+        i++;
+
+        if (!node.right && !node.left) {
+            if (req === 0) return true;
+        }
+
+        if (node.left) q.push({ node: node.left, req: req - node.left.val });
+        if (node.right) q.push({ node: node.right, req: req - node.right.val });
+    }
+
+    return false;
 };

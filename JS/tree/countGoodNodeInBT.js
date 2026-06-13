@@ -47,22 +47,22 @@ Explanation: Root is considered as good.
  * @param {TreeNode} root
  * @return {number}
  */
-var goodNodes = function(root) {
+var goodNodes = function(node) {
+    if (!node) return 0;
 
     let c = 0;
 
-    function getGood(node, maxVal) {
-        if (!node) return;
-
-        if (node.val >= maxVal) {
-            maxVal = node.val;
+    function util(node, max) {
+        let thisMax = max;
+        if (node.val >= thisMax) {
             c++;
+            thisMax = node.val
         }
 
-        getGood(node.left, maxVal);
-        getGood(node.right, maxVal);
+        if (node.left) util(node.left, thisMax);
+        if (node.right) util(node.right, thisMax);
     }
-    getGood(root, root.val);
+    util(node, node.val);
 
     return c;
 };
