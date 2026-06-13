@@ -36,27 +36,27 @@ Output: 3
 
 
 // ref: https://www.youtube.com/watch?v=UQzXYDN49cs
-var pathSum = function(node, targetSum) {
+var pathSum = function(root, targetSum) {
     let c = 0;
 
-    function getSum(node, targetSum) {
+    function util(node, targetSum) {
         if (!node) return;
 
-        helper(node, targetSum); // find targetSum including this node
+        helper(node, targetSum);
 
-        getSum(node.left, targetSum); // find targetSum excluding this node // starting from its left sub-tree
-        getSum(node.right, targetSum); // find targetSum excluding this node // starting from its right sub-tree
+        if (node.left) util(node.left, targetSum);
+        if (node.right) util(node.right, targetSum);
     }
 
     function helper(node, targetSum) {
         if (!node) return;
 
-        if (targetSum === node.val) c++;
+        if (node.val === targetSum) c++;
 
-        helper(node.left, targetSum - node.val); // find targetSum - this node val in left sub-tree
-        helper(node.right, targetSum - node.val); // find targetSum - this node val in right sub-tree
+        if (node.left) helper(node.left, targetSum - node.val);
+        if (node.right) helper(node.right, targetSum - node.val);
     }
 
-    getSum(node, targetSum);
+    util(root, targetSum)
     return c;
 };
