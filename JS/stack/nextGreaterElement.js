@@ -41,11 +41,9 @@ class Solution {
     //Function to find the next greater element for each element of the array.
     nextLargerElement(arr, n) {
         let stack = [];
-
         let resp = [];
         for (let i = n - 1; i >= 0; i--) {
             if (stack.length === 0) {
-                stack.push(arr[i]);
                 resp[i] = -1;
             } else {
                 if (stack.peek() > arr[i]) {
@@ -56,15 +54,15 @@ class Solution {
 
                     resp[i] = stack.peek() || -1;
                 }
-
-                stack.push(arr[i]);
             }
+
+            stack.push(arr[i]);
         }
 
         return resp;
     }
 }
 
-Array.prototype.peek = function () {
+Array.prototype.peek = function() {
     return this[this.length - 1];
 }

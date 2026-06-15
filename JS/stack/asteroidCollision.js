@@ -28,70 +28,30 @@ Explanation: The 2 and -5 collide resulting in -5. The 10 and -5 collide resulti
 */
 
 
+// https://www.youtube.com/watch?v=_eYGqw_VDR4
 /**
  * @param {number[]} asteroids
  * @return {number[]}
  */
-var asteroidCollision = function (asteroids) {
-    let stack = [asteroids[0]];
-    let prevPeek = stack.peek();
+var asteroidCollision = function(arr) {
+    const stack = [];
 
-    for (let i = 1; i < asteroids.length; i++) {
-        stack.push(asteroids[i]);
-        let thisPeek = stack.peek();
+    for (let i = 0; i < arr.length; i++) {
+        const item = arr[i];
+        if (item > 0) {
+            stack.push(item);
+        } else {
+            while (stack.length && stack.at(-1) > 0 && stack.at(-1) < -item) {
+                stack.pop();
+            }
 
-        // if prevPeek is positve only then it can collide with any 
-        // because positive direction is -> and negative direction is <-
-        // prev this can collide only if their direction is like this
-        // -> <- (positive negative)
-        while ((prevPeek > 0) && hasDiffSign(prevPeek, thisPeek) && stack.length) {
-            let bigger = getAbsBigger(prevPeek, thisPeek);
-            stack.pop();
-            stack.pop();
-
-            // if the two asteroids are of same size they will destroy each other
-            // so new asteriod will not be added 
-            if (!isAbsEqual(prevPeek, thisPeek)) stack.push(bigger);
-
-            thisPeek = stack.peek();
-            prevPeek = stack.peek2();
+            if (stack.length && stack.at(-1) === -item) {
+                stack.pop();
+            } else if (stack.length === 0 || stack.at(-1) < 0) {
+                stack.push(item); // Incoming asteroid survives (stack top is empty or moving left)
+            }
         }
-
-        prevPeek = thisPeek;
     }
 
     return stack;
 };
-
-function isAbsEqual(no1, no2) {
-    return (Math.abs(no1) === Math.abs(no2));
-}
-
-function getAbsBigger(no1, no2) {
-    if (Math.abs(no1) > Math.abs(no2)) return no1;
-
-    return no2;
-}
-
-function hasDiffSign(no1, no2) {
-    if (isPos(no1) && isNeg(no2)) return true;
-    if (isPos(no2) && isNeg(no1)) return true;
-
-    return false;
-}
-
-function isNeg(num) {
-    return num < 0;
-}
-
-function isPos(num) {
-    return num > 0;
-}
-
-Array.prototype.peek = function () {
-    return this[this.length - 1];
-}
-Array.prototype.peek2 = function () {
-    return this[this.length - 2];
-}
-

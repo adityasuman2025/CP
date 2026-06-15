@@ -38,7 +38,7 @@ Explanation: The entire string is removed, so we return an empty string.
  * @param {string} s
  * @return {string}
  */
-var removeStars = function (s) {
+var removeStars = function(s) {
     let stack = [];
     for (let i = 0; i < s.length; i++) {
         let char = s.charAt(i);
