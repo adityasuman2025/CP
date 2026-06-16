@@ -51,7 +51,7 @@ class Node {
     }
 }
 
-var findTheWinner = function (n, k) {
+var findTheWinner = function(n, k) {
     // making the linked list for n items
     let head, temp;
     for (let i = 1; i <= n; i++) {
@@ -88,7 +88,7 @@ var findTheWinner = function (n, k) {
 
 
 // Josephus Problem
-var findTheWinner = function (n, k) {
+var findTheWinner = function(n, k) {
     let i = 1, ans = 0;
     while (i <= n) {
         ans = (ans + k) % i

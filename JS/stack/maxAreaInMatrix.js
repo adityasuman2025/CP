@@ -22,52 +22,51 @@ Output: 1
 var maximalRectangle = function(matrix) {
     let maxArea = maxInHistogram(matrix[0], matrix[0].length);
 
-    for (let i = 1; i<matrix.length; i++) {
+    for (let i = 1; i < matrix.length; i++) {
         for (let j = 0; j < matrix[i].length; j++) {
             if (matrix[i][j] == 1)
-                matrix[i][j] = Math.floor(matrix[i-1][j]) + Math.floor(matrix[i][j]);
+                matrix[i][j] = Math.floor(matrix[i - 1][j]) + Math.floor(matrix[i][j]);
         }
 
         let area = maxInHistogram(matrix[i], matrix[i].length);
         maxArea = Math.max(area, maxArea)
     }
-    
+
     return maxArea;
 };
 
 function maxInHistogram(arr, length) {
-    let area = 0;
-    let maxArea = 0;
-    
-    let stack = [];
-    
+    let area = 0, maxArea = 0;
+
+    const stack = [];
+
     let i = 0;
-    while (i<length) {
+    while (i < length) {
         if (stack.isEmpty() || arr[i] >= arr[stack.peek()]) {
             stack.push(i++)
         } else {
-            let top = stack.pop();
+            const top = stack.pop();
             if (stack.isEmpty()) {
                 area = arr[top] * i
             } else {
-                area = arr[top] * ((i-1) - stack.peek());
+                area = arr[top] * ((i - 1) - stack.peek());
             }
-        
+
             maxArea = Math.max(area, maxArea);
         }
     }
-    
+
     while (!stack.isEmpty()) {
-        let top = stack.pop();
+        const top = stack.pop();
         if (stack.isEmpty()) {
             area = arr[top] * i
         } else {
-            area = arr[top] * ((i-1) - stack.peek());
+            area = arr[top] * ((i - 1) - stack.peek());
         }
 
         maxArea = Math.max(area, maxArea);
     }
-    
+
     return maxArea;
 }
 
@@ -76,5 +75,5 @@ Array.prototype.isEmpty = function() {
 }
 
 Array.prototype.peek = function() {
-    return this[this.length-1];
+    return this[this.length - 1];
 }

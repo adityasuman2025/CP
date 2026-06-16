@@ -233,25 +233,35 @@ class LinkedList {
     }
 
     rotateRightBy(k) {
-        if ([undefined, null].includes(k) || this.head === null) return;
+        if (!this.head || k < 1) return;
 
-        let len = this.length();
-        k = k % len;
-        if (k === 0) return;
-
-        let oldHead = this.head;
-
-        let c = 0, curr = this.head;
-        while ((c < len - k - 1) && curr) {  // go to the element at length-k-1 index (curr), element next to it will become the new head
+        let len = 0, curr = this.head;
+        while (curr) {
             curr = curr.next;
-            c++;
+            len++;
         }
-        this.head = curr.next;
-        curr.next = null; // breaking its bond with the new head
 
-        let temp = this.head;
-        while (temp.next) temp = temp.next; // going to the end of the new head linked list
-        temp.next = oldHead; // attaching last element to the old head
+        k = k % len;
+        if (!k) return;
+
+        k = len - k;
+
+        curr = this.head;
+        let prev, next;
+        while (curr.next) {
+            if (k > 0) {
+                prev = curr;
+                next = curr.next;
+            }
+
+            curr = curr.next;
+            k--;
+        }
+
+        if (prev) prev.next = null;
+        curr.next = this.head;
+
+        this.head = next;
     }
 
     reverseInGroup(head, k) {

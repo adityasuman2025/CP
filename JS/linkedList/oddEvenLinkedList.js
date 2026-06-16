@@ -34,30 +34,38 @@ Output: [2,3,6,7,1,5,4]
  * @return {ListNode}
  */
 var oddEvenList = function(head) {
-    let curr = head;
+    if (!head) return head;
 
-    let isOdd = true;
-    let oddCurr = null;
-    let evenCurr = null, evenHead = null;
-    while (curr) {
-        let next = curr.next;
-        curr.next = null; // breaking old link
+    let oddHead = null, evenHead = null;
+    let oddCurr = null, evenCurr = null;
 
-        if (isOdd) {
-            if (oddCurr) oddCurr.next = curr;
-
-            oddCurr = curr;
+    let i = 1; // starting from 1
+    while (head) {
+        if (i % 2 == 0) {
+            // even
+            if (!evenCurr) {
+                evenCurr = head;
+                evenHead = evenCurr;
+            } else {
+                evenCurr.next = head;
+                evenCurr = evenCurr.next;
+            }
         } else {
-            if (evenCurr) evenCurr.next = curr;
-            else evenHead = curr;
-
-            evenCurr = curr;
+            // odd
+            if (!oddCurr) {
+                oddCurr = head;
+                oddHead = oddCurr
+            } else {
+                oddCurr.next = head;
+                oddCurr = oddCurr.next;
+            }
         }
 
-        isOdd = !isOdd;
-        curr = next;
+        i++;
+        head = head.next;
     }
-    if (oddCurr) oddCurr.next = evenHead; // joining odd to even head
+    if (evenCurr) evenCurr.next = null;
+    if (oddCurr) oddCurr.next = evenHead;
 
-    return head;
+    return oddHead;
 };
