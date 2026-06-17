@@ -37,11 +37,11 @@ var permute = function(nums) {
         }
 
         for (let j = start; j < nums.length; j++) {
-            swap(nums, j, start); // swapping elements in each itterations to get new permutation
+            if (j !== start) swap(nums, j, start); // swapping elements in each itterations to get new permutation
 
             dfs(start + 1);
 
-            swap(nums, j, start); // reversing the swap
+            if (j !== start) swap(nums, j, start); // reversing the swap
         }
     }
     dfs(0, []);

@@ -33,7 +33,7 @@ Output: []
  * @param {number} target
  * @return {number[][]}
 */
-var combinationSum = function (candidates, target) {
+var combinationSum = function(candidates, target) {
     let ans = [];
 
     function bt(start, sum, arr) {
