@@ -33,7 +33,7 @@ Output: 3
  * @param {number[][]} isConnected
  * @return {number}
  */
-var findCircleNum = function (arr) {
+var findCircleNum = function(arr) {
     let visited = new Set();
 
     let n = arr.length, c = 0;
@@ -55,7 +55,58 @@ var findCircleNum = function (arr) {
         }
     }
 
-    console.log("visited", visited)
-
     return c
+};
+
+// converting adjacency matrix to adjacency list
+class Graph {
+    constructor() {
+        this.adjList = new Map();
+    }
+
+    buildGraph(matrix) {
+        const n = matrix.length;
+
+        for (let i = 0; i < n; i++) {
+            for (let j = 0; j < n; j++) {
+                if (matrix[i][j] === 1) {
+                    if (!this.adjList.has(i)) this.adjList.set(i, []);
+                    this.adjList.get(i).push(j);
+                }
+            }
+        }
+    }
+
+    calc(len) {
+        let c = len - this.adjList.size;
+
+        const visited = new Set();
+        const dfs = (curr) => {
+            visited.add(curr);
+
+            const depdList = this.adjList.get(curr);
+            depdList.forEach(node => {
+                if (!visited.has(node)) dfs(node);
+            });
+        }
+
+        this.adjList.keys().forEach(node => {
+            if (!visited.has(node)) {
+                c++;
+                dfs(node);
+            }
+        })
+
+        return c;
+    }
+}
+
+/**
+ * @param {number[][]} isConnected
+ * @return {number}
+ */
+var findCircleNum = function(isConnected) {
+    const graph = new Graph();
+    graph.buildGraph(isConnected);
+    return graph.calc(isConnected.length)
 };
