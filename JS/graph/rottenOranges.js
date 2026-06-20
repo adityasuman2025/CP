@@ -28,63 +28,49 @@ Output: 0
 Explanation: Since there are already no fresh oranges at minute 0, the answer is just 0.
 */
 
+const DRCTN = [
+    [-1, 0],
+    [0, -1],
+    [1, 0],
+    [0, 1],
+];
 
-var orangesRotting = function(image) {
-    let maxRIndex = image.length - 1;
-    let maxCIndex = image[0].length - 1;
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+var orangesRotting = function(grid) {
+    const m = grid.length, n = grid[0].length;
 
-    let fresh = 0;
-    let time = 0;
-    let queue = [];
-    for (let sr = 0; sr <= maxRIndex; sr++) {
-        for (let sc = 0; sc <= maxCIndex; sc++) {
-            if (image[sr][sc] == 1) fresh++;
-            if (image[sr][sc] == 2) queue.push({ sr, sc });
-        }
-    }
+    let freshCount = 0;
+    const q = [];
+    grid.forEach((row, rowIdx) => {
+        row.forEach((col, colIdx) => {
+            if (grid[rowIdx][colIdx] === 1) freshCount++
+            if (grid[rowIdx][colIdx] === 2) q.push([rowIdx, colIdx, 0]);
+        })
+    });
 
-    while (queue.length > 0 && fresh > 0) {
-        let size = queue.length;
-        while (size) {
-            size--;
+    if (q.length === 0) return freshCount ? -1 : 0;
 
-            const { sr, sc } = queue.shift();
+    let c = 0;
+    while (c < q.length) {
+        const [currI, currJ, depth] = q[c];
 
-            //top
-            let topR = sr - 1, topC = sc;
-            if (topR >= 0 && image[topR][topC] == 1) {
-                fresh--;
-                image[topR][topC] = 0;
-                queue.push({ sr: topR, sc: topC });
-            }
+        for (let i = 0; i < DRCTN.length; i++) {
+            const nextI = currI + DRCTN[i][0], nextJ = currJ + DRCTN[i][1];
 
-            //bottom
-            let bottomR = sr + 1, bottomC = sc;
-            if (bottomR <= maxRIndex && image[bottomR][bottomC] == 1) {
-                fresh--;
-                image[bottomR][bottomC] = 0;
-                queue.push({ sr: bottomR, sc: bottomC });
-            }
-
-            //left
-            let leftR = sr, leftC = sc - 1;
-            if (leftC >= 0 && image[leftR][leftC] == 1) {
-                fresh--;
-                image[leftR][leftC] = 0;
-                queue.push({ sr: leftR, sc: leftC });
-            }
-
-            //right
-            let rightR = sr, rightC = sc + 1;
-            if (rightC <= maxCIndex && image[rightR][rightC] == 1) {
-                fresh--;
-                image[rightR][rightC] = 0;
-                queue.push({ sr: rightR, sc: rightC });
+            if (nextI >= 0 && nextI < m && nextJ >= 0 && nextJ < n) {
+                if (grid[nextI][nextJ] === 1) {
+                    q.push([nextI, nextJ, depth + 1]);
+                    grid[nextI][nextJ] = 2;
+                    freshCount--;
+                }
             }
         }
 
-        time++;
+        c++;
     }
 
-    return fresh == 0 ? time : -1;
+    return freshCount === 0 ? q.at(-1)[2] : -1;
 };

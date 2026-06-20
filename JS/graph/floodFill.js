@@ -24,38 +24,46 @@ Output: [[0,0,0],[0,0,0]]
 Explanation: The starting pixel is already colored 0, so no changes are made to the image.
 */
 
+const DRCTN = [
+    [-1, 0],
+    [0, -1],
+    [1, 0],
+    [0, 1],
+];
+
 /**
  * @param {number[][]} image
  * @param {number} sr
  * @param {number} sc
  * @param {number} color
  * @return {number[][]}
-*/
-var floodFill = function(image, sr, sc, color) {
-    let m = image.length, n = image[0].length;
+ */
+var floodFill = function(image, si, sj, color) {
+    const m = image.length, n = image[0].length;
 
-    let q = [[sr, sc]];
-    while (q.length) {
-        let [thisR, thisC] = q.shift();
+    if (image[si][sj] === color) return image;
 
-        let prevColor = image[thisR][thisC];
-        if (image[thisR][thisC] !== color) image[thisR][thisC] = color;
+    const org = image[si][sj];
 
-        if ((thisR - 1 >= 0) && (image[thisR - 1][thisC] === prevColor) && image[thisR - 1][thisC] !== color) {
-            q.push([thisR - 1, thisC]);
+    const q = [[si, sj]];
+    image[si][sj] = color;
+
+    let c = 0;
+    while (c < q.length) {
+        const [currI, currJ] = q[c];
+
+        for (let i = 0; i < DRCTN.length; i++) {
+            const nextI = currI + DRCTN[i][0], nextJ = currJ + DRCTN[i][1];
+
+            if (nextI >= 0 && nextI < m && nextJ >= 0 && nextJ < n) {
+                if (image[nextI][nextJ] === org) {
+                    q.push([nextI, nextJ]);
+                    image[nextI][nextJ] = color;
+                }
+            }
         }
 
-        if ((thisR + 1 < m) && (image[thisR + 1][thisC] === prevColor) && image[thisR + 1][thisC] !== color) {
-            q.push([thisR + 1, thisC]);
-        }
-
-        if ((thisC - 1 >= 0) && (image[thisR][thisC - 1] === prevColor) && image[thisR][thisC - 1] !== color) {
-            q.push([thisR, thisC - 1]);
-        }
-
-        if ((thisC + 1 < n) && (image[thisR][thisC + 1] === prevColor) && image[thisR][thisC + 1] !== color) {
-            q.push([thisR, thisC + 1]);
-        }
+        c++;
     }
 
     return image;

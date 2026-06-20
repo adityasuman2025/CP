@@ -32,64 +32,52 @@ Input: grid = [
 Output: 3
 */
 
+const DRCTN = [
+    [-1, 0],
+    [0, -1],
+    [1, 0],
+    [0, 1],
+];
 
 /**
  * @param {character[][]} grid
  * @return {number}
  */
 var numIslands = function(grid) {
-    let m = grid.length, n = grid[0].length;
+    const m = grid.length, n = grid[0].length;
 
-    let c = 0;
+    let count = 0;
     for (let i = 0; i < m; i++) {
         for (let j = 0; j < n; j++) {
             if (grid[i][j] === "1") {
-                c++;
-                let q = [[i, j]];
-                grid[i][j] = 0;
-
-                while (q.length) {
-                    let [thisI, thisJ] = q.shift();
-
-                    // top
-                    let topI = thisI - 1;
-                    if (topI >= 0) {
-                        if ((grid[topI][thisJ] === "1")) {
-                            grid[topI][thisJ] = 0; // we are marking this location/coordinate 0 here only to avoid duplicate addition of this location, because in coming iterations this coordiate can also be picked by left/right/top/bottom
-                            q.push([topI, thisJ]);
-                        }
-                    }
-
-                    // bottom
-                    let bottomI = thisI + 1;
-                    if (bottomI < m) {
-                        if ((grid[bottomI][thisJ] === "1")) {
-                            grid[bottomI][thisJ] = 0; // we are marking this location/coordinate 0 here only to avoid duplicate addition of this location, because in coming iterations this coordiate can also be picked by left/right/top/bottom
-                            q.push([bottomI, thisJ]);
-                        }
-                    }
-
-                    // left
-                    let leftJ = thisJ - 1;
-                    if (leftJ >= 0) {
-                        if ((grid[thisI][leftJ] === "1")) {
-                            grid[thisI][leftJ] = 0; // we are marking this location/coordinate 0 here only to avoid duplicate addition of this location, because in coming iterations this coordiate can also be picked by left/right/top/bottom
-                            q.push([thisI, leftJ]);
-                        }
-                    }
-
-                    // right
-                    let rightJ = thisJ + 1;
-                    if (rightJ < n) {
-                        if ((grid[thisI][rightJ] === "1")) {
-                            grid[thisI][rightJ] = 0; // we are marking this location/coordinate 0 here only to avoid duplicate addition of this location, because in coming iterations this coordiate can also be picked by left/right/top/bottom
-                            q.push([thisI, rightJ]);
-                        }
-                    }
-                }
+                bfs(i, j);
+                count++;
             }
         }
     }
 
-    return c;
+    function bfs(i, j) {
+        const q = [[i, j]];
+        grid[i][j] = 0;
+
+        let c = 0;
+        while (c < q.length) {
+            const [currI, currJ] = q[c];
+
+            for (let k = 0; k < DRCTN.length; k++) {
+                const nextI = currI + DRCTN[k][0], nextJ = currJ + DRCTN[k][1];
+
+                if (nextI >= 0 && nextI < m && nextJ >= 0 && nextJ < n) {
+                    if (grid[nextI][nextJ] === "1") {
+                        q.push([nextI, nextJ]);
+                        grid[nextI][nextJ] = 0;
+                    }
+                }
+            }
+
+            c++;
+        }
+    }
+
+    return count;
 };

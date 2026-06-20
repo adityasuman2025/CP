@@ -39,63 +39,41 @@ Output: -1
 Explanation: There are no exits in this maze.
 */
 
+const DRTCNS = [
+    [-1, 0], // Up
+    [1, 0],  // Down
+    [0, -1], // Left
+    [0, 1]   // Right
+];
+var nearestExit = function(maze, entrance) {
+    const m = maze.length, n = maze[0].length;
 
-/**
- * @param {character[][]} maze
- * @param {number[]} entrance
- * @return {number}
- */
-var nearestExit = function (maze, entrance) {
-    let m = maze.length; n = maze[0].length;
-    let steps = -1;
+    const q = [[entrance, 0]]; // queue stores [[row, col], steps]
+    maze[entrance[0]][entrance[1]] = "+"; // block entrance to mark as visited
 
-    let q = [entrance];
-    maze[entrance[0]][entrance[1]] = "+"; // blocking the entrance
-    while (q.length) {
-        steps++;
+    // bfs
+    let i = 0;
+    while (i < q.length) {
+        const [[currRow, currCol], steps] = q[i];
+        i++;
 
-        let size = q.length;
-        while (size) {
-            let [thisI, thisJ] = q.shift();
+        if (
+            (currRow === 0 || currCol === 0 || currRow === m - 1 || currCol === n - 1) &&
+            (currRow !== entrance[0] || currCol !== entrance[1])
+        ) return steps;
+
+        DRTCNS.forEach(([dRow, dCol]) => {
+            const nextRow = currRow + dRow, nextCol = currCol + dCol;
 
             if (
-                (thisI === 0 || thisJ === 0 || thisI === m - 1 || thisJ === n - 1) && // this is boudary cell
-                ([thisI, thisJ].join(" ") !== entrance.join(" ")) // cell it not entrance
+                nextRow >= 0 && nextRow < m &&
+                nextCol >= 0 && nextCol < n &&
+                maze[nextRow][nextCol] === "."
             ) {
-                return steps;
+                maze[nextRow][nextCol] = "+";
+                q.push([[nextRow, nextCol], steps + 1]);
             }
-
-
-            if (thisI - 1 >= 0 && thisJ >= 0) {
-                if (maze[thisI - 1][thisJ] === ".") {
-                    maze[thisI - 1][thisJ] = "+";
-                    q.push([thisI - 1, thisJ])
-                }
-            }
-
-            if (thisI >= 0 && thisJ - 1 >= 0) {
-                if (maze[thisI][thisJ - 1] === ".") {
-                    maze[thisI][thisJ - 1] = "+";
-                    q.push([thisI, thisJ - 1])
-                }
-            }
-
-            if (thisI >= 0 && thisJ + 1 < n) {
-                if (maze[thisI][thisJ + 1] === ".") {
-                    maze[thisI][thisJ + 1] = "+";
-                    q.push([thisI, thisJ + 1])
-                }
-            }
-
-            if (thisI + 1 < m && thisJ >= 0) {
-                if (maze[thisI + 1][thisJ] === ".") {
-                    maze[thisI + 1][thisJ] = "+";
-                    q.push([thisI + 1, thisJ])
-                }
-            }
-
-            size--;
-        }
+        });
     }
 
     return -1;
