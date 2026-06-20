@@ -24,22 +24,21 @@ Explanation: You don't need to remove any of the intervals since they're already
 */
 
 // this is similar to activity selection problem
-var eraseOverlapIntervals = function (intervals) {
+var eraseOverlapIntervals = function(intervals) {
     if (!intervals.length) return 0;
 
-    // Sort the intervals by end time
     intervals.sort((a, b) => a[1] - b[1]);
-    console.log("intervals", intervals)
 
-    let nonOverlapCount = 1;
-    let endTime = intervals[0][1];
+    let nonOverlapCount = 0;
+    let prevEndTime = -Infinity;
+    for (let i = 0; i < intervals.length; i++) {
+        const [start, end] = intervals[i];
 
-    for (let i = 1; i < intervals.length; i++) {
-        if (intervals[i][0] >= endTime) {
+        if (start >= prevEndTime) {
+            prevEndTime = end;
             nonOverlapCount++;
-            endTime = intervals[i][1];
         }
     }
 
-    return intervals.length - nonOverlapCount;
+    return intervals.length - nonOverlapCount
 };

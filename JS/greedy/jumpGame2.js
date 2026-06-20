@@ -25,7 +25,7 @@ Output: 2
 
 
 // time: O(N^2), space: O(N)
-var jump = function (arr) {
+var jump = function(arr) {
     start = 0, target = arr.length - 1;
 
     let memo = new Map();
@@ -51,7 +51,7 @@ var jump = function (arr) {
 
 // ref: https://www.youtube.com/watch?v=8gO-3ya1ptM
 // time: O(N), space: O(1)
-var jump = function (arr) {
+var jump = function(arr) {
     arr[0] = 0 + arr[0];
     for (let i = 1; i < arr.length; i++) {
         arr[i] = Math.max(arr[i - 1], arr[i] + i);

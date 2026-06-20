@@ -52,34 +52,22 @@ class Item{
 */
 
 class Solution {
-    fractionalKnapsack(maxWeight, arr, n) {
-        // sorting array by its value/weight ratio, so that we can pick element with highest value for a given weight first
-        arr.sort((a, b) => b.value / b.weight - a.value / a.weight);
+    fractionalKnapsack(val, wt, capacity) {
+        const unitCost = val.map((item, idx) => ([item / wt[idx], idx]));
+        unitCost.sort((a, b) => b[0] - a[0]);
 
-        let leftWeight = maxWeight;
-        let i = 0, totalVal = 0;
-        while (leftWeight > 0 && i < n) {
-            const { value: thisVal, weight: thisWeight } = arr[i];
+        let ans = 0;
+        let i = 0;
+        while (capacity > 0 && i < val.length) {
+            const thisIdx = unitCost[i][1];
 
-            // checking if complete weight can be picked or only fraction of weight is possible
-            if (thisWeight <= leftWeight) {
-                totalVal += thisVal;
+            if (capacity >= wt[thisIdx]) ans += val[thisIdx]
+            else ans += (capacity / wt[thisIdx]) * val[thisIdx]
 
-                leftWeight -= thisWeight;
-            } else { // only a fraction of weight can be picked
-                let possiblePercent = leftWeight / thisWeight; // percentage of weight that can be picked from this knapsack
-                let possibleValue = thisVal * possiblePercent; // value associated with that percentage
-
-                totalVal += possibleValue;
-
-                // we are at the situation of fraction picking because weight of the this bag become greater than weights left to pick 
-                // so after picking the fraction weight our left weight will become 0
-                leftWeight = 0;
-            }
-
-            i++;
+            capacity = capacity - wt[thisIdx];
+            i++
         }
 
-        return totalVal;
+        return ans;
     }
 }

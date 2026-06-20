@@ -25,29 +25,27 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum jump 
  * @return {boolean}
  */
 // dfs (more intutive) // time: O(N^2)
-var canJump = function(nums) {
-    if (nums.length === 1) return true;
+var canJump = function(arr) {
+    const end = arr.length - 1;
 
-    let lastIdx = nums.length - 1;
-    const visited = new Set();
-
-    let stack = [0];
-    visited.add(0);
-
-    while (stack.length) {
-        let topIdx = stack.pop();
-
-        for (let i = Math.min(nums[topIdx], lastIdx - topIdx); i >= 1; i--) { // && topIdx + i<=lastIdx
-            if (topIdx + i >= lastIdx) return true;
-
-            if (!visited.has(topIdx + i)) {
-                stack.push(topIdx + i);
-                visited.add(topIdx + i);
-            }
+    const memo = {};
+    function dfs(start) {
+        if (start === end) {
+            memo[start] = true;
+            return true;
         }
-    }
 
-    return false;
+        for (let j = Math.min(arr[start], end - start); j > 0; j--) {
+            const key = start + j;
+
+            if (!memo.hasOwnProperty(key)) memo[key] = dfs(key);
+            if (memo[key]) return true;
+        }
+
+        memo[start] = false;
+        return false;
+    }
+    return dfs(0);
 };
 
 // greedy // time: O(N)
@@ -61,3 +59,4 @@ var canJump = function(nums) {
         max = Math.max(max, i + nums[i]);
     }
 }
+

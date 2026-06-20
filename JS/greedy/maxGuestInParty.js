@@ -36,9 +36,9 @@ Expected Auxiliary Space: O(1).
 function findMaxGuests(entry, exit, n) {
     entry.sort((a, b) => a - b); // [1,2,5,5,10]
     exit.sort((a, b) => a - b); // [4,5,9,12,12]
-    let guestsInCount = 1, maxGuestsCount = 1, timeAtMaxGuests = entry[0];
 
-    let i = 1, j = 0;
+    let guestsInCount = 0, maxGuestsCount = 0, timeAtMaxGuests = 0;
+    let i = 0, j = 0;
     while (i < n && j < n) {
         if (entry[i] <= exit[j]) {
             //one new guest comes

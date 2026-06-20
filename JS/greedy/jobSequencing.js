@@ -34,25 +34,28 @@ maximum profit of 127 (100+27).
 */
 
 class Solution {
-    JobScheduling(arr, n) {
-        arr.sort((a, b) => b.profit - a.profit); // descending order // bara se chota
+    jobSequencing(deadline, profit) {
+        const n = deadline.length;
 
-        let slot = new Array(n).fill(false);
-        let maxProfit = 0, jobCount = 0;
+        const arr = profit.map((item, idx) => ([item, deadline[idx]]));
+        arr.sort((a, b) => b[0] - a[0]);
+        const slot = new Array(n).fill(false);
+
+        let c = 0, sum = 0;
         for (let i = 0; i < n; i++) {
-            const { dead, profit } = arr[i];
+            const [currProfit, currDeadline] = arr[i];
 
-            for (let j = Math.min(dead, n) - 1; j >= 0; j--) {
+            for (let j = Math.min(currDeadline, n) - 1; j >= 0; j--) {
                 if (!slot[j]) {
-                    maxProfit += profit;
-                    jobCount++;
                     slot[j] = true;
+                    sum += currProfit;
+                    c++;
 
                     break;
                 }
             }
         }
 
-        return [jobCount, maxProfit];
+        return [c, sum];
     }
 }
