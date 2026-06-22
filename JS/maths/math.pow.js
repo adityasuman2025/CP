@@ -47,23 +47,26 @@ var myPow = function(x, n) {
 
 // time: O(logn), space: O(logn)
 var myPow = function(x, n) {
-    if (n < 0) x = 1 / x;
-    n = Math.abs(n);
+    if (n < 0) { // if n is negative then making x as oposite, i.e. fraction
+        x = 1 / x;
+        n = -n;
+    }
 
-    let memo = {};
-    function util(x, n) {
-        if (n < 1) return 1;
+    const memo = new Map();
 
-        if (n % 2 === 0) { // even
-            let temp = memo.hasOwnProperty(n / 2) ? memo[n / 2] : util(x, n / 2);
-            memo[n / 2] = temp;
+    function util(num, p) {
+        if (num === 1 || p === 0) return 1;
 
-            return temp * temp;
+        if (memo.has(p)) return memo.get(p);
+
+        if (p % 2 === 0) {
+            const half = memo.has(p / 2) ? memo.get(p / 2) : util(num, p / 2);
+            memo.set(p / 2, half);
+            memo.set(p, half * half);
+            return half * half;
         } else {
-            let temp1 = memo.hasOwnProperty(n - 1) ? memo[n - 1] : util(x, n - 1);
-            memo[n - 1] = temp1;
-
-            return x * temp1;
+            if (!memo.has(p - 1)) memo.set(p - 1, util(num, p - 1));
+            return num * memo.get(p - 1);
         }
     }
 

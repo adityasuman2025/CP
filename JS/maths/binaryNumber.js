@@ -1,32 +1,43 @@
+/*
+    https://leetcode.com/problems/complement-of-base-10-integer/
+
+    1009. Complement of Base 10 Integer
+*/
+
+/**
+ * @param {number} n
+ * @return {number}
+ */
+var bitwiseComplement = function(n) {
+    const binary = decimalToBinary(n);
+    const flipped = binary.map(item => item === 0 ? 1 : 0);
+
+    return binaryToDecimal(flipped);
+};
+
+function binaryToDecimal(num) {
+    let ans = 0;
+
+    let pow = num.length - 1;
+    for (let i = 0; i < num.length; i++) {
+        const item = num[i];
+
+        ans += (item * Math.pow(2, pow))
+        pow--;
+    }
+
+    return ans;
+}
+
 function decimalToBinary(num) {
-    let binary = "";
+    let ans = [];
 
-    let no = num;
-    while (no) {
-        let rem = no % 2;
-        binary = rem + binary;
+    while (num > 1) {
+        const rem = num % 2;
+        ans.push(rem);
 
-        no = Math.floor(no / 2);
+        num = Math.floor(num / 2);
     }
-
-    console.log("binary of", num, "is", binary)
+    ans.push(num);
+    return ans.reverse();
 }
-
-function binaryToDecimal(binary) {
-    let binStr = String(binary), len = binStr.length;
-
-    let no = 0;
-    for (let i = len - 1; i >= 0; i--) {
-        no += Number(binStr[i]) * Math.pow(2, len - 1 - i)
-    }
-
-    console.log("decimal of", binary, "is", no)
-}
-
-
-const number = 100;
-decimalToBinary(number);
-
-
-const binary = 10011100001111;
-binaryToDecimal(binary);

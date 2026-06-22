@@ -35,17 +35,14 @@ Output: 701
  * @return {number}
  */
 var titleToNumber = function(columnTitle) {
-    const len = columnTitle.length;
-    const asciiOfA = 65;
+    const len = columnTitle.length - 1;
 
-    let sum = 0
-    let indexFromBack = 1;
-    for (let i = len - 1; i >= 0; i--) { // piche se process krne hai
-        let charAscii = columnTitle[i].charCodeAt(0);
+    let out = 0;
+    for (let idx = 0; idx <= len; idx++) {
+        const char = columnTitle[idx];
+        const code = char.charCodeAt(0) - 65 + 1;
+        out = out + (code * Math.pow(26, len - idx))
+    };
 
-        sum += indexFromBack * (charAscii - asciiOfA + 1);
-        indexFromBack = indexFromBack * 26;
-    }
-
-    return sum;
+    return out;
 };
