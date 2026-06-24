@@ -29,7 +29,51 @@ Input: equations = [["a","b"]], values = [0.5], queries = [["a","b"],["b","a"],[
 Output: [0.50000,2.00000,-1.00000,-1.00000]
 */
 
-//solution: convertCurrency.js
+class Graph {
+    constructor() {
+        this.adjList = new Map();
+    }
+
+    buildGraph(origin, dest, actn) {
+        if (!this.adjList.has(origin)) this.adjList.set(origin, []);
+        this.adjList.get(origin).push({ node: dest, actn });
+
+        if (!this.adjList.has(dest)) this.adjList.set(dest, []);
+        this.adjList.get(dest).push({ node: origin, actn: 1 / actn });
+    }
+
+    print() {
+        this.adjList.keys().forEach(key => {
+            console.log(key, this.adjList.get(key))
+        })
+    }
+
+    dfs(origin, dest, calc) {
+        const visited = new Set();
+
+        if (origin === dest) return this.adjList.get(origin) ? 1 : -1
+
+        const uitl = (origin, dest, calc) => {
+            if (origin === dest) return calc;
+
+            const children = this.adjList.get(origin) || [];
+            for (let i = 0; i < children.length; i++) {
+                const { node, actn } = children[i];
+
+                if (!visited.has(node)) {
+                    visited.add(node);
+                    const ans = uitl(node, dest, calc * actn)
+                    if (ans !== -1) return ans;
+                }
+            }
+
+            return -1
+        }
+
+        visited.add(origin);
+        return uitl(origin, dest, 1);
+    }
+}
 
 /**
  * @param {string[][]} equations
@@ -38,48 +82,16 @@ Output: [0.50000,2.00000,-1.00000,-1.00000]
  * @return {number[]}
  */
 var calcEquation = function(equations, values, queries) {
-    let graph = {}
-    equations.forEach((equation, index) => {
-        const [ var1, var2 ] = equation;
-        const value = values[index];
+    const graph = new Graph();
 
-        if (!graph.hasOwnProperty(var1)) graph[var1] = []
-        if (!graph.hasOwnProperty(var2)) graph[var2] = []
-
-        graph[var1].push([var2, value])
-        graph[var2].push([var1, 1/value])
+    equations.forEach(([origin, dest], idx) => {
+        graph.buildGraph(origin, dest, values[idx]);
     });
-    console.log("graph", graph)
-    
-    let output = [];
-    for (let i=0; i<queries.length; i++) {
-        const [from, to] = queries[i];
-        let visited = new Set();
-        let calculatedVal = -1;
-        
-        function calcEquationHelper(fromVar, rate) {
-            if (fromVar == to) {
-                calculatedVal = rate;
-                return;
-            }
 
-            visited.add(fromVar);
-            const neighbors = graph[fromVar];
+    const ans = [];
+    queries.forEach(([origin, dest]) => {
+        ans.push(graph.dfs(origin, dest))
+    })
 
-            for (let j=0; j<neighbors.length; j++) {
-                const [toVar1, toRate] = neighbors[j];
-                if (!visited.has(toVar1)) {
-
-                    calcEquationHelper(toVar1, rate*toRate);
-                }
-            }
-        }
-
-        if (graph.hasOwnProperty(from) && graph.hasOwnProperty(to)) {
-            calcEquationHelper(from, 1);
-        }
-        output.push(calculatedVal);
-    }
-     
-    return output
+    return ans;
 };

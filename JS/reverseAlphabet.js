@@ -1,13 +1,13 @@
 /*
-Let's say you already have a function to check if a letter is alphabet (A, B, C, etc) or not, then using this information,
-find a way to reverse only the alphabets in the given string and keep other characters in its same place.
-Example
+    Let's say you already have a function to check if a letter is alphabet (A, B, C, etc) or not, then using this information,
+    find a way to reverse only the alphabets in the given string and keep other characters in its same place.
+    Example
 
-Input - ##$!M@##$A#$!A#@N
-Output - ##$!N@##$A#$!A#@M [ MAAN get reversed ]
+    Input - ##$!M@##$A#$!A#@N
+    Output - ##$!N@##$A#$!A#@M [ MAAN get reversed ]
 
-Input - ##$!R@##$A#$!HU#@L
-Output - ##$!L@##$UH#$!A#@R [RAHUL get reversed 1
+    Input - ##$!R@##$A#$!HU#@L
+    Output - ##$!L@##$UH#$!A#@R [RAHUL get reversed 1
 */
 
 function isAlphabet(char) {
@@ -18,30 +18,25 @@ function isAlphabet(char) {
     return false;
 }
 
-function reverseStr(str) {
-    let n = str.length;
+function reverse(str) {
+    const ans = str.split("");
 
-    let alphabetIndices = [];
-    for (let i = 0; i < n; i++) {
-        if (isAlphabet(str[i])) alphabetIndices.push(i);
-    }
-
-    let start = 0, end = alphabetIndices.length - 1;
-
-    let strArr = str.split("");
+    let start = 0, end = str.length - 1;
     while (start < end) {
-        let startIdx = alphabetIndices[start];
-        let endIdx = alphabetIndices[end];
+        while (start < end && !isAlphabet(str[start])) start++;
+        while (start < end && !isAlphabet(str[end])) end--;
 
-        let temp = strArr[startIdx];
-        strArr[startIdx] = strArr[endIdx];
-        strArr[endIdx] = temp;
+        if (start < end) {
+            const temp = str[start];
+            ans[start] = str[end];
+            ans[end] = temp;
+        }
 
         start++;
         end--;
     }
 
-    return strArr.join("");
+    return ans.join("");
 }
 
 const str = "##$!R@##$A#$!HU#@L";

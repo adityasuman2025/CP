@@ -34,17 +34,17 @@ var isRectangleOverlap = function(rec1, rec2) {
     let rec1BLy = rec1[1];
     let rec1TRx = rec1[2];
     let rec1TRy = rec1[3];
-    
+
     let rec2BLx = rec2[0];
     let rec2BLy = rec2[1];
     let rec2TRx = rec2[2];
     let rec2TRy = rec2[3];
-    
+
     //if bottom-left x of one rectangle is greater than top-right x of other
     if ((rec2BLx >= rec1TRx) || (rec1BLx >= rec2TRx)) return false
-    
+
     //if bottom-left y of one rectangle is greater than top-right y of other
     if ((rec2BLy >= rec1TRy) || (rec1BLy >= rec2TRy)) return false
-    
+
     return true;
 }

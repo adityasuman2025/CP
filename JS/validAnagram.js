@@ -24,24 +24,24 @@ Constraints:
 s and t consist of lowercase English letters.
 */
 
-var isAnagram = function(str1, str2) {
-    let map = {};
-    for (let i = 0; i<str1.length; i++) {
-        let char = str1[i];
-        map[char] = map[char] ? map[char] + 1 : 1;
+var isAnagram = function(s, t) {
+    if (s.length !== t.length) return false;
+
+    const map = new Map();
+    for (let i = 0; i < s.length; i++) {
+        const char = s[i];
+        map.set(char, (map.get(char) || 0) + 1);
     }
-    
-    for (let i = 0; i<str2.length; i++) {
-        let char = str2[i];
-        
-        if (map[char] > 1) {
-            map[char] = map[char] - 1;
-        } else if (map[char] == 1) {
-            delete map[char];
-        } else {
-            map[char] = map[char] ? map[char] + 1 : 1;
-        }
+
+    for (let i = 0; i < t.length; i++) {
+        const char = t[i];
+        const c = map.get(char);
+
+        if (!c) return false;
+
+        if (c === 1) map.delete(char)
+        else map.set(char, c - 1);
     }
-    
-    return Object.keys(map).length == 0
+
+    return map.size === 0;
 };

@@ -48,9 +48,7 @@ class Solution {
             if (map.has(prefixSum)) {
                 let prevPrefixSumIdx = map.get(prefixSum);
                 max = Math.max(max, i - prevPrefixSumIdx);
-            } else {
-                map.set(prefixSum, i);
-            }
+            } else map.set(prefixSum, i);
         }
 
         return max;

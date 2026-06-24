@@ -19,27 +19,24 @@ Output: 9
 */
 
 // time: O(nlogn), space: O(1)
-const longestConsecutive = function(nums) {
-    if (nums.length === 0) return 0;
-    nums.sort((a, b) => a - b);
+var longestConsecutive = function(arr) {
+    if (!arr.length) return 0;
 
-    let c = 1, maxC = 1, prev = nums[0];
-    for (let i = 1; i < nums.length;) {
-        if (nums[i] === prev + 1) {
-            c++;
-            prev = nums[i];
-            maxC = Math.max(maxC, c);
-        } else {
-            c = 1;
-            prev = nums[i];
-        }
+    arr.sort((a, b) => a - b);
 
-        i++;
-        while (nums[i - 1] === nums[i]) i++;
+    let len = 1, max = 1, prev = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        const item = arr[i];
+        if (item === prev) continue;
+        if (item === prev + 1) len++;
+        else len = 1;
+
+        max = Math.max(max, len);
+        prev = item;
     }
 
-    return maxC;
-}
+    return max;
+};
 
 // time: O(n), space: O(n)
 const longestConsecutiveOptimised = function(arr) {

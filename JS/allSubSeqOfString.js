@@ -1,22 +1,20 @@
-function getSubSeq(str) {
-    let list = [];
+// All SubSequence of a String
+function subString(str) {
+    const len = str.length;
 
-    function util(start, out) {
-        if (str === out) {
-            list.push(out);
-            return;
-        }
+    const ans = [];
+    function dfs(start, out) {
+        if (out && start === len) ans.push(out);
 
-        if (out) list.push(out);
+        if (start >= len) return;
 
-        for (let i = start; i < str.length; i++) {
-            util(i + 1, out + str[i]);
-        }
+        dfs(start + 1, out + str[start]);
+        dfs(start + 1, out);
     }
-    util(0, "");
+    dfs(0, "");
 
-    return list;
+    return ans;
 }
-
-let str = "abcd";
-console.log(getSubSeq(str));
+const str = "aditya";
+const res = subString(str);
+console.log("subString", res);
