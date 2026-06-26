@@ -303,6 +303,25 @@ class BST {
         return curr;
     }
 
+    find2ndMax(node) {
+        if (!node || (!node.left && !node.right)) return null;
+
+        let curr = node, prev = null;
+        while (curr.right) {
+            prev = curr;
+            curr = curr.right;
+        }
+
+        if (curr.left) {
+            curr = curr.left;
+            while (curr.right) curr = curr.right;
+
+            return curr.val;
+        }
+
+        return prev.val;
+    }
+
     /* avg: O(logn), worst: O(n) */
     getHeight(node) {
         if (!node) return 0;
