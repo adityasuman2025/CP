@@ -625,18 +625,18 @@ class BST {
 
 
         // time: O(n), space: O(h), because of function call stack
-        let prev = null, isBST = true;
-        function inOrderHelper(root) {
-            if (!root) return;
+        let prev = -Infinity, isBST = true;
+        function inOrder(root) {
+            if (!root || !isBST) return;
 
-            if (isBST) inOrderHelper(root.left); // we will stop recursion if we already found that this tree is not BST
+            if (root.left) inOrder(root.left);
 
-            if (![null, undefined].includes(prev) && prev >= root.val) isBST = false; // in order traversal prev value is always less than this value
+            if (root.val <= prev) isBST = false;
             prev = root.val;
 
-            if (isBST) inOrderHelper(root.right); // we will stop recursion if we already found that this tree is not BST
+            if (root.right) inOrder(root.right);
         }
-        inOrderHelper(node);
+        inOrder(node);
 
         return isBST;
     }
