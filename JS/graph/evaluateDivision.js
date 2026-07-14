@@ -29,52 +29,6 @@ Input: equations = [["a","b"]], values = [0.5], queries = [["a","b"],["b","a"],[
 Output: [0.50000,2.00000,-1.00000,-1.00000]
 */
 
-class Graph {
-    constructor() {
-        this.adjList = new Map();
-    }
-
-    buildGraph(origin, dest, actn) {
-        if (!this.adjList.has(origin)) this.adjList.set(origin, []);
-        this.adjList.get(origin).push({ node: dest, actn });
-
-        if (!this.adjList.has(dest)) this.adjList.set(dest, []);
-        this.adjList.get(dest).push({ node: origin, actn: 1 / actn });
-    }
-
-    print() {
-        this.adjList.keys().forEach(key => {
-            console.log(key, this.adjList.get(key))
-        })
-    }
-
-    dfs(origin, dest, calc) {
-        const visited = new Set();
-
-        if (origin === dest) return this.adjList.get(origin) ? 1 : -1
-
-        const uitl = (origin, dest, calc) => {
-            if (origin === dest) return calc;
-
-            const children = this.adjList.get(origin) || [];
-            for (let i = 0; i < children.length; i++) {
-                const { node, actn } = children[i];
-
-                if (!visited.has(node)) {
-                    visited.add(node);
-                    const ans = uitl(node, dest, calc * actn)
-                    if (ans !== -1) return ans;
-                }
-            }
-
-            return -1
-        }
-
-        visited.add(origin);
-        return uitl(origin, dest, 1);
-    }
-}
-
 /**
  * @param {string[][]} equations
  * @param {number[]} values
@@ -82,16 +36,48 @@ class Graph {
  * @return {number[]}
  */
 var calcEquation = function(equations, values, queries) {
-    const graph = new Graph();
+    const adjList = new Map();
 
+    // build graph
     equations.forEach(([origin, dest], idx) => {
-        graph.buildGraph(origin, dest, values[idx]);
+        const val = values[idx];
+        if (!adjList.has(origin)) adjList.set(origin, []);
+        adjList.get(origin).push({ node: dest, actn: val });
+
+        if (!adjList.has(dest)) adjList.set(dest, []);
+        adjList.get(dest).push({ node: origin, actn: 1 / val });
     });
+
+    const dfs = (origin, dest) => {
+        if (!adjList.has(origin) || !adjList.has(dest)) return -1;
+        if (origin === dest) return 1;
+
+        const visited = new Set();
+        const util = (curr, val) => {
+            if (curr === dest) return val;
+
+            const children = adjList.get(curr) || [];
+            for (let i = 0; i < children.length; i++) {
+                const { node, actn } = children[i];
+
+                if (!visited.has(node)) {
+                    visited.add(node);
+                    const ans = util(node, val * actn);
+                    if (ans !== -1) return ans;
+                }
+            }
+
+            return -1;
+        };
+
+        visited.add(origin);
+        return util(origin, 1);
+    };
 
     const ans = [];
     queries.forEach(([origin, dest]) => {
-        ans.push(graph.dfs(origin, dest))
-    })
+        ans.push(dfs(origin, dest));
+    });
 
     return ans;
 };

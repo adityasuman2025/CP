@@ -59,54 +59,37 @@ var findCircleNum = function(arr) {
 };
 
 // converting adjacency matrix to adjacency list
-class Graph {
-    constructor() {
-        this.adjList = new Map();
-    }
-
-    buildGraph(matrix) {
-        const n = matrix.length;
-
-        for (let i = 0; i < n; i++) {
-            for (let j = 0; j < n; j++) {
-                if (matrix[i][j] === 1) {
-                    if (!this.adjList.has(i)) this.adjList.set(i, []);
-                    this.adjList.get(i).push(j);
-                }
-            }
-        }
-    }
-
-    calc(len) {
-        let c = len - this.adjList.size;
-
-        const visited = new Set();
-        const dfs = (curr) => {
-            visited.add(curr);
-
-            const depdList = this.adjList.get(curr);
-            depdList.forEach(node => {
-                if (!visited.has(node)) dfs(node);
-            });
-        }
-
-        this.adjList.keys().forEach(node => {
-            if (!visited.has(node)) {
-                c++;
-                dfs(node);
-            }
-        })
-
-        return c;
-    }
-}
-
-/**
- * @param {number[][]} isConnected
- * @return {number}
- */
 var findCircleNum = function(isConnected) {
-    const graph = new Graph();
-    graph.buildGraph(isConnected);
-    return graph.calc(isConnected.length)
+    const adjList = new Map();
+    const n = isConnected.length;
+
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < n; j++) {
+            if (isConnected[i][j] === 1) {
+                if (!adjList.has(i)) adjList.set(i, []);
+                adjList.get(i).push(j);
+            }
+        }
+    }
+
+    let c = n - adjList.size;
+    const visited = new Set();
+
+    const dfs = (curr) => {
+        visited.add(curr);
+
+        const depdList = adjList.get(curr);
+        depdList.forEach(node => {
+            if (!visited.has(node)) dfs(node);
+        });
+    }
+
+    adjList.keys().forEach(node => {
+        if (!visited.has(node)) {
+            c++;
+            dfs(node);
+        }
+    });
+
+    return c;
 };

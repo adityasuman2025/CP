@@ -27,39 +27,21 @@ Output: false
 Explanation: We can not enter room number 2 since the only key that unlocks it is in that room.
 */
 
-// adjacency list is already provided
-class Graph {
-    constructor() {
-        this.adjList = []
-    }
-
-    buildGraph(rooms) {
-        this.adjList = rooms;
-    }
-
-    calc(len) {
-        const visited = new Set();
-        const dfs = (curr) => {
-            visited.add(curr);
-
-            const depdList = this.adjList[curr];
-            depdList.forEach(node => {
-                if (!visited.has(node)) dfs(node);
-            });
-        }
-        dfs(0);
-
-        return visited.size === len;
-    }
-}
-
 /**
  * @param {number[][]} rooms
  * @return {boolean}
  */
 var canVisitAllRooms = function(rooms) {
-    const graph = new Graph();
-    graph.buildGraph(rooms);
+    const visited = new Set();
+    const dfs = (curr) => {
+        visited.add(curr);
 
-    return graph.calc(rooms.length);
+        const depdList = rooms[curr];
+        depdList.forEach(node => {
+            if (!visited.has(node)) dfs(node);
+        });
+    }
+    dfs(0);
+
+    return visited.size === rooms.length;
 };

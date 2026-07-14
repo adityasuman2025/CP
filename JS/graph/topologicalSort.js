@@ -32,19 +32,14 @@
 */
 
 class Solution {
-    constructor() {
-        this.adjList = new Map();
-    }
-
-    buildGraph(edges) {
-        edges.forEach(([origin, dest]) => {
-            if (!this.adjList.has(origin)) this.adjList.set(origin, []);
-            this.adjList.get(origin).push(dest);
-        });
-    }
-
     topoSort(V, edges) {
-        this.buildGraph(edges);
+        const adjList = new Map();
+
+        // build graph
+        edges.forEach(([origin, dest]) => {
+            if (!adjList.has(origin)) adjList.set(origin, []);
+            adjList.get(origin).push(dest);
+        });
 
         const visited = new Set();
         const stack = [];
@@ -52,7 +47,7 @@ class Solution {
         const dfs = (curr) => {
             visited.add(curr);
 
-            const depdList = this.adjList.get(curr) || [];
+            const depdList = adjList.get(curr) || [];
             depdList.forEach(node => {
                 if (!visited.has(node)) dfs(node);
             });

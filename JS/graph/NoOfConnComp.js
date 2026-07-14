@@ -36,31 +36,25 @@ class Solution {
      * @param {number[][]} edges
      * @returns {number}
      */
-
-    constructor() {
-        this.adjList = new Map();
-    }
-
-    buildGraph(edges) {
-        edges.forEach(([src, dest]) => {
-            if (!this.adjList.has(src)) this.adjList.set(src, []);
-            this.adjList.get(src).push(dest);
-
-            if (!this.adjList.has(dest)) this.adjList.set(dest, []);
-            this.adjList.get(dest).push(src);
-        })
-    }
-
     countComponents(n, edges) {
-        this.buildGraph(edges);
+        const adjList = new Map();
 
-        let c = n - this.adjList.size;
+        // building graph
+        edges.forEach(([src, dest]) => {
+            if (!adjList.has(src)) adjList.set(src, []);
+            adjList.get(src).push(dest);
+
+            if (!adjList.has(dest)) adjList.set(dest, []);
+            adjList.get(dest).push(src);
+        })
+
+        let c = n - adjList.size; // some nodes might not have any edge i.e. they are compltely isolated -> n - adjList.size (nodes having edge) will result into those isolated nodes
         const visited = new Set();
 
         const dfs = (curr) => {
             visited.add(curr);
 
-            const depdList = this.adjList.get(curr);
+            const depdList = adjList.get(curr);
             depdList.forEach(node => {
                 if (!visited.has(node)) {
                     dfs(node);
@@ -68,7 +62,7 @@ class Solution {
             })
         }
 
-        this.adjList.keys().forEach(node => {
+        adjList.keys().forEach(node => {
             if (!visited.has(node)) {
                 c++;
                 dfs(node);
@@ -77,6 +71,4 @@ class Solution {
 
         return c;
     }
-
-
 }
